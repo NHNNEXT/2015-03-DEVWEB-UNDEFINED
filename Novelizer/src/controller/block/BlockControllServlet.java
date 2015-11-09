@@ -1,16 +1,20 @@
 package controller.block;
 
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//클라이언트에서 sceneId와 blockId를 받아서 다음에 가야할 block의 정보를 넘겨줌 
+
+@WebServlet("/postBlockInfoTest")
 public class BlockControllServlet extends HttpServlet{
 	
-	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int sceneId = Integer.parseInt(req.getParameter("sceneId"));
