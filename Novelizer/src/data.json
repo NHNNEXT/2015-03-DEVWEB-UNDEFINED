@@ -4,11 +4,6 @@
 	"nextBlockId" : 2,
 	"actionList":[
 		{
-			"type":"text",
-			"text":"",
-			"characterId":1
-		},
-		{
 			"type":"character",
 			"characterId":1,
 			"presetId":1,
@@ -22,11 +17,6 @@
 			"option":"appear",
 			"position":[0,0],
 			"animation":null
-		},
-		{
-			"type":"text",
-			"text":"",
-			"characterId":2
 		},
 		{
 			"type":"character",
