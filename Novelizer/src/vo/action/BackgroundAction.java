@@ -1,6 +1,6 @@
 package vo.action;
 
-public class BackgroundAction extends Action{
+public class BackgroundAction extends Action {
 
 	int presetId;
 	String option;
