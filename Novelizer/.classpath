@@ -18,6 +18,7 @@
 	<classpathentry kind="lib" path="lib/tomcat-embed-logging-log4j.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-embed-websocket.jar"/>
 	<classpathentry kind="lib" path="lib/relaunch-plugin_0.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-java-driver-2.9.3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
