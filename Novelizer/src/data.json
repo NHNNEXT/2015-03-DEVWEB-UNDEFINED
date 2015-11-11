@@ -1,0 +1,20 @@
+{
+	"type":"text",
+	"text":"",
+	"characterId":0
+},
+{
+	"type":"character",
+	"characterId":0,
+	"presetId":0,
+	"option":"appear",
+	"position":[0,0],
+	"animation":null
+},
+{
+	"type":"background",
+	"presetId":0,
+	"option":"appear",
+	"position":[0,0],
+	"animation":null
+}
