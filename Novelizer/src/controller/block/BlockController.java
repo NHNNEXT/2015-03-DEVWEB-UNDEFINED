@@ -1,5 +1,6 @@
 package controller.block;
 
+// 사용하는 코드인가?
 public class BlockController {
 	
 	/*
@@ -22,6 +23,7 @@ public class BlockController {
 		return data;
 	}
 	
+	// 구현부가 없는 method는 추가하지 않는다.
 	private void findFlag(int sceneId, int blockId){
 		
 	}
