@@ -7,14 +7,12 @@ import org.json.simple.parser.ParseException;
 
 public class BlockValidateChecker {
 	public boolean isValidate(String jsonData){
-		
 		JSONParser parser = new JSONParser();
 		
 		try {
 			JSONArray blockListArray = (JSONArray)parser.parse(jsonData);
 			for(int i = 0 ; i < blockListArray.size() ; i++){
 				JSONObject blockObject = (JSONObject)blockListArray.get(i);
-				System.out.println(blockObject);
 				if(!isBlockHasEssentialData(blockObject)){ return false; }
 			}
 			
