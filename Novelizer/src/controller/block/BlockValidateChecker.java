@@ -5,26 +5,26 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import model.json.JsonHandler;
+
 public class BlockValidateChecker {
-	public boolean isValidate(String jsonData){
+	
+	public boolean isValidate(String jsonData) {
 		JSONParser parser = new JSONParser();
+		JSONArray blockListArray = JsonHandler.toJSONArray(jsonData, parser);
 		
-		try {
-			JSONArray blockListArray = (JSONArray)parser.parse(jsonData);
-			for(int i = 0 ; i < blockListArray.size() ; i++){
-				JSONObject blockObject = (JSONObject)blockListArray.get(i);
-				if(!isBlockHasEssentialData(blockObject)){ return false; }
+		for (int i = 0; i < blockListArray.size(); i++) {
+			JSONObject blockObject = (JSONObject) blockListArray.get(i);
+			System.out.println(blockObject);//testCode
+			if (!isBlockHasEssentialData(blockObject)) {
+				return false;
 			}
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
-		
 		return true;
 	}
-	
-	private boolean isBlockHasEssentialData(JSONObject blockObject){
-		long blockId = (long)blockObject.get("blockId");
+
+	private boolean isBlockHasEssentialData(JSONObject blockObject) {
+		long blockId = (long) blockObject.get("blockId");
 		long nextBlockId = (long)blockObject.get("nextBlockId");
 		JSONArray actionArray = (JSONArray)blockObject.get("actionList");
 		

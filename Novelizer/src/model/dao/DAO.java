@@ -15,32 +15,25 @@ import com.mongodb.util.JSON;
 
 import model.json.JsonHandler;
 
-public class Dao {
+public class DAO {
 	private DB db;
 
-	public Dao() {
-		Mongo conn;
-
-		try {
-			conn = new Mongo("127.0.0.1", 27017);
-			db = conn.getDB("Novelizer");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public DAO() {
+		Mongo conn = utils.Connection.getConnection();
+		db = conn.getDB("Novelizer");
 	}
 
 	public void saveBlockData(String jsonData) {
-
 		DBCollection blockCollection = db.getCollection("block");
 		blockCollection.drop();
+		insertBlockData(jsonData, blockCollection);
+	}
+
+	private void insertBlockData(String jsonData, DBCollection blockCollection) {
 		ArrayList<JSONObject> blockArrayList = new JsonHandler().parseJsonToArrayList(jsonData);
 		for(JSONObject block : blockArrayList ){
 			DBObject dbObject = (DBObject)JSON.parse(block.toJSONString());
 			blockCollection.insert(dbObject);
 		}
-
 	}
-	
-	
 }
