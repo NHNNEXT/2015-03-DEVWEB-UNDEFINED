@@ -84,7 +84,9 @@ var EditorDataSync = {
  		var maxIdx = targetBlock.actionList.length-1;
  		var maxActionId = (targetBlock.actionList[maxIdx]) ? targetBlock.actionList[maxIdx].actionId : 0;
  		var data = {
- 			actionId : maxActionId+1
+ 			actionId : maxActionId+1,
+ 			actionType : "text",
+ 			text : "임시 데이터"
  		};
  		targetBlock.actionList.push(data);
  		callbackDone(data);
