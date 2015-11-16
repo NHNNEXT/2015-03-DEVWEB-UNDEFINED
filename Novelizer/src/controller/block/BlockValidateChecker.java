@@ -57,6 +57,8 @@ public class BlockValidateChecker {
 	}
 	
 	private boolean isActionHasEssentialData(JSONObject actionObject){
+		if(actionObject == null) return true;
+		
 		String actionType = (String) actionObject.get("type");
 		
 		if(isValidateActionType(actionType)){
