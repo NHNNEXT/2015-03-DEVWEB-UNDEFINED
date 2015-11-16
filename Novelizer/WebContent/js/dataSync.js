@@ -16,7 +16,7 @@ var EditorDataSync = {
 		//this.IDBRequest.onupgradeneeded = this.upgradeDB;
  	},
  	loadData : function(data){
- 		EditorDataSync.blockList = data["blockList"];
+ 		EditorDataSync.blockList = data;
  	},
  	getSceneData : function(callbackDone,callbackFail){	// 현재 씬의 블록 리스트 데이터를 가져옴
  		var request = $.ajax({
@@ -35,7 +35,7 @@ var EditorDataSync = {
  			method : "POST",
  			dataType : "json",
  			data : {sceneId : this.sceneId,
- 					data : this.blockList},
+ 					blockList : JSON.stringify(this.blockList},
  		})
 
  		request.done(callbackDone);
@@ -53,6 +53,7 @@ var EditorDataSync = {
  		callbackDone(data);
  	},
  	removeBlock : function(blockId, callbackDone, callbackFail){
+ 		// TODO : nextBlockId 변경하기
  		var targetBlockIdx = -1;
  		for(var i = 0; i < this.blockList.length; ++i){
  			if(this.blockList[i].blockId == blockId){
@@ -70,6 +71,7 @@ var EditorDataSync = {
 
  	},
  	addAction : function(blockId, callbackDone, callbackFail){
+ 		// TODO : nextBlockId 추가하기
  		// ISSUE! javascript로 더 나은 성능의 search하는 방법은? 
  		var targetBlockIdx = -1;
  		for(var i = 0; i < this.blockList.length; ++i){
