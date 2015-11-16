@@ -4,21 +4,20 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.util.JSON;
 
 import model.json.JsonHandler;
 
-public class DAO {
+public class Dao {
 	private DB db;
 
-	public DAO() {
+	public Dao() {
 		Mongo conn = utils.Connection.getConnection();
 		db = conn.getDB("Novelizer");
 	}
@@ -35,5 +34,19 @@ public class DAO {
 			DBObject dbObject = (DBObject)JSON.parse(block.toJSONString());
 			blockCollection.insert(dbObject);
 		}
+	}
+	
+	public String getBlockList(){
+		DBCollection blockCollection = db.getCollection("block");
+		DBCursor cursor = blockCollection.find();
+		String blockListJson = "[";
+		while(cursor.hasNext()){
+			blockListJson += cursor.next().toString();
+			blockListJson += ",";
+		}
+		blockListJson = blockListJson.substring(0,blockListJson.length() - 1);
+		blockListJson += "]";
+		
+		return blockListJson;
 	}
 }
