@@ -2,11 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>drog&drop</title>
-    <link rel="stylesheet" type="text/css" href="Novelver3.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+    <title>drog&amp;drop</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
   
@@ -21,30 +20,45 @@
             <div id="edit">
                 <div class="left">
                 
-                    <div id="preview"><img src="https://github.com/Junnie-Jobs/junniejobs.github.io/blob/master/Novel/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202015-11-07%2013.15.35.png?raw=true"></div>
+                    <div id="preview">
+                        <img src="https://github.com/Junnie-Jobs/junniejobs.github.io/blob/master/Novel/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202015-11-07%2013.15.35.png?raw=true">
+                    </div>
               
-                    <div id="toolbox"><h1>ToolBox</h1>
-                    <img id="makeMeDraggable" src="http://img04.alkislarlayasiyorum.com/images/members/50_50/297/297943_1.jpg">
+                    <div id="toolbox">
+                        <h1>ToolBox</h1>
+                        <img id="makeMeDraggable" src="http://img04.alkislarlayasiyorum.com/images/members/50_50/297/297943_1.jpg">
                     </div>
                 </div>
-                <div id="timeline"><h1>TimeLines</h1>
-                <ol id="sortable">
-                    <li class="ui-state-default">block1</li>
-                    <li class="ui-state-default">block2</li>
-                    <li class="ui-state-default">block3</li>
-                </ol>
-                <button id="block">블록추가하기</button>
-                <button id="action">액션추가하기</button>
-                <button id="remover">삭제하기</button>
-              
-
-
+                <div id="timeline">
+                    <h1>TimeLines</h1>
+                    <ol id="block-list">
+                        <li class="block">
+                            <ul class="action-list">
+                                <li class="action">action1</li>
+                                <li class="action">action2</li>
+                                <li class="action">action3</li>
+                            </ul>
+                        </li>
+                        <li class="block">
+                            <ul class="action-list">
+                                <li class="action">action1</li>
+                                <li class="action">action2</li>
+                                <li class="action">action3</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <ul id="temp-action-list">
+                    </ul>
+                    <button id="button-add-block">블록추가하기</button>
+                    <button id="button-add-action">액션추가하기</button>
+                    <button id="button-remove">삭제하기</button>
                 </div>
             </div>
             <div id="preset">프리셋</div>
             <div id="scenario">시나리오</div>
 
         </main>
-    <script type="text/javascript" src="Novelver3.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/dataSync.js"></script>
 </body>
 </html>

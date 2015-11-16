@@ -64,13 +64,21 @@ main{
 			overflow: scroll;
 
 		}
-		#edit #timeline li{
-			text-align: center;
+
+			#edit #timeline li{
+				text-align: center;
 				border:1px solid #ccc;
-				height: 50px;
-				width: 90%;
 				margin: 0px auto;
 			}
+
+				#edit #timeline li.block{
+					width: 90%;
+					padding:10px;
+				}
+
+				#edit #timeline li.block.selected{
+					background:#eee;
+				}
 
 	
 	#preset{

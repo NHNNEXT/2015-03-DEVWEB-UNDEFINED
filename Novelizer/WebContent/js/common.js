@@ -17,28 +17,43 @@ function switchTab(tabid){
 	document.querySelector("#"+tabid).style.display="block";
 }
 
+var selectedBlockId = 0;
 
-    $(document).ready(function(){
 
-        $('#makeMeDraggable').draggable();
+$(document).ready(function(){
 
-        $("#block").click(function(){
-            $("ol").append("<li>blcok+</li>");
-        });
-        $("#action").click(function(){
-            $("ol").append("<li>action+</li>");  
-        });
-        $("#remover").click(function(){
-            $("li").remove();
-        });
+    $('#makeMeDraggable').draggable();
 
-        $( "#sortable" ).sortable({
-            revert: true
+    // 새로운 블록 추가
+    $("#button-add-block").click(function(){
+        EditorDataSync.addBlock(function(data){
+            $("ol#block-list").append("<li data-block-id='"+data.blockId+"' class='block'><ul class='action-list'></ul></li>");
         });
-        $( "#draggable" ).draggable({
-            connectToSortable: "#sortable",
-            helper: "clone",
-            revert: "invalid"
+    });
+
+    $(document).on("click","#block-list li.block",function(e){
+        selectedBlockId = $(this).data("blockId");
+        $("li.selected").removeClass("selected");
+        $(this).addClass("selected");
+    })
+
+    $("#button-add-action").click(function(){
+        EditorDataSync.addAction(selectedBlockId,function(data){
+            $("li.selected ul.action-list").append("<li data-action-id='"+data.actionId+"'>action"+data.actionId+"</li>");  
         });
-        $( "ul, li" ).disableSelection();
-    });  
+    });
+    
+    $("#button-remove").click(function(){
+        $("li").remove();
+    });
+
+    $( "#block-list,.action-list,#temp-action-list" ).sortable({
+        revert: true
+    });
+    $( "#draggable" ).draggable({
+        connectToSortable: "#sortable",
+        helper: "clone",
+        revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+});  
