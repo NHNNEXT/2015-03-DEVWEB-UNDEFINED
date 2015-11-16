@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.block.BlockController;
 
-@WebServlet("/postBlockInfoTest")
+@WebServlet("/postBlockInfo")
 public class CreateActionServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
