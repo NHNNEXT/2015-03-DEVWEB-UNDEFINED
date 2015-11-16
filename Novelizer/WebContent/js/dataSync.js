@@ -38,6 +38,23 @@ var EditorDataSync = {
 
  		callbackDone(data);
  	},
+ 	removeBlock : function(blockId, callbackDone, callbackFail){
+ 		var targetBlockIdx = -1;
+ 		for(var i = 0; i < this.blockList.length; ++i){
+ 			if(this.blockList[i].blockId == blockId){
+ 				targetBlockIdx = i;
+ 				break;
+ 			}
+ 		}
+
+ 		if(targetBlockIdx == -1){
+ 			return console.log("blockId="+blockId+" 해당 block데이터를 찾을수 없습니다");
+ 		}
+
+ 		this.blockList.splice(targetBlockIdx,1);
+ 		console.log(this.blockList);
+
+ 	},
  	addAction : function(blockId, callbackDone, callbackFail){
  		// ISSUE! javascript로 더 나은 성능의 search하는 방법은? 
  		var targetBlockIdx = -1;
