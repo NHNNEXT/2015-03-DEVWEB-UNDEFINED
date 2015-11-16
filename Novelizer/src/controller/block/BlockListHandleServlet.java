@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.Dao;
+import model.dao.DAO;
 
 @WebServlet("/getBlock.do")
 public class BlockListHandleServlet extends HttpServlet {
@@ -18,7 +18,7 @@ public class BlockListHandleServlet extends HttpServlet {
 		String jsonData = req.getParameter("data");
 		BlockValidateChecker validateChecker = new BlockValidateChecker();
 		if (validateChecker.isValidate(jsonData)) {
-			Dao dao = new Dao();
+			DAO dao = new DAO();
 			dao.saveBlockData(jsonData);
 		}
 	}
