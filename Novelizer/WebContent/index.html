@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
-  
         <navigation>
             <ul>
                 <li class="tab-edit"><a href="#none;">편집</a></li>
@@ -46,5 +45,12 @@
         </main>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/dataSync.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            Editor.init();
+            EditorDataSync.init();
+        })
+    </script>
 </body>
 </html>

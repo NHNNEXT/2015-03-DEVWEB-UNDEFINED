@@ -64,7 +64,3 @@ function switchTab(tabid){
 	document.querySelector("#"+tabid).style.display="block";
 }
 
-
-$(document).ready(function(){
-    Editor.init();
-})

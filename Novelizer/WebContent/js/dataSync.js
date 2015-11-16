@@ -6,12 +6,17 @@ var EditorDataSync = {
  	url : "http://server.url",
  	blockList : [],
  	sceneId : 0,
- 	IDBRequest : null,
  	init : function(sceneId){
  		this.sceneId = sceneId;
 
+ 		//this.getSceneData(this.loadData);
+
+ 		//ISSUE! localDB는 다음 사이클에! 
  		//this.IDBRequest = window.indexedDB.open("novelizerEditor", 0);
 		//this.IDBRequest.onupgradeneeded = this.upgradeDB;
+ 	},
+ 	loadData : function(data){
+ 		EditorDataSync.blockList = data["blockList"];
  	},
  	getSceneData : function(callbackDone,callbackFail){	// 현재 씬의 블록 리스트 데이터를 가져옴
  		var request = $.ajax({
@@ -24,8 +29,17 @@ var EditorDataSync = {
  		request.done(callbackDone);
  		request.fail(callbackFail);
  	},
- 	postSceneData : function(){
+ 	postSceneData : function(callbackDone,callbackFail){
+ 		var request = $.ajax({
+ 			url : this.url+"/postBlock.do",
+ 			method : "POST",
+ 			dataType : "json",
+ 			data : {sceneId : this.sceneId,
+ 					data : this.blockList},
+ 		})
 
+ 		request.done(callbackDone);
+ 		request.fail(callbackFail);
  	},
  	addBlock : function(callbackDone, callbackFail){
  		var maxIdx = this.blockList.length-1;
