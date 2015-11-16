@@ -6,7 +6,7 @@
 var EditorDataSync = {
  	url : "http://127.0.0.1:8080",
  	blockList : [],
- 	sceneId : 0,
+ 	sceneId : 1,
  	init : function(sceneId){
  		this.sceneId = sceneId;
  		//this.getSceneData(this.loadData);
@@ -36,7 +36,7 @@ var EditorDataSync = {
  			method : "POST",
  			dataType : "json",
  			data : {sceneId : this.sceneId,
- 					blockList : JSON.stringify(this.blockList)},
+ 					data : JSON.stringify(this.blockList)},
  		})
 
  		request.done(callbackDone);
@@ -69,7 +69,7 @@ var EditorDataSync = {
  		}
 
  	},
- 	sortBlock : function(blockId, prevBlockId, callbackDone){
+ 	sortBlock : function(blockId, prevBlockId, callbackDone, callbackFail){
  		var targetBlock = this.getBlock(blockId);
  		var currentPrevBlock = this.getBlock(prevBlockId);
  		var beforePrevBlock = this.getPrevBlock(blockId);
