@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 document.querySelector(".tab-edit").addEventListener("click",function(e){
 	switchTab("edit");
 })
@@ -20,3 +16,29 @@ function switchTab(tabid){
 	
 	document.querySelector("#"+tabid).style.display="block";
 }
+
+
+    $(document).ready(function(){
+
+        $('#makeMeDraggable').draggable();
+
+        $("#block").click(function(){
+            $("ol").append("<li>blcok+</li>");
+        });
+        $("#action").click(function(){
+            $("ol").append("<li>action+</li>");  
+        });
+        $("#remover").click(function(){
+            $("li").remove();
+        });
+
+        $( "#sortable" ).sortable({
+            revert: true
+        });
+        $( "#draggable" ).draggable({
+            connectToSortable: "#sortable",
+            helper: "clone",
+            revert: "invalid"
+        });
+        $( "ul, li" ).disableSelection();
+    });  

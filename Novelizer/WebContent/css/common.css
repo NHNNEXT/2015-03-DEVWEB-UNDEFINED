@@ -36,23 +36,42 @@ main{
 		height:100%;
 	}
 		#edit .left{
-			width:80%;
-			height:100%;
+			width:73%;
+			height:91%;
 		}
 		#edit #preview{
-			height:80%;
+			height:73%;
+			width: 100%;
+			border: 1px solid black;
+
 		}
+		
 		#edit #toolbox{
-			height:20%;
+			text-align: center;
+			height:36.5%;
 			width:100%;
-			background:#ffff00;
+			border: 1px solid black;
 		}
+
+
 		#edit #timeline{
 			float:right;
-			background:#ff0000;
+			text-align: center;
+			background:white;
+			border: 1px solid black;
 			height:100%;
-			width:20%;
+			width:26.8%;
+			overflow: scroll;
+
 		}
+		#edit #timeline li{
+			text-align: center;
+				border:1px solid #ccc;
+				height: 50px;
+				width: 90%;
+				margin: 0px auto;
+			}
+
 	
 	#preset{
 		display:none;
@@ -64,4 +83,11 @@ main{
 
 .left{
 	float:left;
+}
+
+img{
+
+	margin: 10px auto;
+	display: block;
+
 }
