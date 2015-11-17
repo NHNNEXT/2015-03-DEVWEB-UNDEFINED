@@ -1,4 +1,4 @@
-/**
+*
  * EditorDataSync : 에디터 페이지에서 변경되는 데이터 로컬스토리지에 저장 및 서버 연동 처리
  * author : cca-company
  */
@@ -19,14 +19,20 @@ var EditorDataSync = {
  		EditorDataSync.blockList = data;
  		// TODO : 서버에서 받은 기존 리스트 정보를 DOM에 추가
  	},
+ 	// @review - fe
+ 	// getSceneData, postSceneData이 거의 비슷한데 어떻하면 좋을까?
  	getSceneData : function(callbackDone,callbackFail){	// 현재 씬의 블록 리스트 데이터를 가져옴
+ 		// @review - fe
+ 		// 여기서 this는 EditorDataSync인데, Editor#selectBlock에서는 element다.
+ 		// 개발하다보면 헷갈리지 않을까?
  		var request = $.ajax({
  			url : this.url+"/getBlock.do",
  			method : "GET",
  			dataType : "json",
  			data : {sceneId : this.sceneId},
  		})
-
+ 		// @review - fe
+ 		// 아래처럼 할 수도 있지만, request을 사용하지 않는다면 chaining해서 써도 좋을듯.
  		request.done(callbackDone);
  		request.fail(callbackFail);
  	},
@@ -70,6 +76,8 @@ var EditorDataSync = {
 
  	},
  	sortBlock : function(blockId, prevBlockId, callbackDone, callbackFail){
+ 		// @review - fe
+ 		// 파라메터의 갯수가 많이지면 좀 불편한데 객체로 만들면 뭐가 좀 좋고, 어떤 점이 불편할까?
  		var targetBlock = this.getBlock(blockId);
  		var currentPrevBlock = this.getBlock(prevBlockId);
  		var beforePrevBlock = this.getPrevBlock(blockId);
@@ -91,6 +99,8 @@ var EditorDataSync = {
  		targetBlock.actionList.push(data);
  		callbackDone(data);
  	},
+ 	// @review - fe
+ 	// getBlock와 getPrevBlock이 코드가 거의 비슷한데 어떻게 생각해?
  	getBlock : function(blockId, getIdx){
  		if(!getIdx) getIdx = false;
 
@@ -142,4 +152,3 @@ Dog.prototype.getName = function(){
 }
 
 new Dog();
-*/

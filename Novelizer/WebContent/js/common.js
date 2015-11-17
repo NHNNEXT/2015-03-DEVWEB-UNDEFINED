@@ -1,6 +1,12 @@
 var Editor = {
     selectedBlockId : 0,
     init : function(){
+        /*
+        @review - fe
+        1. delegate기법을 활용하게 되면 장단점은?
+        2. 아래 코드의 장단점은?
+        */
+
         // 새로운 블록,액션 추가 
         $(document).on("click","#button-add-block", this.addBlock);
         $(document).on("click","#button-add-action", this.addAction);

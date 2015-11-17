@@ -27,6 +27,10 @@ navigation{
 		}
 
 main{
+	/*
+	@review - fe
+	clear:both;의 의미는 뭐고 왜 사용하지?
+	*/
 	clear:both;
 	width:100%;
 	height:100%;
@@ -55,6 +59,11 @@ main{
 
 
 		#edit #timeline{
+			/*
+			@review - fe
+			CSS도 순서를 정해서 쓰는게 좀 일반적인데 컨벤션을 맞추면 좋을 것 어떻게 생각해?
+			http://webdesign.tutsplus.com/articles/outside-in-ordering-css-properties-by-importance--cms-21685
+			*/
 			float:right;
 			text-align: center;
 			background:white;
