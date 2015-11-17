@@ -78,8 +78,12 @@ public class CreateActionServlet extends HttpServlet{
 		return new BackgroundAction(id, type, presetId, option, animation, position);
 	}
 	
-	private int[] parsePosition(String parameter) {
-		// TODO Auto-generated method stub
-		return null;
+	private int[] parsePosition(String position) {
+		String tmp = position.substring(1, position.length()-1);
+		String[] tokens = tmp.split(",");
+		int[] result = new int[2];
+		result[0] = Integer.parseInt(tokens[0]);
+		result[1] = Integer.parseInt(tokens[1]);
+		return result;
 	}
 }
