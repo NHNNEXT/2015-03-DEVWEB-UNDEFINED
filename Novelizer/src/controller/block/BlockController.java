@@ -1,12 +1,12 @@
 package controller.block;
 
-import model.dao.Dao;
+import model.dao.BlockDao;
 
 public class BlockController {
-	private Dao dao;
+	private BlockDao dao;
 
 	public BlockController() {
-		dao = new Dao();
+		dao = new BlockDao();
 	}
 
 	public String getNextBlock(int sceneId, int blockId) {

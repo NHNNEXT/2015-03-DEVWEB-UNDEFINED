@@ -10,14 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/getBlock.do")
-public class GetBlockListServlet extends HttpServlet{
+public class GetBlockListServlet extends HttpServlet {
+	BlockController blockController;
+
+	@Override
+	public void init() throws ServletException {
+		blockController = new BlockController();
+	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		BlockController bc = new BlockController();
 		String sceneId = req.getParameter("sceneId");
 		PrintWriter writer = resp.getWriter();
-		writer.append(bc.getBlockList(Integer.parseInt(sceneId)));
+		writer.append(blockController.getBlockList(Integer.parseInt(sceneId)));
 		writer.flush();
 	}
-	
+
 }

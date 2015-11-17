@@ -8,23 +8,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.Dao;
+import model.dao.BlockDao;
 
 @WebServlet("/postBlock.do")
 public class PostBlockListServlet extends HttpServlet {
+	BlockValidateChecker validateChecker;
+
+	@Override
+	public void init() throws ServletException {
+		validateChecker = new BlockValidateChecker();
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		String jsonData = req.getParameter("data");
-		
-		System.out.println(jsonData);
-		
-		BlockValidateChecker validateChecker = new BlockValidateChecker();
+
 		if (validateChecker.isValidate(jsonData)) {
-			Dao dao = new Dao();
+			BlockDao dao = new BlockDao();
 			dao.saveBlockData(jsonData);
+		} else {
+			resp.getWriter().write("Invalid JSON DATA");
+			resp.getWriter().flush();
+
 		}
 	}
-	
 
 }
