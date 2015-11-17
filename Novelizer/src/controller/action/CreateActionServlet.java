@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.block.BlockController;
-import model.dao.ActionDAO;
+import model.dao.ActionDao;
 import vo.action.Action;
 import vo.action.BackgroundAction;
 import vo.action.CharacterAction;
@@ -23,7 +23,7 @@ public class CreateActionServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		ActionValidateChecker checker = new ActionValidateChecker();
-		ActionDAO dao = new ActionDAO();
+		ActionDao dao = new ActionDao();
 		
 		if(!checker.isValid(req)){
 			PrintWriter writer = resp.getWriter();
