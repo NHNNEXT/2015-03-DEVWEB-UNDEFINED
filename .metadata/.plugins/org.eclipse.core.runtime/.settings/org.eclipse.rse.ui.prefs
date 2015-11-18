@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 org.eclipse.rse.preferences.order.connections=imdongjun-ui-MacBook-Pro.Local
+=======
+org.eclipse.rse.preferences.order.connections=idohyeong-ui-MacBook-Pro.Local
+>>>>>>> 9cd1321098bd1b8323c608279d590770926a9f63
