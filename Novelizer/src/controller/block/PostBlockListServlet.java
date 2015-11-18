@@ -21,8 +21,12 @@ public class PostBlockListServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("UTF-8");
 		String jsonData = req.getParameter("data");
-
+		
+		System.out.println(jsonData);
+		
 		if (validateChecker.isValidate(jsonData)) {
 			BlockDao dao = new BlockDao();
 			dao.saveBlockData(jsonData);
