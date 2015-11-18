@@ -1,14 +1,19 @@
 package controller.block;
 
-import static org.junit.Assert.*;
-
+import org.junit.Before;
 import org.junit.Test;
 
 public class BlockControllerTest {
-
+	
+	BlockController bc;
+	@Before
+	public void setup(){
+		bc = new BlockController();
+	}
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void getBlockListTest() {
+		bc.getBlockList(1);
 	}
 
 }

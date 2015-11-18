@@ -1,0 +1,32 @@
+main{
+	width:1000px;
+	height:600px;
+	margin:0 auto;
+	position:relative;
+}
+	main>div{
+		width:inherit;
+		height:inherit;
+		position:absolute;
+		top:0;
+		left:0;
+	}
+		div#layer-bg{
+			z-index:1;
+		}
+		div#layer-obj{
+			z-index:10;
+		}
+			div#layer-obj .character{
+				position:absolute;
+			}
+
+		div#layer-text{
+			width:960px;
+			height:160px;
+			padding:20px;
+			background:#eee;
+			top:auto;
+			bottom:0px;
+			z-index:1000;
+		}
