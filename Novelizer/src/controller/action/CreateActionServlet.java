@@ -78,7 +78,7 @@ public class CreateActionServlet extends HttpServlet{
 		return new BackgroundAction(id, type, presetId, option, animation, position);
 	}
 	
-	private int[] parsePosition(String position) {
+	public int[] parsePosition(String position) {
 		String tmp = position.substring(1, position.length()-1);
 		String[] tokens = tmp.split(",");
 		int[] result = new int[2];
