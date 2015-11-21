@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import model.json.JsonHandler;
+import vo.action.ActionType;
 
 public class BlockValidateChecker {
 	private JsonHandler mJsonHandler;
@@ -14,25 +15,24 @@ public class BlockValidateChecker {
 
 	public boolean isValidate(String jsonData) {
 
-		JSONArray blockListArray = mJsonHandler.convertToJSONArray(jsonData);
-		if (blockListArray == null)
+		JSONArray blocks = mJsonHandler.convertToJSONArray(jsonData);
+		if (blocks == null)
 			return false;
 
-		for (int i = 0; i < blockListArray.size(); i++) {
-			JSONObject blockObject = (JSONObject) blockListArray.get(i);
-			if (!isBlockHasEssentialData(blockObject)) {
+		for (Object block : blocks) {
+			if (!isBlockHasValidData((JSONObject) block)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean isBlockHasEssentialData(JSONObject blockObject) {
+	private boolean isBlockHasValidData(JSONObject blockObject) {
 		long blockId = (long) blockObject.get("blockId");
 		long nextBlockId = (long) blockObject.get("nextBlockId");
-		JSONArray actionArray = (JSONArray) blockObject.get("actionList");
+		JSONArray actions = (JSONArray) blockObject.get("actionList");
 
-		if (isValidateBlockId(blockId) && isValidateBlockId(nextBlockId) && isValidateActionList(actionArray)) {
+		if (isValidateBlockId(blockId) && isValidateBlockId(nextBlockId) && isValidateActions(actions)) {
 			return true;
 		} else {
 			System.out.println("Block Data Error");
@@ -50,35 +50,23 @@ public class BlockValidateChecker {
 		}
 	}
 
-	private boolean isValidateActionList(JSONArray actionArray) {
-		for (int i = 0; i < actionArray.size(); i++) {
-			JSONObject actionObject = (JSONObject) actionArray.get(i);
-			if (!isActionHasEssentialData(actionObject))
+	private boolean isValidateActions(JSONArray actionArray) {
+		for (Object action : actionArray) {
+			if (!isActionHasValidData((JSONObject) action))
 				return false;
 		}
 		return true;
 	}
 
-	private boolean isActionHasEssentialData(JSONObject actionObject) {
-		if (actionObject == null) {
+	private boolean isActionHasValidData(JSONObject action) {
+		if (action == null) {
 			System.out.println("No Action");
 			return true;
 		}
-		String actionType = (String) actionObject.get("type");
-
-		if (isValidateActionType(actionType)) {
+		if (ActionType.isActionType((String) action.get("type"))) {
 			return true;
 		}
 		return false;
-	}
-
-	private boolean isValidateActionType(String actionType) {
-		if (actionType.equals("text") || actionType.equals("character") || actionType.equals("background")) {
-			return true;
-		} else {
-			System.out.println("ActionType is invalidate");
-			return false;
-		}
 	}
 
 }

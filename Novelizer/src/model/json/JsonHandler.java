@@ -14,14 +14,6 @@ public class JsonHandler {
 		mParser = new JSONParser();
 	}
 
-	public ArrayList<JSONObject> parseToBlockList(JSONArray blockArray) {
-		ArrayList<JSONObject> blockArrayList = new ArrayList<JSONObject>();
-		for (int i = 0; i < blockArray.size(); i++) {
-			blockArrayList.add((JSONObject) blockArray.get(i));
-		}
-		return blockArrayList;
-	}
-
 	public JSONArray convertToJSONArray(String jsonData) {
 		JSONArray blockArray = null;
 		try {
@@ -30,6 +22,14 @@ public class JsonHandler {
 			System.out.println("JSON Convert FAIL!!");
 		}
 		return blockArray;
+	}
+
+	public ArrayList<JSONObject> parseToBlockList(JSONArray blockArray) {
+		ArrayList<JSONObject> blockArrayList = new ArrayList<JSONObject>();
+		for (int i = 0; i < blockArray.size(); i++) {
+			blockArrayList.add((JSONObject) blockArray.get(i));
+		}
+		return blockArrayList;
 	}
 
 }
