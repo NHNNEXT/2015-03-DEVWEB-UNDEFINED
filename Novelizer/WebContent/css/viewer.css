@@ -22,7 +22,6 @@ main{
 			div#layer-obj .character{
 				position: absolute;
 			}
-
 		div#layer-text{
 			top: auto;
 			bottom: 0px;
