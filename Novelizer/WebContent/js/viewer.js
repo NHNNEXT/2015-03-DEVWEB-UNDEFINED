@@ -33,17 +33,17 @@ var Viewer = {
 	"nextBlockId" : 2,
 	"actionList":[
 		{
-			"type":"character",
+			"type":"CHARACTER",
 			"characterId":1,
 			"presetId":1,
-			"option":"appear",
+			"option":"APPEAR",
 			"position":[100,0],
 			"animation":null
 		},
 		{
-			"type":"background",
+			"type":"BACKGROUND",
 			"presetId":3,
-			"option":"appear",
+			"option":"APPEAR",
 			"position":[0,0],
 			"animation":null
 		}
@@ -54,7 +54,7 @@ var Viewer = {
 	"nextBlockId" : 3,
 	"actionList":[
 		{
-			"type":"text",
+			"type":"TEXT",
 			"text":"왜 이렇게 철수가 늦지?",
 			"characterId":1
 		}
@@ -65,15 +65,15 @@ var Viewer = {
 	"nextBlockId" : 4,
 	"actionList":[
 		{
-			"type":"character",
+			"type":"CHARACTER",
 			"characterId":2,
 			"presetId":2,
-			"option":"appear",
+			"option":"APPEAR",
 			"position":[700,0],
 			"animation":null
 		},
 		{
-			"type":"text",
+			"type":"TEXT",
 			"text":"헉헉, 미안해 내가 너무 늦었지?",
 			"characterId":2
 		}
@@ -84,7 +84,7 @@ var Viewer = {
 	"nextBlockId" : 5,
 	"actionList":[
 		{
-			"type":"text",
+			"type":"TEXT",
 			"text":"그걸 지금 말이라고 해? 우리 헤어져! ",
 			"characterId":1
 		}
@@ -95,10 +95,10 @@ var Viewer = {
 	"nextBlockId" : 0,
 	"actionList":[
 		{
-			"type":"character",
+			"type":"CHARACTER",
 			"characterId":1,
 			"presetId":1,
-			"option":"disappear",
+			"option":"DISAPPEAR",
 			"position":[0,0],
 			"animation":null
 		}
@@ -121,16 +121,16 @@ var Viewer = {
 	doAction : function(action){
 		var layer;
 
-		if(action.type == "text")
+		if(action.type == "TEXT")
 		{
 			layer = $("#layer-text");
 			layer.html(action.text);
 		}
-		else if(action.type == "character")
+		else if(action.type == "CHARACTER")
 		{
 			layer = $("#layer-obj");
 			// ISSUE! object요소에 z-index attr 추가 
-			if(action.option == "appear"){
+			if(action.option == "APPEAR"){
 				$("<div id='character"+action.characterId+"' class='character'></div>")
 					.css({
 						backgroundImage:"url('"+Viewer.presetData[action.presetId-1]+"')",
@@ -140,11 +140,11 @@ var Viewer = {
 						top:action.position[1]
 					})
 					.appendTo(layer);
-			}else if(action.option=="disappear"){
+			}else if(action.option=="DISAPPEAR"){
 				$("#character"+action.characterId).remove();
 			}
 		}
-		else if(action.type=="background")
+		else if(action.type=="BACKGROUND")
 		{
 			layer = $("#layer-bg");
 			layer.css({
