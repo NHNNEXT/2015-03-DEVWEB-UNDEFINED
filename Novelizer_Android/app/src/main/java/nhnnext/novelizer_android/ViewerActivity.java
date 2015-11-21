@@ -1,9 +1,13 @@
 package nhnnext.novelizer_android;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class ViewerActivity extends AppCompatActivity {
 
@@ -11,27 +15,28 @@ public class ViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
+        final ServerConnector serverConnector = new ServerConnector();
+
+        final TextView blockListTextView = (TextView) findViewById(R.id.textView_viewer_blockList);
+        findViewById(R.id.button_viewer_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final String data = serverConnector.getBlockListByJSON();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                blockListTextView.setText(data);
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_viewer, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
