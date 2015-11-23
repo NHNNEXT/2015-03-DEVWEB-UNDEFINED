@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final ServerConnector serverConnector = new ServerConnector();
-                final TextView blockListTextView = (TextView) findViewById(R.id.textView_viewer_blockList);
-                findViewById(R.id.button_viewer_test).setOnClickListener(new View.OnClickListener() {
+                final TextView blockListTextView = (TextView) findViewById(R.id.fab);
+                findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         new Thread(new Runnable() {
