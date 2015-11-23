@@ -11,11 +11,11 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/book_icon"
+            android:id="@+id/novel_image"
             android:src="@mipmap/book_icon"
             android:layout_gravity="center_horizontal" />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:id="@+id/novel_name"
