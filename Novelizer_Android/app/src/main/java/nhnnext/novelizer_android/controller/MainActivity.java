@@ -7,9 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import nhnnext.novelizer_android.R;
 import nhnnext.novelizer_android.SplashActivity;
+import nhnnext.novelizer_android.network.ServerConnector;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,8 +25,25 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                final ServerConnector serverConnector = new ServerConnector();
+                final TextView blockListTextView = (TextView) findViewById(R.id.textView_viewer_blockList);
+                findViewById(R.id.button_viewer_test).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final String data = serverConnector.getBlockListByJSON();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        blockListTextView.setText(data);
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                });
             }
         });
     }

@@ -50,6 +50,7 @@ public class NovelListAdapter extends ArrayAdapter<NovelSummary>{
             holder = (ViewHolder) convertView.getTag();
         }
         holder.novelName.setText(items.get(position).getNovelName());
+        /* novel Image에 대한 부분은 이후에 구현 */
 
         return convertView;
     }

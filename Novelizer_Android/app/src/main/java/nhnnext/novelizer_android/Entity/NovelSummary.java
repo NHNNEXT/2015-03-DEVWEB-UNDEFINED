@@ -18,4 +18,7 @@ public class NovelSummary {
     public String getNovelName(){
         return novelName;
     }
+    public String getNovelId(){
+        return novelId;
+    }
 }
