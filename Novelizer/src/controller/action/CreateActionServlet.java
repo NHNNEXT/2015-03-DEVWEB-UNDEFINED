@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-import controller.block.BlockController;
+import controller.block.BlockService;
 import model.dao.ActionDao;
 import vo.action.Action;
 import vo.action.BackgroundAction;

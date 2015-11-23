@@ -1,28 +1,32 @@
 package controller.block;
 
-import model.dao.BlockDao;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-public class BlockController {
-	private BlockDao dao;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-	public BlockController() {
-		dao = new BlockDao();
-	}
+//클라이언트에서 sceneId와 blockId를 받아서 다음에 가야할 block의 정보를 넘겨줌 
 
-	public String getNextBlock(int sceneId, int blockId) {
-		String data = "{sceneId : 3, blockId : 2}";
-		findFlag(sceneId, blockId);
+@WebServlet("/postBlockInfoTest")
+public class BlockController extends HttpServlet {
 
-		return data;
-	}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	private void findFlag(int sceneId, int blockId) {
+		int sceneId = Integer.parseInt(req.getParameter("sceneId"));
+		int blockId = Integer.parseInt(req.getParameter("blockId"));
 
-	}
+		BlockService bc = new BlockService();
 
-	public String getBlockList(int sceneId) {
+		String nextBlockInfo = bc.getNextBlock(sceneId, blockId);
 
-		return dao.getBlockList();
+		ObjectOutputStream dataOutPut = new ObjectOutputStream(resp.getOutputStream());
+		dataOutPut.writeUTF(nextBlockInfo);
+		dataOutPut.flush();
+		dataOutPut.close();
 
 	}
 }

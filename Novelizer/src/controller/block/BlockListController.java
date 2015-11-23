@@ -9,13 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/getBlockList")
-public class GetBlockListServlet extends HttpServlet {
-	BlockController blockController;
+import model.dao.BlockDao;
+
+@WebServlet("/blockList")
+public class BlockListController extends HttpServlet {
+	BlockValidateChecker validateChecker;
+	BlockService blockController;
 
 	@Override
 	public void init() throws ServletException {
-		blockController = new BlockController();
+		validateChecker = new BlockValidateChecker();
+		blockController = new BlockService();
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+		String jsonData = req.getParameter("data");
+
+		if (validateChecker.isValidate(jsonData)) {
+			BlockDao dao = new BlockDao();
+			dao.saveBlockData(jsonData);
+		} else {
+			resp.getWriter().write("Invalid JSON DATA");
+			resp.getWriter().flush();
+
+		}
 	}
 
 	@Override

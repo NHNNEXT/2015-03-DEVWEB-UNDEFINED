@@ -5,10 +5,10 @@ import org.junit.Test;
 
 public class BlockControllerTest {
 	
-	BlockController bc;
+	BlockService bc;
 	@Before
 	public void setup(){
-		bc = new BlockController();
+		bc = new BlockService();
 	}
 	
 	@Test
