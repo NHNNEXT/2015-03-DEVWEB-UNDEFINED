@@ -26,6 +26,24 @@ public class NovelListFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_novel_list, container, false);
         novelSummarys = new ArrayList<NovelSummary>();
 
+        getNovelSummaryData(novelSummarys);
+
+        GridView gridView = (GridView) root.findViewById(R.id.novel_list_grid_view);
+        NovelListAdapter adapter = new NovelListAdapter(getActivity(), R.layout.novel_item, novelSummarys);
+        gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ViewerActivity.class);
+                intent.putExtra("novelId", novelSummarys.get(position).getNovelId());
+                startActivity(intent);
+            }
+        });
+
+        return root;
+    }
+
+    private void getNovelSummaryData(ArrayList<NovelSummary> novelSummarys){
         /* novel summary data를 받아오는 model부분 후에 추가 구현  */
         /* Dummy data */
         NovelSummary dummy1 = new NovelSummary("novel1 name", "novel1 image path", "novel1 id");
@@ -38,18 +56,5 @@ public class NovelListFragment extends Fragment {
         novelSummarys.add(dummy3);
         novelSummarys.add(dummy4);
         novelSummarys.add(dummy5);
-
-        GridView gridView = (GridView) root.findViewById(R.id.novel_list_grid_view);
-        NovelListAdapter adapter = new NovelListAdapter(getActivity(), R.layout.novel_item, novelSummarys);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ViewerActivity.class);
-                intent.putExtra("novelId", novelSummarys.get(position).getNovelId());
-            }
-        });
-
-        return root;
     }
 }
