@@ -1,4 +1,4 @@
-package nhnnext.novelizer_android;
+package nhnnext.novelizer_android.network;
 
 
 import com.squareup.okhttp.ResponseBody;
