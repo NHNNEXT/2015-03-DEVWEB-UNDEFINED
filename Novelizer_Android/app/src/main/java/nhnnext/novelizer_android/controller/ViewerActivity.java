@@ -15,9 +15,6 @@ public class ViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
-
-        String novelId = getIntent().getStringExtra("novelId");
-        Toast.makeText(this, novelId, Toast.LENGTH_LONG).show();
     }
 
 

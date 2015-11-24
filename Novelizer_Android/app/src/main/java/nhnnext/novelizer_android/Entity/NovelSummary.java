@@ -6,12 +6,11 @@ package nhnnext.novelizer_android.Entity;
 public class NovelSummary {
 
     private String novelName;
-    private String novelImagePath;
     private String novelId;
+    /* 각 novel의 대표 사진(리스트에서 보여줄 사진) 이후에 추가 예정 */
 
-    public NovelSummary(String novelName, String novelImagePath, String novelId){
+    public NovelSummary(String novelName, String novelId){
         this.novelName = novelName;
-        this.novelImagePath = novelImagePath;
         this.novelId = novelId;
     }
 
