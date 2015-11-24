@@ -1,6 +1,6 @@
 package model.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 
@@ -31,7 +31,7 @@ public class BlockDao {
 	}
 
 	private void insertBlockData(String jsonData, DBCollection blockCollection) {
-		ArrayList<JSONObject> blockList = jsonHandler.parseToBlockList(jsonHandler.convertToJSONArray(jsonData));
+		List<JSONObject> blockList = jsonHandler.convertToJSONArray(jsonData);
 		for (JSONObject block : blockList) {
 			DBObject dbObject = (DBObject) JSON.parse(block.toJSONString());
 			blockCollection.insert(dbObject);

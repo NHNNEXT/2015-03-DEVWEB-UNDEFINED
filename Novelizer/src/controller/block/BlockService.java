@@ -4,25 +4,18 @@ import model.dao.BlockDao;
 
 public class BlockService {
 	private BlockDao dao;
+	private BlockValidateChecker validateChecker;
 
 	public BlockService() {
 		dao = new BlockDao();
-	}
-
-	public String getNextBlock(int sceneId, int blockId) {
-		String data = "{sceneId : 3, blockId : 2}";
-		findFlag(sceneId, blockId);
-
-		return data;
-	}
-
-	private void findFlag(int sceneId, int blockId) {
-
+		validateChecker = new BlockValidateChecker();
 	}
 
 	public String getBlockList(int sceneId) {
-
 		return dao.getBlockList();
+	}
 
+	public boolean isValidateBlockList(String jsonData) {
+		return validateChecker.isValidate(jsonData);
 	}
 }

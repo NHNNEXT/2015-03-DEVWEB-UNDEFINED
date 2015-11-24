@@ -1,7 +1,5 @@
 package model.json;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,22 +12,24 @@ public class JsonHandler {
 		mParser = new JSONParser();
 	}
 
-	public JSONArray convertToJSONArray(String jsonData) {
-		JSONArray blockArray = null;
+	public JSONObject convertToJSONObject(String jsonData) {
+		JSONObject jsonObject = null;
 		try {
-			blockArray = (JSONArray) mParser.parse(jsonData);
+			jsonObject = (JSONObject) mParser.parse(jsonData);
 		} catch (ParseException e) {
 			System.out.println("JSON Convert FAIL!!");
 		}
-		return blockArray;
+		return jsonObject;
 	}
 
-	public ArrayList<JSONObject> parseToBlockList(JSONArray blockArray) {
-		ArrayList<JSONObject> blockArrayList = new ArrayList<JSONObject>();
-		for (int i = 0; i < blockArray.size(); i++) {
-			blockArrayList.add((JSONObject) blockArray.get(i));
+	public JSONArray convertToJSONArray(String jsonData) {
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = (JSONArray) mParser.parse(jsonData);
+		} catch (ParseException e) {
+			System.out.println("JSON Convert FAIL!!");
 		}
-		return blockArrayList;
+		return jsonArray;
 	}
 
 }

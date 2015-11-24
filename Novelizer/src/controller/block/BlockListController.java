@@ -13,13 +13,11 @@ import model.dao.BlockDao;
 
 @WebServlet("/blockList")
 public class BlockListController extends HttpServlet {
-	BlockValidateChecker validateChecker;
-	BlockService blockController;
+	BlockService blockService;
 
 	@Override
 	public void init() throws ServletException {
-		validateChecker = new BlockValidateChecker();
-		blockController = new BlockService();
+		blockService = new BlockService();
 	}
 
 	@Override
@@ -28,11 +26,11 @@ public class BlockListController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String jsonData = req.getParameter("data");
 
-		if (validateChecker.isValidate(jsonData)) {
+		if (blockService.isValidateBlockList(jsonData)) {
 			BlockDao dao = new BlockDao();
 			dao.saveBlockData(jsonData);
 		} else {
-			resp.getWriter().write("Invalid JSON DATA");
+			resp.getWriter().write("Error : Invalid JSON DATA");
 			resp.getWriter().flush();
 
 		}
@@ -43,7 +41,7 @@ public class BlockListController extends HttpServlet {
 		String sceneId = req.getParameter("sceneId");
 		resp.setContentType("text/plain;charset=UTF-8");
 		PrintWriter writer = resp.getWriter();
-		writer.append(blockController.getBlockList(Integer.parseInt(sceneId)));
+		writer.append(blockService.getBlockList(Integer.parseInt(sceneId)));
 		writer.flush();
 	}
 
