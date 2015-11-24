@@ -1,7 +1,5 @@
 package model.dao;
 
-import org.json.simple.JSONObject;
-
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
