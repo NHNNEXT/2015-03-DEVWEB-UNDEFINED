@@ -17,4 +17,21 @@ public class Novel {
         this.novelId = novelId;
         this.scenes = scenes;
     }
+
+    /* getter & setter */
+    public String getNovelId() {
+        return novelId;
+    }
+
+    public void setNovelId(String novelId) {
+        this.novelId = novelId;
+    }
+
+    public List<Scene> getScenes() {
+        return scenes;
+    }
+
+    public void setScenes(List<Scene> scenes) {
+        this.scenes = scenes;
+    }
 }

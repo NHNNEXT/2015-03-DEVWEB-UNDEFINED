@@ -34,10 +34,16 @@ public class NovelViewerFragment extends Fragment {
 
         String novelId = getActivity().getIntent().getStringExtra("novelId");
         Novel novel = getNovelData(novelId);
-        Toast.makeText(getActivity(), novelId, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), novelId, Toast.LENGTH_LONG).show();
+
+        startVisualNovel(novel);
+
         return root;
     }
 
+    private void startVisualNovel(Novel novel){
+      
+    }
 
     private Novel getNovelData(String novelId){
         /* 이후 model에서 novelId를 키로하여 novel의 data를 불러오는 방식 구현 */
@@ -50,8 +56,8 @@ public class NovelViewerFragment extends Fragment {
         Bitmap girl = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl)).getBitmap();
 
         actions.put("Background", new BackgroundAction(0, "Background", backgroundImg));
-        actions.put("Character", new CharacterAction(1, "Character", new int[]{10, 10}, boy));
-        actions.put("Character", new CharacterAction(2, "Character", new int[]{60, 10}, girl));
+        actions.put("Character1", new CharacterAction(1, "Character", new int[]{10, 10}, boy));
+        actions.put("Character2", new CharacterAction(2, "Character", new int[]{60, 10}, girl));
         actions.put("Text", new TextAction(3, "Text", "Hello World"));
         /* test block data 생성 */
         List<Block> blocks = new ArrayList<Block>();

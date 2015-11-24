@@ -12,4 +12,21 @@ public class Block {
         this.actions = actions;
         this.blockId = blockId;
     }
+
+    /* getter & setter */
+    public Map<String, Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Map<String, Action> actions) {
+        this.actions = actions;
+    }
+
+    public int getBlockId() {
+        return blockId;
+    }
+
+    public void setBlockId(int blockId) {
+        this.blockId = blockId;
+    }
 }
