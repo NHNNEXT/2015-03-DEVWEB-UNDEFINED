@@ -5,7 +5,7 @@ main{
 	height: 600px;
 	margin: 0 auto;
 }
-	main>div{
+	div.layer{
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -22,6 +22,7 @@ main{
 			div#layer-obj .character{
 				position: absolute;
 			}
+
 		div#layer-text{
 			top: auto;
 			bottom: 0px;
