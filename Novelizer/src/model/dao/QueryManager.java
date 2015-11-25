@@ -1,6 +1,6 @@
 package model.dao;
 
-public class SQLManager {
+public class QueryManager {
 	public String find(String dbName, String where){		
 		return "SELECT * FROM " + dbName +" WHERE " + where+ ";";
 	}
