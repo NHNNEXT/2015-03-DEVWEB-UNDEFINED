@@ -1,29 +1,25 @@
 package controller.scene;
 
-import org.json.simple.JSONObject;
-
+import model.dao.ActionDao;
+import model.dao.BlockDao;
 import model.dao.SceneDao;
 import model.json.JsonHandler;
 
 public class SceneService {
 	private JsonHandler jsonHandler;
 	private SceneDao sceneDao;
-	private JSONObject scene;
-	private long sceneId;
-	
-	public SceneService(){
+	private BlockDao blockDao;
+	private ActionDao actionDao;
+
+	public SceneService() {
 		jsonHandler = new JsonHandler();
 		sceneDao = new SceneDao();
+		blockDao = new BlockDao();
+		actionDao = new ActionDao();
 	}
-	
-	public void saveScene(String sceneData){
-		scene = jsonHandler.convertToJSONObject(sceneData);
-		sceneId = (long) scene.get("sceneId");
-		if(sceneDao.hasScene(sceneId)){
-			sceneDao.updateScene(scene);
-		}else{
-			sceneDao.newScene(scene);
-		}
+
+	public void saveScene(String sceneData) {
+		
 	}
-	
+
 }

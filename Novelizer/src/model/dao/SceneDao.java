@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.json.simple.JSONObject;
 
 import utils.Connector;
+import utils.JdbcTemplate;
 
 public class SceneDao {
 	private Connector connector;
@@ -15,10 +16,12 @@ public class SceneDao {
 	private Connection conn;
 	private PreparedStatement prst;
 	private ResultSet resultSet;
+	private JdbcTemplate template;
 	
 	public SceneDao(){
 		mQueryManager = new QueryManager();
 		conn = connector.getConnection();
+		template = new JdbcTemplate();
 		prst = null;
 		resultSet = null;
 	}
@@ -29,7 +32,7 @@ public class SceneDao {
 			prst = conn.prepareStatement(hasSecneQuery);
 			resultSet = prst.executeQuery();
 		} catch (SQLException e) {
-			
+			throw new RuntimeException();
 		}finally{
 			if(prst != null)  try{prst.close();}catch(SQLException sqle){}
 			if(resultSet != null)  try{resultSet.close(); return true;}catch(SQLException sqle){}
