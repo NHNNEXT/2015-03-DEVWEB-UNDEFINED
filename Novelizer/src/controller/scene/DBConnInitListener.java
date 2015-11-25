@@ -1,3 +1,5 @@
+package controller.scene;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
