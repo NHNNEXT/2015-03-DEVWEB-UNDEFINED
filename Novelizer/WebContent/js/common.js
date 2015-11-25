@@ -1,3 +1,4 @@
+
 var Editor = {
     selectedBlockId : 0,
     init : function(){
@@ -9,7 +10,10 @@ var Editor = {
         $(document).on("click","#block-list li.block", this.selectBlock);
         $(document).on("click","#button-remove", this.removeBlock);
 
-        // TODO : sortable 새로 추가된 액션 리스트에 적용되게 수정하기
+        // TODO: 액션 선택 추가
+
+
+        // TODO: sortable 새로 추가된 액션 리스트에 적용되게 수정하기
         // action-list li 태그를 이동할 수 있게 
         $( "#block-list,.action-list,#temp-action-list" ).sortable({
             revert: true
@@ -18,9 +22,10 @@ var Editor = {
         $( "#draggable" ).draggable({
             connectToSortable: "#sortable",
             helper: "clone",
-            revert: "invalid"
+            revert: "valid"
         });
         $( "ul, li" ).disableSelection();
+
 
     },
     addBlock : function(){
@@ -32,6 +37,10 @@ var Editor = {
         EditorDataSync.removeBlock(Editor.selectedBlockId);
         $("li.selected").remove();
     },
+
+    //TODO: removieAction
+
+    //
     selectBlock : function(){
         Editor.selectedBlockId = $(this).data("blockId");
         $("li.selected").removeClass("selected");
@@ -41,17 +50,23 @@ var Editor = {
         EditorDataSync.addAction(Editor.selectedBlockId,function(data){
             $("li.selected ul.action-list").append("<li data-action-id='"+data.actionId+"'>action"+data.actionId+"</li>");  
         });
-    },
+    }, 
+    selectAction : function(){
+         Editor.selectedActionId = $(this).data("actionId");
+        $("li.selected").removeClass("selected");
+        $(this).addClass("selected");
+    }
+
+
 }
 
-// TODO : jquery로 고치기
-document.querySelector(".tab-edit").addEventListener("click",function(e){
+$(".tab-edit").on("click",function(event){
 	switchTab("edit");
 })
-document.querySelector(".tab-preset").addEventListener("click",function(){
+$(".tab-preset").on("click",function(event){
 	switchTab("preset");
 })
-document.querySelector(".tab-scenario").addEventListener("click",function(){
+$(".tab-scenario").on("click",function(event){
 	switchTab("scenario");
 })
 
@@ -63,4 +78,6 @@ function switchTab(tabid){
 	
 	document.querySelector("#"+tabid).style.display="block";
 }
+
+
 
