@@ -1,7 +1,5 @@
 {	
 	"sceneId" : 1,
-	"projectId" : 1,
-	"startBlockId" : 1,
 	"name" : "startScene",
 	"blockList" : [
 		{
@@ -9,27 +7,36 @@
 			"nextBlockId" : 2,
 			"actionList":[
 				{
+					"actionId" : 1,
 					"type":"CHARACTER",
-					"characterId":1,
-					"presetId":1,
-					"option":"APPEAR",
-					"position":[0,0],
-					"animation":null
+					"optionData" : {
+						"characterId":1,
+						"presetId":1,
+						"option":"APPEAR",
+						"position":[0,0],
+						"animation":null
+					}
 				},
 				{
+					"actionId" : 2,
 					"type":"BACKGROUND",
-					"presetId":3,
-					"option":"APPEAR",
-					"position":[0,0],
-					"animation":null
+					"optionData" : {
+						"presetId":3,
+						"option":"APPEAR",
+						"position":[0,0],
+						"animation":null
+					}
 				},
 				{
+					"actionId" : 3,
 					"type":"CHARACTER",
-					"characterId":2,
-					"presetId":2,
-					"option":"APPEAR",
-					"position":[0,0],
-					"animation":null
+					"optionData" : {
+						"characterId":2,
+						"presetId":2,
+						"option":"APPEAR",
+						"position":[0,0],
+						"animation":null
+					}
 				}
 			]
 		},
@@ -38,9 +45,12 @@
 			"nextBlockId" : 3,
 			"actionList":[
 				{
+					"actionId" : 4,
 					"type":"TEXT",
-					"text":"왜 이렇게 철수가 늦지?",
-					"characterId":1
+					"optionData" : {
+						"text":"왜 이렇게 철수가 늦지?",
+						"characterId":1
+					}
 				}
 			]
 		},
@@ -49,9 +59,12 @@
 			"nextBlockId" : 4,
 			"actionList":[
 				{
+					"actionId" : 5,
 					"type":"TEXT",
-					"text":"헉헉, 미안해 내가 너무 늦었지?",
-					"characterId":2
+					"optionData" : {
+						"text":"헉헉, 미안해 내가 너무 늦었지?",
+						"characterId":2
+					}
 				}
 			]
 		},
@@ -60,9 +73,12 @@
 			"nextBlockId" : 5,
 			"actionList":[
 				{
+					"actionId" : 6,
 					"type":"TEXT",
-					"text":"그걸 지금 말이라고 해? 우리 헤어져! ",
-					"characterId":1
+					"optionData" : {
+						"text":"그걸 지금 말이라고 해? 우리 헤어져! ",
+						"characterId":1
+					}
 				}
 			]
 		},
@@ -71,12 +87,15 @@
 			"nextBlockId" : 6,
 			"actionList":[
 				{
+					"actionId" : 7,
 					"type":"CHARACTER",
-					"characterId":1,
-					"presetId":1,
-					"option":"DISAPPEAR",
-					"position":[0,0],
-					"animation":null
+					"optionData" : {
+						"characterId":1,
+						"presetId":1,
+						"option":"DISAPPEAR",
+						"position":[0,0],
+						"animation":null
+					}
 				}
 			]
 		}

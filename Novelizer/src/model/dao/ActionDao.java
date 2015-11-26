@@ -1,26 +1,26 @@
 package model.dao;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import vo.action.Action;
 
 public class ActionDao {
-	private DB db;
+	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
+
+	private QueryManager mQueryManager;
+	private SqlManager sqlManager;
 
 	public ActionDao() {
-		Mongo conn = utils.Connection.getConnection();
-		db = conn.getDB("Novelizer");
+		mQueryManager = new QueryManager();
+		sqlManager = new SqlManager();
 	}
 
-	public void saveActionData(DBObject actionJSONData) {
-		DBCollection actionCollection = db.getCollection("action");
-		actionCollection.drop();
-		insertActionData(actionCollection, actionJSONData);
-	}
+	public void newAction(Action action, int blockId) {
+		String insertBlockQuery = mQueryManager.Insert("action", "acionId, type, blockId",
+				action.getActionId() + "," + mQueryManager.toQueryStirng(action.getType()) + "," + blockId);
+		sqlManager.excuteUpdate(insertBlockQuery);
 
-	private void insertActionData(DBCollection actionCollection, DBObject actionJSONData) {
-		actionCollection.insert(actionJSONData);
 	}
 
 }

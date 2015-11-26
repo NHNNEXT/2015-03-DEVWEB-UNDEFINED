@@ -3,11 +3,12 @@ package utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import com.mongodb.Mongo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Connector { 
-	// Issue ServletContextListener 쓸때, context-param을 web.xml에 설정하지 않고 annotation 기법으로 구현하는 방법 모르겠음
-	// 검색해보니까 그렇게 구현 못하는 것 같은데.. 
+
+	private Logger log = LoggerFactory.getLogger("Connector.class");
 	private Connection conn = null;
 	
 	public Connector(){
@@ -28,7 +29,7 @@ public class Connector {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.conn = DriverManager.getConnection(url, id, pw);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			log.error("cannot make connections \n" + e);
 		}
 	}
 	

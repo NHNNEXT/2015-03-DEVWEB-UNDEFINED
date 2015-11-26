@@ -8,11 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet
+@WebServlet("/scene")
 public class SceneController extends HttpServlet {
+	
+	private SceneService service;
+	
+	@Override
+	public void init() throws ServletException {
+		service = new SceneService();
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String SceneData = req.getParameter("sceneData");
-		
+		req.setCharacterEncoding("UTF-8");
+		String sceneData = req.getParameter("sceneData");
+		service.saveScene(sceneData);
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/plain;charset=UTF-8");
 	}
 }

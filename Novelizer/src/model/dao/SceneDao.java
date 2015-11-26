@@ -1,59 +1,35 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.json.simple.JSONObject;
-
-import utils.Connector;
-import utils.JdbcTemplate;
+import vo.scene.Scene;
 
 public class SceneDao {
-	private Connector connector;
+	private static final Logger log = LoggerFactory.getLogger("SceneDao.class");
+
 	private QueryManager mQueryManager;
-	private Connection conn;
-	private PreparedStatement prst;
-	private ResultSet resultSet;
-	private JdbcTemplate template;
-	
-	public SceneDao(){
+	private SqlManager sqlManager;
+
+	public SceneDao() {
 		mQueryManager = new QueryManager();
-		conn = connector.getConnection();
-		template = new JdbcTemplate();
-		prst = null;
-		resultSet = null;
+		sqlManager = new SqlManager();
 	}
 
 	public boolean hasScene(long sceneId) {
-		String hasSecneQuery = mQueryManager.find("scene", "ID="+sceneId);
-		try {
-			prst = conn.prepareStatement(hasSecneQuery);
-			resultSet = prst.executeQuery();
-		} catch (SQLException e) {
-			throw new RuntimeException();
-		}finally{
-			if(prst != null)  try{prst.close();}catch(SQLException sqle){}
-			if(resultSet != null)  try{resultSet.close(); return true;}catch(SQLException sqle){}
+		String hasSecneQuery = mQueryManager.find("scene", "ID=" + sceneId);
+		if (sqlManager.excuteSelect(hasSecneQuery) != null) {
+			return true;
 		}
 		return false;
 	}
 
-	public void updateScene(JSONObject scene) {
-		
-	}
+	//현재 projectId가 1로 고정 추후  project객체 생성시 수정 필요 
+	public void newScene(Scene scene) {
+		String insertSceneQuery = mQueryManager.Insert("scene", "sceneId, projectId, startBlockId, name",
+				scene.getSceneId() + "," + 1 + "," + scene.getStartBlockId() + ","
+						+ mQueryManager.toQueryStirng(scene.getName()));
+		sqlManager.excuteUpdate(insertSceneQuery);
 
-	public void newScene(JSONObject scene) {
-		long sceneId = (long)scene.get("sceneId");
-		long projectId = (long)scene.get("projectId");
-		
 	}
-	
-	public String getSceneList(){
-		String getSceneListQuery = mQueryManager.findAll("scene");
-		
-		return null;
-	}
-
 }

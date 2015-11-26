@@ -1,54 +1,25 @@
 package model.dao;
 
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.json.simple.JSONObject;
-
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
-import com.mongodb.util.JSON;
-
-import model.json.JsonHandler;
+import vo.block.Block;
 
 public class BlockDao {
-	private DB db;
-	private JsonHandler jsonHandler;
+	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);
+
+	private QueryManager mQueryManager;
+	private SqlManager sqlManager;
 
 	public BlockDao() {
-		Mongo conn = utils.Connection.getConnection();
-		db = conn.getDB("Novelizer");
-		jsonHandler = new JsonHandler();
+		mQueryManager = new QueryManager();
+		sqlManager = new SqlManager();
 	}
 
-	public void saveBlockData(String jsonData) {
-		DBCollection blockCollection = db.getCollection("block");
-		blockCollection.drop();
-		insertBlockData(jsonData, blockCollection);
-		// System.out.println("insertBlockData Complete");
-	}
+	public void newBlock(Block block, int sceneId) {
+		String insertBlockQuery = mQueryManager.Insert("block", "blockId, nextBlockId, sceneId",
+				block.getBlockId() + "," + block.getNextBlockId() + "," + sceneId);
+		sqlManager.excuteUpdate(insertBlockQuery);
 
-	private void insertBlockData(String jsonData, DBCollection blockCollection) {
-		List<JSONObject> blockList = jsonHandler.convertToJSONArray(jsonData);
-		for (JSONObject block : blockList) {
-			DBObject dbObject = (DBObject) JSON.parse(block.toJSONString());
-			blockCollection.insert(dbObject);
-		}
-	}
-
-	public String getBlockList() {
-		DBCollection blockCollection = db.getCollection("block");
-		DBCursor cursor = blockCollection.find();
-		String blockListJson = "[";
-		while (cursor.hasNext()) {
-			blockListJson += cursor.next().toString();
-			blockListJson += ",";
-		}
-		blockListJson = blockListJson.substring(0, blockListJson.length() - 1);
-		blockListJson += "]";
-
-		return blockListJson;
 	}
 }
