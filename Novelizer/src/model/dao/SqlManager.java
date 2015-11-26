@@ -5,46 +5,52 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import utils.Connector;
 
 public class SqlManager {
 	private static final Logger log = LoggerFactory.getLogger(SqlManager.class);
 
-	private Connector connector;
-
 	private PreparedStatement preparedStatement;
-	private ResultSet resultSet;
 
 	public void SqlManger() {
-		connector = new Connector();
 		preparedStatement = null;
-		resultSet = null;
 	}
 
-	public void excuteUpdate(String query) {
-		Connection conn = connector.getConnection();
+	public void excuteUpdate(String query, DataSource ds) {
+		if(ds == null){
+			log.error("ds null");
+		}
 		try {
+			Connection conn = ds.getConnection();
+			if(conn == null){
+				log.error("null");
+			}
 			preparedStatement = conn.prepareStatement(query);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			log.error("excuteUpdate " + query + "Error\n" + e);
 			e.printStackTrace();
 			throw new RuntimeException();
+		} catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 
-	public ResultSet excuteSelect(String query) {
-		ResultSet resultSet;
-		Connection conn = connector.getConnection();
+	public ResultSet excuteSelect(String query, DataSource ds) {
+		ResultSet resultSet = null;
+
 		try {
+			Connection conn = ds.getConnection();
 			preparedStatement = conn.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			log.error("excuteSelect " + query + "Error\n" + e);
 			throw new RuntimeException();
+		} catch (Exception e){
+			log.error("" + e);
 		}
 		return resultSet;
 	}

@@ -14,7 +14,6 @@ public class WebServerLauncher {
 		if (webPort == null || webPort.isEmpty()) {
 			webPort = "8080";
 		}
-
 		tomcat.setPort(Integer.valueOf(webPort));
 		Connector connector = tomcat.getConnector();
 		connector.setURIEncoding("UTF-8");

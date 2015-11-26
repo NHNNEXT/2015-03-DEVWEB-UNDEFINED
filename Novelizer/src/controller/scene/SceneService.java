@@ -1,5 +1,7 @@
 package controller.scene;
 
+import javax.sql.DataSource;
+
 import model.dao.ActionDao;
 import model.dao.BlockDao;
 import model.dao.SceneDao;
@@ -14,11 +16,11 @@ public class SceneService {
 	private BlockDao blockDao;
 	private ActionDao actionDao;
 
-	public SceneService() {
+	public SceneService(DataSource ds) {
 		jsonHandler = new JsonHandlerByJackson();
-		sceneDao = new SceneDao();
-		blockDao = new BlockDao();
-		actionDao = new ActionDao();
+		sceneDao = new SceneDao(ds);
+		blockDao = new BlockDao(ds);
+		actionDao = new ActionDao(ds);
 	}
 
 	public void saveScene(String sceneData) {

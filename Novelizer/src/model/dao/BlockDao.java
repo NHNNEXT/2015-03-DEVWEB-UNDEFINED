@@ -1,5 +1,7 @@
 package model.dao;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +12,10 @@ public class BlockDao {
 
 	private QueryManager mQueryManager;
 	private SqlManager sqlManager;
+	private DataSource mDataSource;
 
-	public BlockDao() {
+	public BlockDao(DataSource ds) {
+		mDataSource = ds;
 		mQueryManager = new QueryManager();
 		sqlManager = new SqlManager();
 	}
@@ -19,7 +23,7 @@ public class BlockDao {
 	public void newBlock(Block block, int sceneId) {
 		String insertBlockQuery = mQueryManager.Insert("block", "blockId, nextBlockId, sceneId",
 				block.getBlockId() + "," + block.getNextBlockId() + "," + sceneId);
-		sqlManager.excuteUpdate(insertBlockQuery);
+		sqlManager.excuteUpdate(insertBlockQuery, mDataSource);
 
 	}
 }

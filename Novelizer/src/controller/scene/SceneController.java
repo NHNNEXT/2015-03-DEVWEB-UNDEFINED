@@ -7,24 +7,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 @WebServlet("/scene")
 public class SceneController extends HttpServlet {
-	
+
 	private SceneService service;
-	
+
 	@Override
 	public void init() throws ServletException {
-		service = new SceneService();
+		DataSource ds = (DataSource)getServletContext().getAttribute("ds");
+		service = new SceneService(ds);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String sceneData = req.getParameter("sceneData");
+
 		service.saveScene(sceneData);
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/plain;charset=UTF-8");

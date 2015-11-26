@@ -5,6 +5,17 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>Novelizer</display-name>
 
+	<resource-ref>
+		  
+		<description>MySQL Resource</description>
+		  
+		<res-ref-name>jdbc/myconn</res-ref-name>
+		  
+		<res-type>javax.sql.DataSource</res-type>
+		  
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -13,4 +24,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+
+
 </web-app>
