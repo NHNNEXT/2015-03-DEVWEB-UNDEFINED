@@ -28,5 +28,11 @@ public class Action {
 		return optionData;
 	}
 
+	@Override
+	public String toString() {
+		return "Action [actionId=" + actionId + ", type=" + type + ", optionData=" + optionData + "]";
+	}
+	
+	
 
 }

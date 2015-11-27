@@ -19,39 +19,37 @@ public class SqlManager {
 		preparedStatement = null;
 	}
 
-	public void excuteUpdate(String query, DataSource ds) {
-		if(ds == null){
-			log.error("ds null");
-		}
+	public void excuteUpdate(String query) throws SQLException {
+		Connection conn = null;
 		try {
-			Connection conn = ds.getConnection();
-			if(conn == null){
-				log.error("null");
-			}
+			conn = model.dao.DataSource.getInstance().getConnection();
 			preparedStatement = conn.prepareStatement(query);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			log.error("excuteUpdate " + query + "Error\n" + e);
 			e.printStackTrace();
 			throw new RuntimeException();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				conn.close();
 		}
 	}
 
-	public ResultSet excuteSelect(String query, DataSource ds) {
+	public ResultSet excuteSelect(String query) throws SQLException {
 		ResultSet resultSet = null;
-
+		Connection conn = null;
 		try {
-			Connection conn = ds.getConnection();
+			conn = model.dao.DataSource.getInstance().getConnection();
 			preparedStatement = conn.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			log.error("excuteSelect " + query + "Error\n" + e);
 			throw new RuntimeException();
-		} catch (Exception e){
+		} catch (Exception e) {
 			log.error("" + e);
-		}
+		} 
 		return resultSet;
 	}
 }

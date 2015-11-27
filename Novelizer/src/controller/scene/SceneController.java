@@ -16,7 +16,7 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		DataSource ds = (DataSource)getServletContext().getAttribute("ds");
+		DataSource ds = (DataSource) getServletContext().getAttribute("ds");
 		service = new SceneService(ds);
 	}
 
@@ -24,12 +24,18 @@ public class SceneController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String sceneData = req.getParameter("sceneData");
-
-		service.saveScene(sceneData);
+		String result;
+		try {
+			result = service.saveScene(sceneData);
+		} catch (Exception e) {
+			result = "error : " + e;
+		}
+		resp.getWriter().append(result).flush();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/plain;charset=UTF-8");
+		
 	}
 }

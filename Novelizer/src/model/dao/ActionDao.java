@@ -1,6 +1,6 @@
 package model.dao;
 
-import javax.sql.DataSource;
+import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,18 +12,17 @@ public class ActionDao {
 
 	private QueryManager mQueryManager;
 	private SqlManager sqlManager;
-	private DataSource mDataSource;
 
-	public ActionDao(DataSource ds) {
-		mDataSource = ds;
+	public ActionDao() {
+
 		mQueryManager = new QueryManager();
 		sqlManager = new SqlManager();
 	}
 
-	public void newAction(Action action, int blockId) {
-		String insertBlockQuery = mQueryManager.Insert("action", "acionId, type, blockId",
+	public void newAction(Action action, int blockId) throws SQLException {
+		String insertBlockQuery = mQueryManager.Insert("action", "actionId, type, blockId",
 				action.getActionId() + "," + mQueryManager.toQueryStirng(action.getType()) + "," + blockId);
-		sqlManager.excuteUpdate(insertBlockQuery, mDataSource);
+		sqlManager.excuteUpdate(insertBlockQuery);
 
 	}
 
