@@ -20,4 +20,14 @@ public class Block {
 		return actionList;
 	}
 
+	public Block(int blockId, int nextBlockId) {
+		super();
+		this.blockId = blockId;
+		this.nextBlockId = nextBlockId;
+	}
+
+	public void setActionList(List<Action> actionList) {
+		this.actionList = actionList;
+	}
+
 }

@@ -1,6 +1,9 @@
 package model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,19 @@ public class ActionDao {
 		String insertBlockQuery = mQueryManager.Insert("action", "actionId, type, blockId",
 				action.getActionId() + "," + mQueryManager.toQueryStirng(action.getType()) + "," + blockId);
 		sqlManager.excuteUpdate(insertBlockQuery);
+
+	}
+
+	public List<Action> getActions(int blockId) throws SQLException {
+		List<Action> actions = new ArrayList<Action>();
+
+		String selectQuery = mQueryManager.find("action", "blockId=" + blockId);
+		ResultSet rs = sqlManager.excuteSelect(selectQuery);
+		while (rs.next()) {
+			actions.add(new Action(rs.getInt(1), rs.getString(2)));
+		}
+
+		return actions;
 
 	}
 

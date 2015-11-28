@@ -36,6 +36,15 @@ public class SceneController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/plain;charset=UTF-8");
+		String sceneId = req.getParameter("sceneId");
+		String result;
+		try {
+			result = service.getScene(sceneId);
+		} catch (Exception e) {
+			result = "error : " + e;
+			e.printStackTrace();
+		}
 		
+		resp.getWriter().append(result).flush();
 	}
 }

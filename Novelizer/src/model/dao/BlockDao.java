@@ -1,6 +1,9 @@
 package model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,5 +27,17 @@ public class BlockDao {
 		log.info("blockId :" + block.getBlockId() + " start");
 		sqlManager.excuteUpdate(insertBlockQuery);
 
+	}
+
+	public List<Block> getBlocks(int sceneId) throws SQLException {
+		List<Block> blocks = new ArrayList<Block>();
+
+		String selectBlocksQuery = mQueryManager.find("block", "sceneId=" + sceneId);
+		ResultSet rs = sqlManager.excuteSelect(selectBlocksQuery);
+		while (rs.next()) {
+			blocks.add(new Block(rs.getInt(1), rs.getInt(2)));
+		}
+
+		return blocks;
 	}
 }

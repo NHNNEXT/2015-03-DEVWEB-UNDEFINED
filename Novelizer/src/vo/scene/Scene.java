@@ -21,4 +21,14 @@ public class Scene {
 		return blockList;
 	}
 
+	public Scene(int sceneId, String name) {
+		super();
+		this.sceneId = sceneId;
+		this.name = name;
+	}
+
+	public void setBlockList(List<Block> blockList) {
+		this.blockList = blockList;
+	}
+
 }

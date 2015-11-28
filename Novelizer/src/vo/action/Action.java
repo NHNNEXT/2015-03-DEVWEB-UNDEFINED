@@ -2,6 +2,8 @@ package vo.action;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import model.json.JsonHandler;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Action {
 
@@ -16,6 +18,12 @@ public class Action {
 		this.type = type;
 	}
 	
+	public Action(int actionId, String type, String optionData) {
+		this.actionId = actionId;
+		this.type = type;
+		this.optionData = new JsonHandler().convertToOption(optionData);
+	}
+
 	public int getActionId() {
 		return actionId;
 	}

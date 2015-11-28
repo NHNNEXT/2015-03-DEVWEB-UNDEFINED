@@ -16,6 +16,6 @@ public class QueryManager {
 	public String toQueryStirng(String text){
 		return "'" + text + "'";
 	}
-
+	
 	
 }

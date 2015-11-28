@@ -3,8 +3,6 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,4 +41,20 @@ public class SceneDao {
 		sqlManager.excuteUpdate(insertSceneQuery);
 
 	}
+
+	
+	public Scene getScene(String sceneId) throws SQLException {
+		String selectSceneQuery = mQueryManager.find("scene", "sceneId="+sceneId);
+		ResultSet rs = sqlManager.excuteSelect(selectSceneQuery);
+		if(rs.next()){
+			int sceneId1 = Integer.parseInt(rs.getString("sceneId"));
+			String sceneName = rs.getString("name");
+			return new Scene(sceneId1,sceneName);
+		}
+		throw new RuntimeException();
+		
+	}
+
+
+
 }

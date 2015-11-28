@@ -1,35 +1,57 @@
 package model.json;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import vo.action.Option;
+import vo.scene.Scene;
 
 public class JsonHandler {
-	JSONParser mParser;
+	private static final Logger log = LoggerFactory.getLogger(JsonHandler.class);
 
-	public JsonHandler() {
-		mParser = new JSONParser();
-	}
+	public Scene convertToScene(String jsonData) {
+		ObjectMapper objMapper = new ObjectMapper();
 
-	public JSONObject convertToJSONObject(String jsonData) {
-		JSONObject jsonObject = null;
+		Scene scene = null;
 		try {
-			jsonObject = (JSONObject) mParser.parse(jsonData);
-		} catch (ParseException e) {
-			System.out.println("JSON Convert FAIL!!");
+			scene = objMapper.readValue(jsonData, Scene.class);
+		} catch (IOException e) {
+			log.error("JsonString to Scene fail \n" + e);
+			throw new RuntimeException();
 		}
-		return jsonObject;
-	}
 
-	public JSONArray convertToJSONArray(String jsonData) {
-		JSONArray jsonArray = null;
+		return scene;
+
+	}
+	
+	public Option convertToOption(String jsonData){
+		ObjectMapper objMapper = new ObjectMapper();
+
+		Option option = null;
 		try {
-			jsonArray = (JSONArray) mParser.parse(jsonData);
-		} catch (ParseException e) {
-			System.out.println("JSON Convert FAIL!!");
+			option = objMapper.readValue(jsonData, Option.class);
+		} catch (IOException e) {
+			log.error("JsonString to Scene fail \n" + e);
+			throw new RuntimeException();
 		}
-		return jsonArray;
-	}
 
+		return option;
+	}
+	
+	public String convertToJson(Object object){
+		ObjectMapper objMapper = new ObjectMapper();
+		
+		String resultJson = null;
+		try{
+			resultJson = objMapper.writeValueAsString(object);
+		}catch(IOException e){
+			log.error("Object to Json Fail \n" + e);
+			throw new RuntimeException();
+		}
+		return resultJson;
+	}
 }
