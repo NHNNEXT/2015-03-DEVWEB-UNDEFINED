@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import vo.action.Option;
+import vo.option.Option;
 import vo.scene.Scene;
 
 public class JsonHandler {
@@ -27,8 +27,8 @@ public class JsonHandler {
 		return scene;
 
 	}
-	
-	public Option convertToOption(String jsonData){
+
+	public Option convertToOption(String jsonData) {
 		ObjectMapper objMapper = new ObjectMapper();
 
 		Option option = null;
@@ -41,14 +41,14 @@ public class JsonHandler {
 
 		return option;
 	}
-	
-	public String convertToJson(Object object){
+
+	public String convertToJson(Object object) {
 		ObjectMapper objMapper = new ObjectMapper();
-		
+
 		String resultJson = null;
-		try{
+		try {
 			resultJson = objMapper.writeValueAsString(object);
-		}catch(IOException e){
+		} catch (IOException e) {
 			log.error("Object to Json Fail \n" + e);
 			throw new RuntimeException();
 		}

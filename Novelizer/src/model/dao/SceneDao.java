@@ -42,19 +42,16 @@ public class SceneDao {
 
 	}
 
-	
 	public Scene getScene(String sceneId) throws SQLException {
-		String selectSceneQuery = mQueryManager.find("scene", "sceneId="+sceneId);
+		String selectSceneQuery = mQueryManager.find("scene", "sceneId=" + sceneId);
 		ResultSet rs = sqlManager.excuteSelect(selectSceneQuery);
-		if(rs.next()){
+		if (rs.next()) {
 			int sceneId1 = Integer.parseInt(rs.getString("sceneId"));
 			String sceneName = rs.getString("name");
-			return new Scene(sceneId1,sceneName);
+			return new Scene(sceneId1, sceneName);
 		}
 		throw new RuntimeException();
-		
+
 	}
-
-
 
 }

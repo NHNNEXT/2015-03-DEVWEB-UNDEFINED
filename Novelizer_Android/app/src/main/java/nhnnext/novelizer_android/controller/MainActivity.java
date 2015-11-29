@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nhnnext.novelizer_android.R;
 import nhnnext.novelizer_android.SplashActivity;
@@ -23,23 +24,19 @@ public class MainActivity extends Activity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ServerConnector serverConnector = new ServerConnector();
-                final TextView blockListTextView = (TextView) findViewById(R.id.fab);
+
                 findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        final ServerConnector serverConnector = new ServerConnector();
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                final String data = serverConnector.getBlockListByJSON();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        blockListTextView.setText(data);
-                                    }
-                                });
+                                Toast toast = Toast.makeText(getApplicationContext(), serverConnector.getScene(), Toast.LENGTH_LONG);
+                                toast.show();
                             }
                         }).start();
+
                     }
                 });
             }

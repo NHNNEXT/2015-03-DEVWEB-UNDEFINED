@@ -3,6 +3,7 @@ package vo.action;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import model.json.JsonHandler;
+import vo.option.Option;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Action {
@@ -11,13 +12,14 @@ public class Action {
 	private String type;
 	private Option optionData;
 
-	public Action(){}
-	
-	public Action(int actionId, String type){
+	public Action() {
+	}
+
+	public Action(int actionId, String type) {
 		this.actionId = actionId;
 		this.type = type;
 	}
-	
+
 	public Action(int actionId, String type, String optionData) {
 		this.actionId = actionId;
 		this.type = type;
@@ -40,7 +42,5 @@ public class Action {
 	public String toString() {
 		return "Action [actionId=" + actionId + ", type=" + type + ", optionData=" + optionData + "]";
 	}
-	
-	
 
 }

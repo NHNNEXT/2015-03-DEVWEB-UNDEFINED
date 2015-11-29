@@ -1,4 +1,4 @@
-package vo.action;
+package vo.option;
 
 import java.util.Arrays;
 

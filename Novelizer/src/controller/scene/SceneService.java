@@ -33,7 +33,9 @@ public class SceneService {
 	public String saveScene(String sceneData) {
 		Scene scene = jsonHandler.convertToScene(sceneData);
 		try {
-			if (!sceneDao.hasScene(scene.getSceneId())) {
+			if (sceneDao.hasScene(scene.getSceneId())) {
+				return "Error : Scene already Exist";
+			} else {
 				sceneDao.newScene(scene);
 				saveBlock(scene);
 				return "result : DB INPUT Success";
@@ -41,7 +43,6 @@ public class SceneService {
 		} catch (SQLException e) {
 			return "error : " + e;
 		}
-		return "result : Scene already Exist";
 	}
 
 	private void saveBlock(Scene scene) throws SQLException {
@@ -60,15 +61,13 @@ public class SceneService {
 		}
 	}
 
-	
 	public String getScene(String sceneId) throws SQLException {
 		Scene scene = sceneDao.getScene(sceneId);
-		scene.setBlockList(blockDao.getBlocks(scene.getSceneId()));	
-		for(Block block : scene.getBlockList()){
+		scene.setBlockList(blockDao.getBlocks(scene.getSceneId()));
+		for (Block block : scene.getBlockList()) {
 			block.setActionList(actionDao.getActions(block.getBlockId()));
 		}
 		return jsonHandler.convertToJson(scene);
 	}
-	
 
 }
