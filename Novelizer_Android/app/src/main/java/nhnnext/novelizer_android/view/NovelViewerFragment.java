@@ -56,15 +56,14 @@ public class NovelViewerFragment extends Fragment {
     }
 
     private void startVisualNovel(Novel novel){
-        FrameLayout viewerLayout = (FrameLayout)getActivity().findViewById(R.id.viewerLayout);
+        FrameLayout viewerLayout = (FrameLayout)getView().findViewById(R.id.viewerLayout);
         Block firstBlock = novel.getScenes().get(0).getBlocks().get(0);
         BackgroundAction backgroundAction = (BackgroundAction)firstBlock.getActions().get("Background");
         TextAction textAction = (TextAction)firstBlock.getActions().get("Text");
         CharacterAction characterAction = (CharacterAction)firstBlock.getActions().get("Character");
 
-        ((ImageView) getActivity().findViewById(R.id.background_image)).setImageBitmap(backgroundAction.getImg());
-        ((TextView) getActivity().findViewById(R.id.caption)).setText(textAction.getText());
-        Log.i("test", ""+viewerLayout);
+        ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(backgroundAction.getImg());
+        ((TextView) getView().findViewById(R.id.caption)).setText(textAction.getText());
         //viewerLayout.setOnClickListener(new RunViewer());
     }
 
