@@ -14,4 +14,13 @@ public class BackgroundAction extends Action {
         super(actionId, type);
         this.img = img;
     }
+
+    /* getter & setter */
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
 }

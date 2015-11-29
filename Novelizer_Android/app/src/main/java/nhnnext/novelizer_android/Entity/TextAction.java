@@ -12,4 +12,13 @@ public class TextAction extends Action {
         super(actionId, type);
         this.text = text;
     }
+
+    /* getter & setter */
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

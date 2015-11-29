@@ -16,4 +16,22 @@ public class CharacterAction extends Action {
         this.position = position;
         this.img = img;
     }
+
+    /* getter & setter*/
+
+    public int[] getPosition() {
+        return position;
+    }
+
+    public void setPosition(int[] position) {
+        this.position = position;
+    }
+
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
 }

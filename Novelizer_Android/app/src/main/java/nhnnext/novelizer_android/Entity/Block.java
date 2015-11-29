@@ -7,13 +7,23 @@ import java.util.Map;
 public class Block {
     private Map<String, Action> actions;
     private int blockId;
+    private int nextBlock;
 
-    public Block(int blockId, Map<String, Action> actions){
+    public Block(int blockId, int nextBlock, Map<String, Action> actions){
         this.actions = actions;
         this.blockId = blockId;
+        this.nextBlock = nextBlock;
     }
 
     /* getter & setter */
+    public int getNextBlock() {
+        return nextBlock;
+    }
+
+    public void setNextBlock(int nextBlock) {
+        this.nextBlock = nextBlock;
+    }
+
     public Map<String, Action> getActions() {
         return actions;
     }
