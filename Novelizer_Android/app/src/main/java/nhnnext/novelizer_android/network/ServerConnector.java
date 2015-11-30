@@ -24,7 +24,7 @@ public class ServerConnector {
     NovelizerService novelizerService;
 
     public ServerConnector() {
-        retrofit = new RestAdapter.Builder().setEndpoint("http://127.0.0.1:8080").build();
+        retrofit = new RestAdapter.Builder().setEndpoint("http://10.0.3.2:8080").build();
         novelizerService = retrofit.create(NovelizerService.class);
 
     }
