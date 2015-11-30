@@ -3,6 +3,7 @@ package nhnnext.novelizer_android.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
+                                Looper.prepare();
                                 Toast toast = Toast.makeText(getApplicationContext(), serverConnector.getScene(), Toast.LENGTH_LONG);
                                 toast.show();
                             }

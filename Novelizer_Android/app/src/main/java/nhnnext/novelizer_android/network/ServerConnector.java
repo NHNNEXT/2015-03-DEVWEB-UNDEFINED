@@ -30,7 +30,6 @@ public class ServerConnector {
     }
 
     public String getScene() {
-        final List<String> resultList = new ArrayList<>();
 
             novelizerService.getScene(new Callback<Response>() {
                 @Override
@@ -52,18 +51,17 @@ public class ServerConnector {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    resultList.add(sb.toString());
+                    Log.i("Retrofit success",sb.toString());
 
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     Log.e("Retrofit error", error.toString());
-                    resultList.add("error : retrofit Error");
                 }
             });
 
-        return resultList.get(0);
+       return null;
     }
 
 }
