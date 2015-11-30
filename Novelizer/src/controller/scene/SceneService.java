@@ -23,6 +23,7 @@ public class SceneService {
 	private BlockDao blockDao;
 	private ActionDao actionDao;
 
+	// TODO datasource는 사용하지도 않고 있는데 전달하는 이유는?
 	public SceneService(DataSource ds) {
 		jsonHandler = new JsonHandler();
 		sceneDao = new SceneDao();
@@ -61,6 +62,7 @@ public class SceneService {
 		}
 	}
 
+	// TODO sceneId type이 String이어도 괜찮은가? int로 변환한다면 어느 시점에서 변환하는 것이 좋은가?
 	public String getScene(String sceneId) throws SQLException {
 		Scene scene = sceneDao.getScene(sceneId);
 		scene.setBlockList(blockDao.getBlocks(scene.getSceneId()));

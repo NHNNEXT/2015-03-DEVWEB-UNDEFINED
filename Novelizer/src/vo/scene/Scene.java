@@ -21,6 +21,7 @@ public class Scene {
 		return blockList;
 	}
 
+	// TODO 자바 convention에서 생성자의 위치는 어디에 위치하는 것이 좋은가?
 	public Scene(int sceneId, String name) {
 		super();
 		this.sceneId = sceneId;

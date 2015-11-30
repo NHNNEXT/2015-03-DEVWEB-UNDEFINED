@@ -22,6 +22,7 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO ServletFilter를 적용해 해결한다.
 		req.setCharacterEncoding("UTF-8");
 		String sceneData = req.getParameter("sceneData");
 		String result;
@@ -35,6 +36,7 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO ServletFilter를 적용해 해결한다.
 		resp.setContentType("text/plain;charset=UTF-8");
 		String sceneId = req.getParameter("sceneId");
 		String result;

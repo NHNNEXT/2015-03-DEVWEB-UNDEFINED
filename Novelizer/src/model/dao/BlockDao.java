@@ -22,6 +22,8 @@ public class BlockDao {
 	}
 
 	public void newBlock(Block block, int sceneId) throws SQLException {
+		// TODO sql 쿼리문을 block.getBlockId() + "," + block.getNextBlockId() + "," + sceneId와 같이 작성할 때의 문제점은 무엇인가?
+		// TODO jdbc에서 Statement와 PreparedStatement의 차이점은? 이 둘 중 어느 것을 사용하는 것이 더 좋은가?
 		String insertBlockQuery = mQueryManager.Insert("block", "blockId, nextBlockId, sceneId",
 				block.getBlockId() + "," + block.getNextBlockId() + "," + sceneId);
 		log.info("blockId :" + block.getBlockId() + " start");

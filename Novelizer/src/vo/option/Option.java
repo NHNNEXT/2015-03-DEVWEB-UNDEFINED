@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @JsonIgnoreProperties
 @JsonIgnoreType
+// TODO Action, Block, Scene은 setter와 getter method를 가진다. 이 클래스는 field만 가지고 있다. 어느 방식으로 구현하는 것이 맞는가? convention을 정하면 좋겠다.
 public class Option {
 	private int characterId;
 	private int presetId;
