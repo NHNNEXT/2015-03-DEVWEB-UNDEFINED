@@ -7,10 +7,12 @@ import java.util.List;
 public class Scene {
     private List<Block> blocks;
     private int sceneId;
+    private int nextSceneId;
 
-    public Scene(int sceneId, List<Block> blocks){
+    public Scene(int sceneId, int nextSceneId, List<Block> blocks){
         this.sceneId = sceneId;
         this.blocks = blocks;
+        this.nextSceneId = nextSceneId;
     }
 
     /* getter & setter */
