@@ -16,8 +16,7 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		DataSource ds = (DataSource) getServletContext().getAttribute("ds");
-		service = new SceneService(ds);
+		service = new SceneService();
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class SceneController extends HttpServlet {
 		} catch (Exception e) {
 			result = "error : " + e;
 		}
-		resp.getWriter().append(result).flush();
+		resp.getWriter().print(result);
 	}
 
 	@Override
@@ -45,6 +44,6 @@ public class SceneController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		resp.getWriter().append(result).flush();
+		resp.getWriter(). print(result);
 	}
 }

@@ -1,9 +1,9 @@
-package vo.action;
+package model.action;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import model.json.JsonHandler;
-import vo.option.Option;
+import model.option.Option;
+import utils.json.JsonHandler;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Action {

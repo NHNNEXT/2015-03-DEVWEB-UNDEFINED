@@ -1,4 +1,4 @@
-package model.dao;
+package model.block;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +8,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import vo.block.Block;
+import uitls.dao.QueryManager;
+import uitls.dao.SqlManager;
 
 public class BlockDao {
 	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);

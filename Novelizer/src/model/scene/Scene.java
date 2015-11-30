@@ -1,8 +1,8 @@
-package vo.scene;
+package model.scene;
 
 import java.util.List;
 
-import vo.block.Block;
+import model.block.Block;
 
 public class Scene {
 	private int sceneId;

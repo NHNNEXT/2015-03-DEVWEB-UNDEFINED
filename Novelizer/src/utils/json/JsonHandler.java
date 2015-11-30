@@ -1,4 +1,4 @@
-package model.json;
+package utils.json;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import vo.option.Option;
-import vo.scene.Scene;
+import model.option.Option;
+import model.scene.Scene;
 
 public class JsonHandler {
 	private static final Logger log = LoggerFactory.getLogger(JsonHandler.class);

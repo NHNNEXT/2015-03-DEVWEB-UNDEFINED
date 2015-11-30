@@ -1,11 +1,10 @@
-package vo.option;
+package model.option;
 
 import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
-@JsonIgnoreProperties
 @JsonIgnoreType
 public class Option {
 	private int characterId;

@@ -7,13 +7,13 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.dao.ActionDao;
-import model.dao.BlockDao;
-import model.dao.SceneDao;
-import model.json.JsonHandler;
-import vo.action.Action;
-import vo.block.Block;
-import vo.scene.Scene;
+import model.action.Action;
+import model.action.ActionDao;
+import model.block.Block;
+import model.block.BlockDao;
+import model.scene.Scene;
+import model.scene.SceneDao;
+import utils.json.JsonHandler;
 
 public class SceneService {
 	private static final Logger log = LoggerFactory.getLogger(SceneService.class);
@@ -23,7 +23,7 @@ public class SceneService {
 	private BlockDao blockDao;
 	private ActionDao actionDao;
 
-	public SceneService(DataSource ds) {
+	public SceneService() {
 		jsonHandler = new JsonHandler();
 		sceneDao = new SceneDao();
 		blockDao = new BlockDao();
