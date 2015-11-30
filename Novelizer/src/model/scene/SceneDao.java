@@ -2,6 +2,8 @@ package model.scene;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +55,19 @@ public class SceneDao {
 		}
 		throw new RuntimeException();
 
+	}
+
+	public List<Scene> getSceneList(int projectId) throws SQLException {
+		List<Scene> scenes = new ArrayList<Scene>();
+
+		String getSceneListQuery = mQueryManager.findAll("scene");
+		ResultSet rs = sqlManager.excuteSelect(getSceneListQuery);
+		while (rs.next()) {
+			int sceneId = Integer.parseInt(rs.getString("sceneId"));
+			String sceneName = rs.getString("name");
+			scenes.add(new Scene(sceneId, sceneName));
+		}
+		return scenes;
 	}
 
 }
