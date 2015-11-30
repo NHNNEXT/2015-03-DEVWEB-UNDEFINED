@@ -1,7 +1,8 @@
-package vo.block;
+package model.block;
 
 import java.util.List;
-import vo.action.Action;
+
+import model.action.Action;
 
 public class Block {
 	private int blockId;
