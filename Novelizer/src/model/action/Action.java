@@ -1,10 +1,9 @@
-package vo.action;
-// TODO 패키지 이름에 vo를 사용하고 있다. vo가 무엇인가?
+package model.action;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import model.json.JsonHandler;
-import vo.option.Option;
+import model.option.Option;
+import utils.json.JsonHandler;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Action {

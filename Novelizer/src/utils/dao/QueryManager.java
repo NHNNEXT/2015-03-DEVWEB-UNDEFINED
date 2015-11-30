@@ -1,8 +1,22 @@
-package model.dao;
+package utils.dao;
 
 public class QueryManager {
 	public String find(String tableName, String where) {
 		return "SELECT * FROM " + tableName + " WHERE " + where + ";";
+	}
+
+	public String find(String tableName, String... params) {
+		return find(tableName, toWhereSql(params));
+	}
+	
+	private String toWhereSql(String[] params) {
+		StringBuffer whereSql = new StringBuffer();
+		
+		for (String param : params) {
+			whereSql.append(param);
+		}
+		
+		return whereSql.toString();
 	}
 
 	public String findAll(String tableName) {

@@ -24,13 +24,12 @@ public class ServerConnector {
     NovelizerService novelizerService;
 
     public ServerConnector() {
-        retrofit = new RestAdapter.Builder().setEndpoint("http://127.0.0.1:8080").build();
+        retrofit = new RestAdapter.Builder().setEndpoint("http://10.0.3.2:8080").build();
         novelizerService = retrofit.create(NovelizerService.class);
 
     }
 
     public String getScene() {
-        final List<String> resultList = new ArrayList<>();
 
             novelizerService.getScene(new Callback<Response>() {
                 @Override
@@ -52,18 +51,17 @@ public class ServerConnector {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    resultList.add(sb.toString());
+                    Log.i("Retrofit success",sb.toString());
 
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     Log.e("Retrofit error", error.toString());
-                    resultList.add("error : retrofit Error");
                 }
             });
 
-        return resultList.get(0);
+       return null;
     }
 
 }

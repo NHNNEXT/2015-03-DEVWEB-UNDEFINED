@@ -7,23 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet("/scene")
 public class SceneController extends HttpServlet {
-
+	private Logger log = LoggerFactory.getLogger(SceneController.class);
+	
 	private SceneService service;
 
 	@Override
 	public void init() throws ServletException {
-		DataSource ds = (DataSource) getServletContext().getAttribute("ds");
-		service = new SceneService(ds);
+		service = new SceneService();
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO ServletFilter를 적용해 해결한다.
-		req.setCharacterEncoding("UTF-8");
 		String sceneData = req.getParameter("sceneData");
 		String result;
 		try {
@@ -31,14 +31,13 @@ public class SceneController extends HttpServlet {
 		} catch (Exception e) {
 			result = "error : " + e;
 		}
-		resp.getWriter().append(result).flush();
+		resp.getWriter().print(result);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO ServletFilter를 적용해 해결한다.
-		resp.setContentType("text/plain;charset=UTF-8");
 		String sceneId = req.getParameter("sceneId");
+		log.info("new Get");
 		String result;
 		try {
 			result = service.getScene(sceneId);
@@ -46,7 +45,7 @@ public class SceneController extends HttpServlet {
 			result = "error : " + e;
 			e.printStackTrace();
 		}
-		
-		resp.getWriter().append(result).flush();
+		resp.setStatus(200);
+		resp.getWriter().print(result);
 	}
 }

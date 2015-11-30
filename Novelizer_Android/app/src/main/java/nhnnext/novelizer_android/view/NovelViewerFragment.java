@@ -34,6 +34,8 @@ public class NovelViewerFragment extends Fragment {
     private Novel novel;
     private int curBlockId;
     private int curSceneId;
+    private ArrayList<Block> BlocksOfCurScene;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,15 +58,20 @@ public class NovelViewerFragment extends Fragment {
     }
 
     private void startVisualNovel(Novel novel){
-        FrameLayout viewerLayout = (FrameLayout)getView().findViewById(R.id.viewerLayout);
-        Block firstBlock = novel.getScenes().get(0).getBlocks().get(0);
+        /* first Scene & Block ID setting */
+        curBlockId = 0;
+        curSceneId = 0;
+        //BlocksOfCurScene = novel.getScenes().get(curSceneId).getBlocks();
+
+        Block firstBlock = novel.getScenes().get(curSceneId).getBlocks().get(curBlockId);
         BackgroundAction backgroundAction = (BackgroundAction)firstBlock.getActions().get("Background");
         TextAction textAction = (TextAction)firstBlock.getActions().get("Text");
         CharacterAction characterAction = (CharacterAction)firstBlock.getActions().get("Character");
 
         ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(backgroundAction.getImg());
-        ((TextView) getView().findViewById(R.id.caption)).setText(textAction.getText());
-        //viewerLayout.setOnClickListener(new RunViewer());
+        TextView caption = (TextView) getView().findViewById(R.id.caption);
+        caption.setText(textAction.getText());
+        caption.setOnClickListener(new RunViewer());
     }
 
     private class RunViewer implements View.OnClickListener{
@@ -102,7 +109,7 @@ public class NovelViewerFragment extends Fragment {
 
         /* test scene data 생성 */
         List<Scene> scenes = new ArrayList<Scene>();
-        Scene scene = new Scene(0, blocks);
+        Scene scene = new Scene(0, -1, blocks);
         scenes.add(scene);
 
         Novel novel = new Novel("testNovelId", scenes);

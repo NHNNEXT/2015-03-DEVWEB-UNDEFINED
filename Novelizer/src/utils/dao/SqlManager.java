@@ -1,4 +1,4 @@
-package model.dao;
+package utils.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class SqlManager {
 	public void excuteUpdate(String query) throws SQLException {
 		Connection conn = null;
 		try {
-			conn = model.dao.DataSource.getInstance().getConnection();
+			conn = utils.dao.DataSource.getInstance().getConnection();
 			preparedStatement = conn.prepareStatement(query);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -39,7 +39,7 @@ public class SqlManager {
 		ResultSet resultSet = null;
 		Connection conn = null;
 		try {
-			conn = model.dao.DataSource.getInstance().getConnection();
+			conn = utils.dao.DataSource.getInstance().getConnection();
 			preparedStatement = conn.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
