@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import uitls.dao.QueryManager;
-import uitls.dao.SqlManager;
+import utils.dao.QueryManager;
+import utils.dao.SqlManager;
 
 public class SceneDao {
 	private static final Logger log = LoggerFactory.getLogger(SceneDao.class);

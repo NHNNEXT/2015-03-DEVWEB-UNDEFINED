@@ -21,7 +21,6 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		String sceneData = req.getParameter("sceneData");
 		String result;
 		try {
@@ -34,7 +33,6 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/plain;charset=UTF-8");
 		String sceneId = req.getParameter("sceneId");
 		String result;
 		try {
@@ -43,7 +41,7 @@ public class SceneController extends HttpServlet {
 			result = "error : " + e;
 			e.printStackTrace();
 		}
-		
-		resp.getWriter(). print(result);
+
+		resp.getWriter().print(result);
 	}
 }

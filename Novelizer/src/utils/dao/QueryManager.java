@@ -1,4 +1,4 @@
-package uitls.dao;
+package utils.dao;
 
 public class QueryManager {
 	public String find(String tableName, String where) {

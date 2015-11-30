@@ -1,4 +1,4 @@
-package uitls.dao;
+package utils.dao;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
