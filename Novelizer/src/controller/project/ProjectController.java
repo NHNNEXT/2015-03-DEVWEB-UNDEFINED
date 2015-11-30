@@ -28,6 +28,7 @@ public class ProjectController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO projectId가 존재하지 않을 경우 에러가 발생한다. 이 같은경우 어떻게 처리할 것인가?
 		int projectId = Integer.parseInt(req.getParameter("projectId"));
 		try {
 			List<Scene> scenes = sceneDao.getSceneList(projectId);

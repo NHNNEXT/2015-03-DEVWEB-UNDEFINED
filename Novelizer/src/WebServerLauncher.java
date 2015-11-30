@@ -6,6 +6,7 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 
+// TODO 같은 클래스가 두 개 존재함. 둘 중 하나를 제거한다.
 public class WebServerLauncher {
 	public static void main(String[] args) throws ServletException, LifecycleException {
 		String webappDirLocation = "WebContent/";
