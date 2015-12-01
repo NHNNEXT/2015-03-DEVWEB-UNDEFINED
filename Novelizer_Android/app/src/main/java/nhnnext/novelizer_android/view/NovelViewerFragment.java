@@ -5,13 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
@@ -67,10 +68,11 @@ public class NovelViewerFragment extends Fragment {
         blocksOfCurScene = scenesOfCurNovel.get(curSceneId).getBlocks();
 
         screenSetting();
-        getView().findViewById(R.id.caption).setOnClickListener(new RunViewer());
+        getView().findViewById(R.id.next_btn).setOnClickListener(new RunViewer());
     }
 
     /* Click 이벤트를 받아 viewer를 running 시켜주는 로직 */
+    /* 이후 controller 쪽으로 로직을 이동시키는게 좋지 않을까 생각중 */
     private class RunViewer implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -114,8 +116,16 @@ public class NovelViewerFragment extends Fragment {
         CharacterAction characterAction = (CharacterAction)block.getActions().get("Character");
 
         ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(backgroundAction.getImg());
-        TextView caption = (TextView) getView().findViewById(R.id.caption);
-        caption.setText(textAction.getText());
+        ((TextView) getView().findViewById(R.id.caption)).setText(textAction.getText());
+
+        int[] characterPosition = characterAction.getPosition();
+        FrameLayout layout = (FrameLayout) getView().findViewById(R.id.viewer_layout);
+        ImageView character = new ImageView(getActivity());
+        character.setImageBitmap(characterAction.getImg());
+        character.setX(characterPosition[0]);
+        character.setY(characterPosition[1]);
+
+        layout.addView(character);
     }
 
     private Novel getNovelData(String novelId){
