@@ -11,8 +11,8 @@ public class Scene {
 
     public Scene(int sceneId, int nextSceneId, List<Block> blocks){
         this.sceneId = sceneId;
-        this.blocks = blocks;
         this.nextSceneId = nextSceneId;
+        this.blocks = blocks;
     }
 
     /* getter & setter */
@@ -30,5 +30,13 @@ public class Scene {
 
     public void setSceneId(int sceneId) {
         this.sceneId = sceneId;
+    }
+
+    public int getNextSceneId() {
+        return nextSceneId;
+    }
+
+    public void setNextSceneId(int nextSceneId) {
+        this.nextSceneId = nextSceneId;
     }
 }
