@@ -119,13 +119,9 @@ public class NovelViewerFragment extends Fragment {
         ((TextView) getView().findViewById(R.id.caption)).setText(textAction.getText());
 
         int[] characterPosition = characterAction.getPosition();
-        FrameLayout layout = (FrameLayout) getView().findViewById(R.id.viewer_layout);
         ImageView character = new ImageView(getActivity());
         character.setImageBitmap(characterAction.getImg());
-        character.setX(characterPosition[0]);
-        character.setY(characterPosition[1]);
-
-        layout.addView(character);
+        ((FrameLayout) getView()).addView(character);
     }
 
     private Novel getNovelData(String novelId){
@@ -140,7 +136,7 @@ public class NovelViewerFragment extends Fragment {
         Bitmap girl = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl)).getBitmap();
 
         actions.put("Background", new BackgroundAction(0, "Background", backgroundImg));
-        actions.put("Character", new CharacterAction(1, "Character", new int[]{10, 10}, boy));
+        actions.put("Character", new CharacterAction(1, "Character", new int[]{0, 0}, boy));
         actions.put("Text", new TextAction(2, "Text", "안녕 영희야?"));
             //Block 2의 Action
         Map<String, Action> actions2 = new HashMap<String, Action>();
