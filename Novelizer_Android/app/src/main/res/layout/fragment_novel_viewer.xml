@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/viewerLayout"
+    android:id="@+id/viewer_layout"
     tools:context=".ViewerActivity"
     >
 
@@ -15,12 +15,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/scrollView"
+        android:id="@+id/caption_scroll_view"
         android:layout_gravity="bottom"
         android:background="#96000000"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="20dp">
+        android:paddingRight="20dp"
+        android:fillViewport="false"
+        android:clickable="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,5 +32,14 @@
             android:autoText="false"
             android:textColor="#ffffff" />
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NEXT >>"
+        android:id="@+id/next_btn"
+        android:layout_gravity="bottom|right"
+        android:textColor="#78ffffff"
+        android:background="#00ffffff" />
 
 </FrameLayout>
