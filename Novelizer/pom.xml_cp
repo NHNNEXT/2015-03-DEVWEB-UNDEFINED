@@ -11,19 +11,43 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+		 <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>
-
+		 </dependency>
+		
+		 <dependency>
+		        <groupId>org.apache.tomcat</groupId>
+	    		<artifactId>dbcp</artifactId>
+	    		<version>8.0.5</version>
+		 </dependency>	
+		
 		<dependency>
-			<groupId>com.cedarsoft.serialization</groupId>
-			<artifactId>jackson</artifactId>
-			<version>7.1.0</version>
-		</dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1</version>
+		</dependency>	
 
+		 <dependency>
+            		<groupId>com.fasterxml.jackson.core</groupId>
+            		<artifactId>jackson-annotations</artifactId>
+           		<version>2.2.2</version>
+        	 </dependency>
+       
+		 <dependency>
+            	 	<groupId>com.fasterxml.jackson.core</groupId>
+            		<artifactId>jackson-core</artifactId>
+            		<version>2.2.2</version>
+        	 </dependency>
+        
+		<dependency>
+            		<groupId>com.fasterxml.jackson.core</groupId>
+            		<artifactId>jackson-databind</artifactId>
+            		<version>2.2.2</version>
+       		</dependency>		
+		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -101,7 +125,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>qna</finalName>
+		<finalName>Novelizer</finalName>
 
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
@@ -144,7 +168,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<warSourceDirectory>webapp</warSourceDirectory>
-					<webXml>webapp/WEB-INF/web.xml</webXml>
+					<webXml>/root/2015-03-DEVWEB-UNDEFINED/Novelizer/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 		</plugins>
