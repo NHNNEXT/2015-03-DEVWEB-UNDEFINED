@@ -83,6 +83,7 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>dbcp</artifactId>
 			<version>6.0.44</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -167,7 +168,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<warSourceDirectory>webapp</warSourceDirectory>
-					<webXml>/root/2015-03-DEVWEB-UNDEFINED/Novelizer/webapp/WEB-INF/web.xml</webXml>
+					<webXml>${project.basedir}/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 		</plugins>
