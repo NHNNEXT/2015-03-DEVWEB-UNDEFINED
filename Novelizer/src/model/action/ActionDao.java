@@ -12,12 +12,14 @@ import utils.dao.QueryManager;
 import utils.dao.SqlManager;
 
 public class ActionDao {
+<<<<<<< HEAD
 
+=======
+>>>>>>> a9b09f4909c80e23a945c6ef8359538f89d083a4
 	private QueryManager mQueryManager;
 	private SqlManager sqlManager;
 
 	public ActionDao() {
-
 		mQueryManager = new QueryManager();
 		sqlManager = new SqlManager();
 	}
@@ -26,7 +28,6 @@ public class ActionDao {
 		String insertBlockQuery = mQueryManager.Insert("action", "actionId, type, blockId",
 				action.getActionId() + "," + mQueryManager.toQueryStirng(action.getType()) + "," + blockId);
 		sqlManager.excuteUpdate(insertBlockQuery);
-
 	}
 
 	public List<Action> getActions(int blockId) throws SQLException {
@@ -37,9 +38,6 @@ public class ActionDao {
 		while (rs.next()) {
 			actions.add(new Action(rs.getInt(1), rs.getString(2)));
 		}
-
 		return actions;
-
 	}
-
 }

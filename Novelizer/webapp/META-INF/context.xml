@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    maxActive : 최대 동시 대여 가능 커넥션수
+    maxIdle : 최소 보유 커넥션수
+    maxWait : 최대 대기 시간 -> 넘겼는데도 빈 커넥션이 없으면 Exception (1=5초, 180=15분)
+    removeAbandoned : (true) 대여시간 초과했는데 반납 안된 커넥션 처리
+    removeAbandonedTimeout : 대여시간 설정 ( 1=5초 60=5분 )
+    logAbandoned : (true) 삭제시에 로그를 남길 것인가?
+    validationQuery : 커넥션이 살아 있는지 체크 하는 쿼리로 오라클의 경우에는 "select 1 from dual", MySQL의 경우에는 "select 1"
+   testWhileIdle : (true) 커넥션에 아무런 데이터 송수신이 없을 경우 테스트를 할지 여부를 결정합니다.
+    timeBetweenEvictionRunsMillis : 커넥션이 쉬고 있을 때 커넥션 체크 쿼리를 실행하는 시간 간격을 설정합니다. 밀리 세컨드로 설정하며, 저보통 60000(1분)을 줍니다.
+-->
+
+<!-- TODO DB 계정 셋팅과 DB와 테이블 셋팅, issue는 내가 임베디드 톰캣을 써서 여기다가 환경설정했는데 원래 여기다가 환경설정하는지.. 
+일반적인 톰캣을 쓰면 그 안에다가 context.xml 넣어주면 되는 것 같은데... -->
+<Resource name="jdbc/novelizerDB"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              testWhileIdle="true"
+              testOnBorrow="true"
+              testOnReturn="false"
+              validationQuery="SELECT 1"
+              validationInterval="30000"
+              timeBetweenEvictionRunsMillis="30000"
+              maxActive="100"
+              minIdle="20"
+              maxWait="10000"
+              initialSize="10"
+              removeAbandonedTimeout="60"
+              removeAbandoned="true"
+              logAbandoned="true"
+              minEvictableIdleTimeMillis="30000"
+              jmxEnabled="true"
+              jdbcInterceptors=
+"org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+              username="root"
+              password="db1004" 
+              driverClassName="com.mysql.jdbc.Driver"
+              poolPreparedStatements="true"
+              url="jdbc:mysql://localhost:3306/novelizer"/>

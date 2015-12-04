@@ -22,7 +22,10 @@ public class Action {
 	public Action(int actionId, String type, String optionData) {
 		this.actionId = actionId;
 		this.type = type;
-		this.optionData = new JsonHandler().convertToOption(optionData);
+		
+		if(optionData != null) {
+			this.optionData = new JsonHandler().convertToOption(optionData);
+		}
 	}
 
 	public int getActionId() {

@@ -14,7 +14,11 @@ public class Scene {
 		this.sceneId = sceneId;
 		this.name = name;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> a9b09f4909c80e23a945c6ef8359538f89d083a4
 	public int getSceneId() {
 		return sceneId;
 	}
@@ -31,4 +35,8 @@ public class Scene {
 		this.blockList = blockList;
 	}
 
+	@Override
+	public String toString() {
+		return "Scene [sceneId=" + sceneId + ", name=" + name + ", blockList=" + blockList + "]";
+	}
 }
