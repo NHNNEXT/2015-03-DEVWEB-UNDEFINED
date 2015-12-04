@@ -45,7 +45,7 @@ public class SceneDao {
 
 	}
 
-	public Scene getScene(String sceneId) throws SQLException {
+	public Scene getScene(int sceneId) throws SQLException {
 		String selectSceneQuery = mQueryManager.find("scene", "sceneId=" + sceneId);
 		ResultSet rs = sqlManager.excuteSelect(selectSceneQuery);
 		if (rs.next()) {

@@ -12,8 +12,6 @@ import utils.dao.QueryManager;
 import utils.dao.SqlManager;
 
 public class ActionDao {
-	// TODO 사용하지 않는 코드는 제거한다.
-	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
 	private QueryManager mQueryManager;
 	private SqlManager sqlManager;

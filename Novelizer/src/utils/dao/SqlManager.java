@@ -35,7 +35,7 @@ public class SqlManager {
 		}
 	}
 
-	public ResultSet excuteSelect(String query) throws SQLException {
+	public ResultSet excuteSelect(String query) {
 		ResultSet resultSet = null;
 		Connection conn = null;
 		try {
@@ -44,13 +44,13 @@ public class SqlManager {
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			log.error("excuteSelect " + query + "Error\n" + e);
-			// TODO RuntimeException을 throw하고 있는데 굳이 SQLException을 throws 해야 하는가?
 			throw new RuntimeException();
 		} catch (Exception e) {
 			log.error("" + e);
-		} 
-		
-		// TODO resultSet, preparedStatment, connection 자원은 사용한 후에 반드시 close 해야 한다. close하지 않을 경우 발생할 수 있는 문제점은?
+		}
+
+		// TODO resultSet, preparedStatment, connection 자원은 사용한 후에 반드시 close 해야
+		// 한다. close하지 않을 경우 발생할 수 있는 문제점은?
 		return resultSet;
 	}
 }

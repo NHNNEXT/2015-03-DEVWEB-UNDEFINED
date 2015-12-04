@@ -2,9 +2,6 @@ package controller.scene;
 
 import java.sql.SQLException;
 
-// TODO 사용하지 않는 import문은 제거한다. 
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +23,8 @@ public class SceneService {
 
 	public SceneService() {
 		jsonHandler = new JsonHandler();
-		// TODO singleton 패턴은 JVM에 하나의 인스턴스만 만들고 싶다. 그런데 이와 같이 구현할 경우 여기서 1개의 인스턴스, ProjectController에도 하나의 인스턴스가 생성된다.
+		// TODO singleton 패턴은 JVM에 하나의 인스턴스만 만들고 싶다. 그런데 이와 같이 구현할 경우 여기서 1개의
+		// 인스턴스, ProjectController에도 하나의 인스턴스가 생성된다.
 		// 인스턴스를 하나만 생성하고 싶다. 어떻게 구현하는 것이 좋을까? singleton 패턴 적용하면 될까?
 		sceneDao = new SceneDao();
 		blockDao = new BlockDao();
@@ -41,11 +39,11 @@ public class SceneService {
 			} else {
 				sceneDao.newScene(scene);
 				saveBlock(scene);
-				// TODO 이와 같이 반환하면 이 값을 사용할 것인가? 어떻게?
+				// TODO 추후에 알맞은 데이터로 수정
 				return "result : DB INPUT Success";
 			}
 		} catch (SQLException e) {
-			// TODO 이와 같이 반환하면 이 값을 사용할 것인가? 어떻게?
+			// TODO 추후에 알맞은 데이터로 수정
 			return "error : " + e;
 		}
 	}
@@ -66,8 +64,7 @@ public class SceneService {
 		}
 	}
 
-	// TODO sceneId type이 String이어도 괜찮은가? int로 변환한다면 어느 시점에서 변환하는 것이 좋은가?
-	public String getScene(String sceneId) throws SQLException {
+	public String getScene(int sceneId) throws SQLException {
 		Scene scene = sceneDao.getScene(sceneId);
 		scene.setBlockList(blockDao.getBlocks(scene.getSceneId()));
 		for (Block block : scene.getBlockList()) {
