@@ -22,8 +22,8 @@ public class Action {
 	public Action(int actionId, String type, String optionData) {
 		this.actionId = actionId;
 		this.type = type;
-		
-		if(optionData != null) {
+
+		if (optionData != null) {
 			this.optionData = new JsonHandler().convertToOption(optionData);
 		}
 	}

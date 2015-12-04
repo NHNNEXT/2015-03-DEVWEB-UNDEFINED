@@ -5,17 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import utils.dao.QueryManager;
 import utils.dao.SqlManager;
 
 public class ActionDao {
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b09f4909c80e23a945c6ef8359538f89d083a4
 	private QueryManager mQueryManager;
 	private SqlManager sqlManager;
 
