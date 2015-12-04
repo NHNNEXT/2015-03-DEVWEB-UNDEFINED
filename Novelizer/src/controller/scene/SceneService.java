@@ -2,8 +2,6 @@ package controller.scene;
 
 import java.sql.SQLException;
 
-// TODO 사용하지 않는 import문은 제거한다. 
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,16 +15,17 @@ public class Action {
 	public Action() {
 	}
 
-	// TODO 이 두 개의 생성자를 하나로 합칠 수는 없을까? 가변 인자를 사용한다면...
 	public Action(int actionId, String type) {
-		this.actionId = actionId;
-		this.type = type;
+		this(actionId, type, null);
 	}
 
 	public Action(int actionId, String type, String optionData) {
 		this.actionId = actionId;
 		this.type = type;
-		this.optionData = new JsonHandler().convertToOption(optionData);
+		
+		if(optionData != null) {
+			this.optionData = new JsonHandler().convertToOption(optionData);
+		}
 	}
 
 	public int getActionId() {

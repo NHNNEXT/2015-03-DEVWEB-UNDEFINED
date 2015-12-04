@@ -9,6 +9,12 @@ public class Scene {
 	private String name;
 	private List<Block> blockList;
 
+	public Scene(int sceneId, String name) {
+		super();
+		this.sceneId = sceneId;
+		this.name = name;
+	}
+	
 	public int getSceneId() {
 		return sceneId;
 	}
@@ -21,15 +27,12 @@ public class Scene {
 		return blockList;
 	}
 
-	// TODO 자바 convention에서 생성자의 위치는 어디에 위치하는 것이 좋은가?
-	public Scene(int sceneId, String name) {
-		super();
-		this.sceneId = sceneId;
-		this.name = name;
-	}
-
 	public void setBlockList(List<Block> blockList) {
 		this.blockList = blockList;
 	}
 
+	@Override
+	public String toString() {
+		return "Scene [sceneId=" + sceneId + ", name=" + name + ", blockList=" + blockList + "]";
+	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +21,12 @@ import model.scene.SceneDao;
 public class ProjectController extends HttpServlet{
 	private Logger log = LoggerFactory.getLogger(ProjectController.class);
 	private SceneDao sceneDao;
+	private DataSource datasource;
 	
 	@Override
 	public void init() throws ServletException {
 		sceneDao = new SceneDao();
+		datasource = (DataSource)getServletContext().getAttribute("DataSource");
 	}
 	
 	@Override
