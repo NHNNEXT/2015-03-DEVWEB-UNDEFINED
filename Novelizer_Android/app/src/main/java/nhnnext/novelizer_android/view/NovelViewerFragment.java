@@ -37,6 +37,7 @@ public class NovelViewerFragment extends Fragment {
     private int curSceneId;
     private List<Scene> scenesOfCurNovel;
     private List<Block> blocksOfCurScene;
+    private Map<String, ImageView> characters;
 
 
     @Override
@@ -66,7 +67,7 @@ public class NovelViewerFragment extends Fragment {
 
         scenesOfCurNovel = novel.getScenes();
         blocksOfCurScene = scenesOfCurNovel.get(curSceneId).getBlocks();
-
+        characters = new HashMap<>();
         screenSetting();
         getView().findViewById(R.id.next_btn).setOnClickListener(new RunViewer());
     }
@@ -116,13 +117,13 @@ public class NovelViewerFragment extends Fragment {
         for(Action action : actions){
             switch(action.getType()){
                 case "Background" :
-                    setBackgroundAction(action);
+                    setBackgroundAction((BackgroundAction) action);
                     break;
                 case "Character" :
-                    setCharacterAction(action);
+                    setCharacterAction((CharacterAction) action);
                     break;
                 case "Text" :
-                    setTextAction(action);
+                    setTextAction((TextAction) action);
                     break;
                 default :
                     /* TODO : action type unvalid에 대한 예외처리 해주기 */
@@ -131,18 +132,29 @@ public class NovelViewerFragment extends Fragment {
         }
     }
 
-    private void setBackgroundAction(Action action){
-        ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(((BackgroundAction) action).getImg());
+    private void setBackgroundAction(BackgroundAction action){
+        ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(action.getImg());
     }
 
-    private void setCharacterAction(Action action){
-        ImageView character = new ImageView(getActivity());
-        character.setImageBitmap(((CharacterAction) action).getImg());
-        ((FrameLayout) getView()).addView(character);
+    private void setCharacterAction(CharacterAction action){
+
+        if(action.getOption() == "in") {
+            ImageView character = new ImageView(getActivity());
+            character.setImageBitmap(action.getImg());
+            ((FrameLayout) getView()).addView(character);
+
+            /* characters는 후에 character를 사라지게 할 때 이미지뷰를 찾기 위한 용도로 사용 */
+            characters.put(action.getCharacterId(), character);
+        }else if(action.getOption() == "out"){
+            ImageView character = characters.get(action.getCharacterId());
+            character.setImageBitmap(null);
+        }else{
+            /* TODO : Unvalid Character option Exception 처리하기 */
+        }
     }
 
-    private void setTextAction(Action action){
-        ((TextView) getView().findViewById(R.id.caption)).setText(((TextAction) action).getText());
+    private void setTextAction(TextAction action){
+        ((TextView) getView().findViewById(R.id.caption)).setText(action.getText());
     }
     private Novel getNovelData(String novelId){
         /* 이후 model에서 novelId를 키로하여 novel의 data를 불러오는 방식 구현 */
@@ -155,13 +167,13 @@ public class NovelViewerFragment extends Fragment {
         Bitmap boy = ((BitmapDrawable) getResources().getDrawable(R.mipmap.boy)).getBitmap();
         Bitmap girl = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl)).getBitmap();
 
-        actions.add(new BackgroundAction(0, "Background", backgroundImg));
-        actions.add(new CharacterAction(1, "Character", new int[]{0, 0}, boy));
+        actions.add(new BackgroundAction(0, "Background", backgroundImg, "in"));
+        actions.add(new CharacterAction(1, "Character", new int[]{0, 0}, boy, "철수", "in"));
         actions.add(new TextAction(2, "Text", "안녕 영희야?"));
             //Block 2의 Action
-        List<Action> actions2 = new ArrayList<Action>();
-        actions2.add(new BackgroundAction(3, "Background", backgroundImg));
-        actions2.add(new CharacterAction(4, "Character", new int[]{60, 10}, girl));
+        List<Action> actions2 = new ArrayList<>();
+        actions2.add(new CharacterAction(3, "Character", new int[]{0, 0}, boy, "철수","out"));
+        actions2.add(new CharacterAction(4, "Character", new int[]{60, 10}, girl, "영희", "in"));
         actions2.add(new TextAction(5, "Text", "ㅇㅇㅇㅇㅇㅇㅇ"));
 
         /* test block data 생성 */

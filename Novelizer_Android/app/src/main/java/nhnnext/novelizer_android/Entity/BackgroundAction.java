@@ -8,11 +8,13 @@ import android.graphics.Bitmap;
 public class BackgroundAction extends Action {
 
     private Bitmap img;
+    private String option;
     /* 이후 애니메이션 관련 구현 추가 예정 */
 
-    public BackgroundAction(int actionId, String type, Bitmap img){
+    public BackgroundAction(int actionId, String type, Bitmap img, String option){
         super(actionId, type);
         this.img = img;
+        this.option = option;
     }
 
     /* getter & setter */
@@ -22,5 +24,13 @@ public class BackgroundAction extends Action {
 
     public void setImg(Bitmap img) {
         this.img = img;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
     }
 }

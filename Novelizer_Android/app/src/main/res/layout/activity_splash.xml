@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
     android:gravity="center"
-    android:background="#fcd01f">
+    android:background="#fcf2da">
 
 
     <ImageView
