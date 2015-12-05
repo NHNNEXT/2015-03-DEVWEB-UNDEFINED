@@ -109,40 +109,60 @@ public class NovelViewerFragment extends Fragment {
         }
     }
 
-    private void screenSetting(){
+    private void screenSetting() {
         Block block = blocksOfCurScene.get(curBlockId);
-        BackgroundAction backgroundAction = (BackgroundAction)block.getActions().get("Background");
-        TextAction textAction = (TextAction)block.getActions().get("Text");
-        CharacterAction characterAction = (CharacterAction)block.getActions().get("Character");
+        List<Action> actions = block.getActions();
 
-        ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(backgroundAction.getImg());
-        ((TextView) getView().findViewById(R.id.caption)).setText(textAction.getText());
+        for(Action action : actions){
+            switch(action.getType()){
+                case "Background" :
+                    setBackgroundAction(action);
+                    break;
+                case "Character" :
+                    setCharacterAction(action);
+                    break;
+                case "Text" :
+                    setTextAction(action);
+                    break;
+                default :
+                    /* TODO : action type unvalid에 대한 예외처리 해주기 */
+                    break;
+            }
+        }
+    }
 
-        int[] characterPosition = characterAction.getPosition();
+    private void setBackgroundAction(Action action){
+        ((ImageView) getView().findViewById(R.id.background_image)).setImageBitmap(((BackgroundAction) action).getImg());
+    }
+
+    private void setCharacterAction(Action action){
         ImageView character = new ImageView(getActivity());
-        character.setImageBitmap(characterAction.getImg());
+        character.setImageBitmap(((CharacterAction) action).getImg());
         ((FrameLayout) getView()).addView(character);
     }
 
+    private void setTextAction(Action action){
+        ((TextView) getView().findViewById(R.id.caption)).setText(((TextAction) action).getText());
+    }
     private Novel getNovelData(String novelId){
         /* 이후 model에서 novelId를 키로하여 novel의 data를 불러오는 방식 구현 */
 
         /* Dummy Data */
         /* test action data 생성 */
             //Block 1의 Action
-        Map<String, Action> actions = new HashMap<>();
+        List<Action> actions = new ArrayList<>();
         Bitmap backgroundImg = ((BitmapDrawable) getResources().getDrawable(R.mipmap.space)).getBitmap();
         Bitmap boy = ((BitmapDrawable) getResources().getDrawable(R.mipmap.boy)).getBitmap();
         Bitmap girl = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl)).getBitmap();
 
-        actions.put("Background", new BackgroundAction(0, "Background", backgroundImg));
-        actions.put("Character", new CharacterAction(1, "Character", new int[]{0, 0}, boy));
-        actions.put("Text", new TextAction(2, "Text", "안녕 영희야?"));
+        actions.add(new BackgroundAction(0, "Background", backgroundImg));
+        actions.add(new CharacterAction(1, "Character", new int[]{0, 0}, boy));
+        actions.add(new TextAction(2, "Text", "안녕 영희야?"));
             //Block 2의 Action
-        Map<String, Action> actions2 = new HashMap<String, Action>();
-        actions2.put("Background", new BackgroundAction(3, "Background", backgroundImg));
-        actions2.put("Character", new CharacterAction(4, "Character", new int[]{60, 10}, girl));
-        actions2.put("Text", new TextAction(5, "Text", "ㅇㅇㅇㅇㅇㅇㅇ"));
+        List<Action> actions2 = new ArrayList<Action>();
+        actions2.add(new BackgroundAction(3, "Background", backgroundImg));
+        actions2.add(new CharacterAction(4, "Character", new int[]{60, 10}, girl));
+        actions2.add(new TextAction(5, "Text", "ㅇㅇㅇㅇㅇㅇㅇ"));
 
         /* test block data 생성 */
         List<Block> blocks = new ArrayList<>();

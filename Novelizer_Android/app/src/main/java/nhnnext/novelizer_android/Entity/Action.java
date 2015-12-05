@@ -11,4 +11,22 @@ public abstract class Action {
         this.actionId = actionId;
         this.type = type;
     }
+
+
+    /* getter & setter */
+    public int getActionId() {
+        return actionId;
+    }
+
+    public void setActionId(int actionId) {
+        this.actionId = actionId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

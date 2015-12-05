@@ -1,15 +1,15 @@
 package nhnnext.novelizer_android.Entity;
 
-import java.util.Map;
+import java.util.List;
 /**
  * Created by Henry on 2015. 11. 24..
  */
 public class Block {
-    private Map<String, Action> actions;
+    private List<Action> actions;
     private int blockId;
     private int nextBlockId;
 
-    public Block(int blockId, int nextBlock, Map<String, Action> actions){
+    public Block(int blockId, int nextBlock, List<Action> actions){
         this.actions = actions;
         this.blockId = blockId;
         this.nextBlockId = nextBlock;
@@ -28,11 +28,11 @@ public class Block {
         this.nextBlockId = nextBlockId;
     }
 
-    public Map<String, Action> getActions() {
+    public List<Action> getActions() {
         return actions;
     }
 
-    public void setActions(Map<String, Action> actions) {
+    public void setActions(List<Action> actions) {
         this.actions = actions;
     }
 
