@@ -1,10 +1,11 @@
-package model.action;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.action.Action;
 import utils.dao.QueryManager;
 import utils.dao.SqlManager;
 

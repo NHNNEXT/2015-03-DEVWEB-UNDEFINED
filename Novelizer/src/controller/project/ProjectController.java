@@ -14,8 +14,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dao.SceneDao;
 import model.scene.Scene;
-import model.scene.SceneDao;
 
 @WebServlet("/project")
 public class ProjectController extends HttpServlet{
