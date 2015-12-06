@@ -38,7 +38,6 @@ public class SceneDao {
 
 	// 현재 projectId가 1로 고정 추후 project객체 생성시 수정 필요
 	public void newScene(Scene scene) throws SQLException {
-		log.info("newScene Start");
 		String insertSceneQuery = mQueryManager.Insert("scene", "sceneId, projectId, name",
 				scene.getSceneId() + "," + 1 + "," + mQueryManager.toQueryStirng(scene.getName()));
 		sqlManager.excuteUpdate(insertSceneQuery);

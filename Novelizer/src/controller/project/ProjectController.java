@@ -16,10 +16,14 @@ import org.slf4j.LoggerFactory;
 
 import model.scene.Scene;
 import model.scene.SceneDao;
+import project.Project;
+import utils.json.JsonHandler;
 
 @WebServlet("/project")
 public class ProjectController extends HttpServlet{
 	private Logger log = LoggerFactory.getLogger(ProjectController.class);
+	
+	private JsonHandler jsonHandler;
 	private SceneDao sceneDao;
 	private DataSource datasource;
 	
@@ -27,6 +31,7 @@ public class ProjectController extends HttpServlet{
 	public void init() throws ServletException {
 		sceneDao = new SceneDao();
 		datasource = (DataSource)getServletContext().getAttribute("DataSource");
+		jsonHandler = new JsonHandler();
 	}
 	
 	@Override
@@ -39,6 +44,13 @@ public class ProjectController extends HttpServlet{
 			log.error("SQL Exception");
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String projectData = req.getParameter("projectData");
+		Project project = jsonHandler.convertToProject(projectData);
+		resp.getWriter().write("1");
 	}
 	
 }

@@ -31,8 +31,4 @@ public class Scene {
 		this.blockList = blockList;
 	}
 
-	@Override
-	public String toString() {
-		return "Scene [sceneId=" + sceneId + ", name=" + name + ", blockList=" + blockList + "]";
-	}
 }

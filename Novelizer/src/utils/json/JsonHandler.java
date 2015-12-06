@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.option.Option;
 import model.scene.Scene;
+import project.Project;
 
 public class JsonHandler<T> {
 	private static final Logger log = LoggerFactory.getLogger(JsonHandler.class);
@@ -40,6 +41,20 @@ public class JsonHandler<T> {
 		}
 
 		return option;
+	}
+	
+	public Project convertToProject(String jsonData) {
+		ObjectMapper objMapper = new ObjectMapper();
+
+		Project project = null;
+		try {
+			project = objMapper.readValue(jsonData, Project.class);
+		} catch (IOException e) {
+			log.error("JsonString to Project fail \n" + e);
+			throw new RuntimeException();
+		}
+
+		return project;
 	}
 	
 	// Object를 T로 바꿨는데, 잘바꾼지 모르겠음
