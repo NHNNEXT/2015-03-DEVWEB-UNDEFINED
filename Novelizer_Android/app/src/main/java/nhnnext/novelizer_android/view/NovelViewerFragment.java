@@ -1,6 +1,10 @@
 package nhnnext.novelizer_android.view;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,9 +17,7 @@ import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -106,7 +108,30 @@ public class NovelViewerFragment extends Fragment {
 
 
         private void finishNovel(){
-            Toast.makeText(getActivity(), "Game is over", Toast.LENGTH_LONG).show();
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            dialogBuilder.setMessage("게임이 끝났습니다. 초기화면으로 돌아가시겠습니까?").setCancelable(
+                    false).setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            getActivity().finish();
+                        }
+                    }).setNegativeButton("No",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.setTitle("Game Over");
+
+            /* Drawable을 Bitmap으로 바꾸지 않고 바로 scaling하는 방법은 없을까? */
+            Drawable icon = getResources().getDrawable(R.mipmap.novelizer);
+            Bitmap iconBitmap = ((BitmapDrawable)icon).getBitmap();
+            icon = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(iconBitmap, 50, 70, true));
+            dialog.setIcon(icon);
+            dialog.show();
         }
 
         private void showNextScene(){
