@@ -23,6 +23,16 @@ var Editor = { //Editor 객체 형성
         $(document).on("click","ul.action-list li", this.selectAction); //액션 리스트를 클릭하면, 액션 선택이 됨
         $(document).on("click","ul.action-list li", this.unselectedBlock);
         
+        //액션리스트에서 옥션 선택변화에 따른 설정사
+        $(document).on("change","select.action-option", this.changeOption);
+
+        // 텍스트박스 동기화 
+        $(document).on("keyup", "textarea", this.copyText);
+
+        //배경 이미지 드로그 & 드랍 & resizeable
+        $(document).on("click", "img", this.backgroundFill);
+
+
 
         // TODO: sortable 새로 추가된 액션 리스트에  적용되게 수정하기
         // action-list li 태그를 이동할 수 있게 
@@ -30,21 +40,31 @@ var Editor = { //Editor 객체 형성
             revert: true //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
         });
 
-        $( ".action-list" ).sortable({
-            revert: true //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
-        });
+        
 
-        $( ".draggable" ).draggable({ // 아래의 내용이 있으니 drag가 안되서 일단 주석처리함.
-            //connectToSortable: "#sortable", 
-            //helper: "clone", //클론을 하게 되면 그 요소는 복제되어 드래그 된다.
-            //revert: "valid"
-        });
+        // $( ".draggable" ).draggable({ // 아래의 내용이 있으니 drag가 안되서 일단 주석처리함.
+        //     //connectToSortable: "#sortable", 
+        //     //helper: "clone", //클론을 하게 되면 그 요소는 복제되어 드래그 된다.
+        //     revert: "valid"
+        // });
     },
+
+
 
     addBlock : function(){
         EditorDataSync.addBlock(function(data){
             $("ol#block-list").append("<li data-block-id='"+data.blockId+"' class='block'><ul class='action-list'></ul></li>");
-        }); // 체이닝할 때의 타겟 
+            $( ".action-list" ).sortable({
+                revert: true, //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
+                handle: ".move",
+                tolerance: "pointer",
+                cursor: "move",
+       
+         
+           
+
+            });
+        }); 
     },
     removeBlock : function(){
         EditorDataSync.removeBlock(Editor.selectedBlockId);
@@ -70,18 +90,49 @@ var Editor = { //Editor 객체 형성
 
     addAction : function(){
         EditorDataSync.addAction(Editor.selectedBlockId,function(data){
-           var select = $("select.temp-action-option").clone()
-           select.removeClass("temp-action-option");
-           var li = $("<li></li>");
+           var select = $("select.temp.action-option").clone();
+           var selectText = $("option.textAction");
+           select.removeClass("temp");
+           var li = $("<li><div class='move'></div></li>");
+          
            li.data("actionId",data.actionId).append(select);
            $("li.selected ul.action-list").append(li);
-          
+
         });
 
-    }, 
+    },
 
+
+     changeOption : function(){
+      var textArea = $("<textarea class='textsync' placeholder='이곳에 대사를 입력해주세요' maxlength='300'></textarea>");
+         if($(this).val() == "text")
+            $(this).closest("li").append(textArea);
+               
+     },
+
+     //TODO: 서로다른 블록별로 어떻게 다르게 지정해줄 수 있을것인지.
+     copyText :  function(){
+                    $(".textsync").val($(this).val());
+        },
+
+    backgroundFill : function(){
+
+        alert(1);
+         $(".dragzones").draggable({
+        start: handleDragStart,
+        cursor: 'move',
+        revert: "invalid",
+        helper: "clone"
+        });
+        $(".dropzones").droppable({
+            drop: handleDropEvent,
+            tolerance: "touch",              
+        });
+        validateDropzones();
+        }
 
 }
+
 
 $(".tab-edit").on("click",function(event){ //클릭하면 edit으로 넘어감.
     switchTab("edit");
@@ -116,5 +167,11 @@ function switchTab(tabid){
     
     document.querySelector("#"+tabid).style.display="block";
 }
+
+// function(){
+//     $(".textsync").keyup(function(){
+//         $(".textsync").val($(this).val());
+//     });
+///////
 
 

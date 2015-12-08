@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>drog&amp;drop</title>
+    
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-
 </head>
 <body>
         <navigation>
@@ -21,7 +20,15 @@
             <div id="edit">
                 <div class="left">
                     <div id="preview">
-                        <img src="https://github.com/Junnie-Jobs/junniejobs.github.io/blob/master/Novel/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202015-11-07%2013.15.35.png?raw=true">
+                    <div id="screen" class="dropzones">
+                    이곳에 배경이미지를 드래그 해주세요
+                        <div class="leftChracter" >이곳에 캐릭터를 드래그 해주세요</div>
+                        <div class="rightChracter">이곳에 캐릭터를 드래그 해주세요</div>
+                        <form name="input method="post>
+                            <textarea class="textfield textsync" placeholder="이곳에 대사를 입력해주세요" maxlength="300"></textarea>
+                        </form>
+                    </div>
+                    <div id="play"></div>
                     </div>
               
                     <div id="toolbox">
@@ -32,10 +39,16 @@
                                 <li rel="tab3">기타</li>
                             </ul>
                                 <div class="tab_container">
-                                    <div id="tab1" class="tab_content">
-                                        <img class="draggable" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0KDw0IDAwHDQgMDw0NBwcMBw8ICQcMFBEWFiARExQfKCggGBolGxQTITEhJSkrLi4uFx8zODMsNygtLisBCgoKDA0MFQwPDjAZFBkrLCsyKzcrKysrOCwrLCsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAFAAUAMBIgACEQEDEQH/xAAaAAEBAQEAAwAAAAAAAAAAAAABAgADBAUG/8QAGhABAQEBAAMAAAAAAAAAAAAAAAECEQMhUf/EABkBAQEBAQEBAAAAAAAAAAAAAAIDAQAGBP/EABcRAQEBAQAAAAAAAAAAAAAAAAABAhH/2gAMAwEAAhEDEQA/APk85k9SST5JxQMenjy+iYCURqo1aNWimptNqLRp5a1FrWotCr5juYlUIdEwEojVQardRquGQarnarVc7QtWzBam1qmwKvmPLMBikR0YYI1rU61qLWoc2JqeLqNaCnkWJtg1pz1RtXzmvOMDHEaQ1BAwtNrnqstdJ0b0501NCrZiajSqjQLPYFmVfNWoKbWinVRVWoo0pE1NVXPWhquY1c9VteRx1sOqyP/Z">
+                                    <div id="tab1" class="tab_content" style="display:block">
+                                        <div class="backgroundSetBox">
+                                            <span id="droppable" class="backgroundSet draggable"><p>Oh!</p></span></span>
+                                            <span id="droppable" class="backgroundSet draggable"><p>Oh!</p></span>
+                                            <span id="droppable" class="backgroundSet draggable"></span>
+                                            <span id="droppable" class="backgroundSet draggable"></span>
+
+                                        </div>
                                     </div>
-                                    <div id="tab2" class="tab_content"><img class="draggable" src="http://img04.alkislarlayasiyorum.com/images/members/50_50/297/297943_1.jpg"></div>
+                                    <div id="tab2" class="tab_content"><img class="draggable  dragzones" src="http://img04.alkislarlayasiyorum.com/images/members/50_50/297/297943_1.jpg"></div>
                                     <div id="tab3" class="tab_content">기타</div>  
                                 </div>
                                 <!-- .tab_container -->
@@ -43,29 +56,37 @@
                             <!-- #container -->
                     </div>
                  </div>
-                <div id="timeline">
+                
+                    <div id="timeline">
                     <h1>TimeLines</h1>
+                    <div class="sortable">
                     <ol id="block-list">
                     </ol>
                     <ul>
-                     
-                        <select class="temp-action-option">
-                            <option class='textAction'>텍스트</option>
-                            <option class='backGroundAction'>배경</option>
-                            <option class='characterAction'>캐릭터</option>
-                            <option class='variableAction'>변수</option>
+                        <select class="temp action-option">
+                            <option value="background" class='backGroundAction'>배경</option>
+                            <option value="text" class='textAction'>텍스트</option> 
+                            <option value="character" class='characterAction'>캐릭터</option>
+                            <option value="variable" class='variableAction'>변수</option>
                         </select>
-                     
                     </ul>
+                    </div>
                     <button id="button-add-block">블록추가하기</button>
                     <button id="button-add-action">액션추가하기</button>
                     <button id="button-remove">삭제하기</button>
                 </div>
             </div>
             <div id="preset">프리셋</div>
+              <form action="/file-upload" class="dropzone">
+                      <div class="fallback">
+                        <input name="file" type="file" multiple/>
+                      </div>
+                 </form> 
             <div id="scenario">시나리오</div>
 
         </main>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/dataSync.js"></script>
     <script type="text/javascript">
