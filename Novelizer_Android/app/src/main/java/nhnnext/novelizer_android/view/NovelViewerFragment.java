@@ -153,7 +153,13 @@ public class NovelViewerFragment extends Fragment {
         if(action.getOption() == "in") {
             ImageView character = new ImageView(getActivity());
             character.setImageDrawable(action.getImg());
-            character.setLayoutParams(new ViewGroup.LayoutParams(400, 800));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(800, 600);
+            if(action.getPosition()[0] > 50) {
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            }else params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+            character.setLayoutParams(params);
+
             ((RelativeLayout)getView().findViewById(R.id.background_layout)).addView(character);
 
             /* characters는 후에 character를 사라지게 할 때 이미지뷰를 찾기 위한 용도로 사용 */
@@ -182,17 +188,17 @@ public class NovelViewerFragment extends Fragment {
         Drawable girl = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl));
 
         actions1.add(new BackgroundAction(0, "Background", backgroundImg, "in"));
-        actions1.add(new CharacterAction(1, "Character", new int[]{10, 10}, boy, "철수", "in"));
+        actions1.add(new CharacterAction(1, "Character", new int[]{60, 10}, boy, "철수", "in"));
         actions1.add(new TextAction(2, "Text", "안녕 영희야?"));
             //Block 2의 Action
         List<Action> actions2 = new ArrayList<>();
         actions2.add(new CharacterAction(3, "Character", new int[]{0, 0}, boy, "철수","out"));
-        actions2.add(new CharacterAction(4, "Character", new int[]{400, 10}, girl, "영희", "in"));
+        actions2.add(new CharacterAction(4, "Character", new int[]{10, 10}, girl, "영희", "in"));
         actions2.add(new TextAction(5, "Text", "어, 철수야 안녕! \n무사히 두번째 블럭으로 넘어왔구나. 여긴 무슨 일이니?"));
             //Block 3의 Action
         List<Action> actions3 = new ArrayList<>();
         actions3.add(new CharacterAction(6, "Character", new int[]{0, 0}, girl, "영희", "out"));
-        actions3.add(new CharacterAction(7, "Character", new int[]{10, 10}, boy, "철수", "in"));
+        actions3.add(new CharacterAction(7, "Character", new int[]{60, 10}, boy, "철수", "in"));
         actions3.add(new TextAction(8, "Text", "널 없애러 왔어"));
             //Block 4의 Action
         List<Action> actions4 = new ArrayList<>();
@@ -219,17 +225,17 @@ public class NovelViewerFragment extends Fragment {
         Drawable girl2 = ((BitmapDrawable) getResources().getDrawable(R.mipmap.girl));
 
         actions5.add(new BackgroundAction(12, "Background", backgroundImg2, "in"));
-        actions5.add(new CharacterAction(13, "Character", new int[]{10, 10}, boy2, "철수", "in"));
+        actions5.add(new CharacterAction(13, "Character", new int[]{60, 10}, boy2, "철수", "in"));
         actions5.add(new TextAction(14, "Text", "이제 두번째 씬이야"));
             //Block 2의 Action
         List<Action> actions6 = new ArrayList<>();
         actions6.add(new CharacterAction(15, "Character", new int[]{0, 0}, boy2, "철수","out"));
-        actions6.add(new CharacterAction(16, "Character", new int[]{400, 10}, girl2, "영희", "in"));
+        actions6.add(new CharacterAction(16, "Character", new int[]{10, 10}, girl2, "영희", "in"));
         actions6.add(new TextAction(17, "Text", "오 드디어?"));
             //Block 3의 Action
         List<Action> actions7 = new ArrayList<>();
         actions7.add(new CharacterAction(18, "Character", new int[]{0, 0}, girl2, "영희", "out"));
-        actions7.add(new CharacterAction(19, "Character", new int[]{10, 10}, boy2, "철수", "in"));
+        actions7.add(new CharacterAction(19, "Character", new int[]{60, 10}, boy2, "철수", "in"));
         actions7.add(new TextAction(20, "Text", "응. 여까기지 오느라 삽질 많이 했어."));
             //Block 4의 Action
         List<Action> actions8 = new ArrayList<>();
