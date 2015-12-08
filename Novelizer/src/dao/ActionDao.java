@@ -1,38 +1,73 @@
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import model.action.Action;
-import utils.dao.QueryManager;
-import utils.dao.SqlManager;
 
-public class ActionDao {
+public class ActionDao extends AbstractDao<Action, Integer> {
+	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
-	private QueryManager mQueryManager;
-	private SqlManager sqlManager;
+	private static final String insertQuery = "INSERT INTO action(actionId, type, blockId) values(?,?,?);";
+	private final String selectByParentIdQuery = "SELECT * FROM action WHERE blockId = ?;";
 
-	public ActionDao() {
-		mQueryManager = new QueryManager();
-		sqlManager = new SqlManager();
+	public ActionDao(){
+		super.insertQuery = insertQuery;
+		super.selectByParentIdQuery = selectByParentIdQuery;
 	}
+	
+	public void insertAction(Action action) throws SQLException {
+		try {
+			ArrayList<Object> insertList = new ArrayList<Object>();
 
-	public void newAction(Action action, int blockId) throws SQLException {
-		String insertBlockQuery = mQueryManager.Insert("action", "actionId, type, blockId",
-				action.getActionId() + "," + mQueryManager.toQueryStirng(action.getType()) + "," + blockId);
-		sqlManager.excuteUpdate(insertBlockQuery);
-	}
+			insertList.add(action.getActionId());
+			insertList.add(action.getType());
+			insertList.add(action.getBlockId());
 
-	public List<Action> getActions(int blockId) throws SQLException {
-		List<Action> actions = new ArrayList<Action>();
-
-		String selectQuery = mQueryManager.find("action", "blockId=" + blockId);
-		ResultSet rs = sqlManager.excuteSelect(selectQuery);
-		while (rs.next()) {
-			actions.add(new Action(rs.getInt(1), rs.getString(2)));
+			insert(insertList);
+		} catch (Exception e) {
+			log.error("Insert Block Error");
+			e.printStackTrace();
 		}
-		return actions;
+	}
+
+	public List<Action> selectByBlockId(int blockId) throws SQLException {
+		List<List<Object>> actions = new ArrayList<>();
+		List<Action> resulActions = new ArrayList<>();
+
+		try {
+			actions = selectByParentId(blockId);
+			for (List<Object> actionContents : actions) {
+				resulActions.add(convertToBlock(actionContents));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return resulActions;
+	}
+
+	private Action convertToBlock(List<Object> actionContents) {
+		int actionId = (Integer) actionContents.get(0);
+		String type = (String) actionContents.get(1);
+		int blockId = (Integer) actionContents.get(2);
+
+		return new Action(actionId, type, blockId);
+	}
+
+	@Override
+	public void update(Action vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer key) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,19 +1,17 @@
 package model.scene;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import model.ValueImpl;
 import model.block.Block;
 
-public class Scene implements ValueImpl {
+public class Scene {
 	private int sceneId;
 	private String sceneName;
 	private List<Block> blockList;
 	private int projectId;
 
-	public Scene(int sceneId, String name) {
-		this(sceneId,name,null,0);
+	public Scene(int sceneId, String name, int resultProjectId) {
+		this(sceneId,name,null,resultProjectId);
 	}
 
 	public Scene(int sceneId, String sceneName, List<Block> blockList, int projectId) {
@@ -56,19 +54,5 @@ public class Scene implements ValueImpl {
 	public String toString() {
 		return "Scene [sceneId=" + sceneId + ", name=" + sceneName + ", blockList=" + blockList + "]";
 	}
-
-	@Override
-	public String getInsertQuery() {
-		return "scene(sceneId, name, projectId) values(?,?,?);";
-	}
-
-	@Override
-	public List<Object> getInsertList() {
-		ArrayList<Object> insertList = new ArrayList<Object>();
-		insertList.add(this.sceneId);
-		insertList.add(this.sceneName);
-		insertList.add(this.projectId);
-
-		return insertList;
-	}
+	
 }

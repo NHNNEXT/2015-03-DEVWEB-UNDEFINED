@@ -2,19 +2,14 @@ package service;
 
 import java.sql.SQLException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import dao.ActionDao;
 import dao.BlockDao;
 import dao.SceneDao;
-import model.action.Action;
 import model.block.Block;
 import model.scene.Scene;
 import utils.json.JsonHandler;
 
 public class SceneService {
-	private static final Logger log = LoggerFactory.getLogger(SceneService.class);
 	private JsonHandler<Scene> jsonHandler;
 	private BlockService blockService;
 	private SceneDao sceneDao;
@@ -29,7 +24,7 @@ public class SceneService {
 		sceneDao = new SceneDao();
 		blockDao = new BlockDao();
 		actionDao = new ActionDao();
-		
+
 		blockService = new BlockService();
 	}
 
@@ -37,10 +32,10 @@ public class SceneService {
 		Scene scene = jsonHandler.convertToScene(sceneData);
 		scene.setProjectId(1);
 		try {
-			if (sceneDao.hasScene(scene.getSceneId())) {
+			if (sceneDao.selectScene(scene.getSceneId()) == null) {
 				return "Error : Scene already Exist";
 			} else {
-				sceneDao.newScene(scene);
+				sceneDao.insertScene(scene);
 				blockService.saveBlock(scene);
 				// TODO 추후에 알맞은 데이터로 수정
 				return "result : DB INPUT Success";
@@ -52,10 +47,13 @@ public class SceneService {
 	}
 
 	public String getScene(int sceneId) throws SQLException {
-		Scene scene = sceneDao.getScene(sceneId);
-		scene.setBlockList(blockDao.getBlocks(scene.getSceneId()));
+		Scene scene = sceneDao.selectScene(sceneId);
+		if(scene == null){
+			throw new NullPointerException();
+		}
+		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));
 		for (Block block : scene.getBlockList()) {
-			block.setActionList(actionDao.getActions(block.getBlockId()));
+			block.setActionList(actionDao.selectByBlockId((block.getBlockId())));
 		}
 		return jsonHandler.convertToJson(scene);
 	}

@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,45 +8,93 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import model.block.Block;
-import utils.dao.QueryManager;
-import utils.dao.SqlManager;
+import model.scene.Scene;
 
 public class BlockDao extends AbstractDao<Block, Integer> {
 	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);
 
-	private QueryManager mQueryManager;
-	private SqlManager sqlManager;
+	private static final String insertQuery = "INSERT INTO block(blockId, nextBlockId, sceneId) VALUES(?, ?, ?);";
+	private final String selectQuery = "SELECT * FROM block WHERE blockId = ?;";
+	private final String selectAllQuery = "SELECT * FROM block;";
+	private final String selectByParentIdQuery = "SELECT * FROM block WHERE sceneId = ?;";
+	private final String updateQuery = "";
+	private final String deleteQuery = "";
 
-	public BlockDao() {
-		mQueryManager = new QueryManager();
-		sqlManager = new SqlManager();
+	public BlockDao(){
+		super.insertQuery = insertQuery;
+		super.selectAllQuery = selectAllQuery;
+		super.selectQuery = selectQuery;
+		super.selectByParentIdQuery = selectByParentIdQuery;
 	}
-
-	public void newBlock(Block block) throws SQLException {
+	
+	public void insertBlock(Block block) throws SQLException {
 		try {
-			insert(block);
+			ArrayList<Object> insertList = new ArrayList<Object>();
+
+			insertList.add(block.getBlockId());
+			insertList.add(block.getNextBlockId());
+			insertList.add(block.getSceneId());
+
+			insert(insertList);
 		} catch (Exception e) {
 			log.error("Insert Block Error");
 			e.printStackTrace();
 		}
 	}
 
-	public List<Block> getBlocks(int sceneId) throws SQLException {
-		List<Block> blocks = new ArrayList<Block>();
+	public Block selectBlock(int blockId) throws SQLException {
+		List<Object> blockContents = new ArrayList<>();
+		Block block = null;
 
-		String selectBlocksQuery = mQueryManager.find("block", "sceneId=" + sceneId);
-		ResultSet rs = sqlManager.excuteSelect(selectBlocksQuery);
-		while (rs.next()) {
-			blocks.add(new Block(rs.getInt(1), rs.getInt(2)));
+		try {
+			blockContents = select(blockId);
+			block = convertToBlock(blockContents);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		return blocks;
+		return block;
+	}
+	
+	public List<Block> selectBySceneId(int sceneId){
+		List<Block> resultBlocks = new ArrayList<>();
+		List<List<Object>> blocks = new ArrayList<>();
+		
+		try{
+			blocks = selectByParentId(sceneId);
+			for(List<Object> block : blocks){
+				resultBlocks.add(convertToBlock(block));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return resultBlocks;
+	}
+	
+	public List<Block> selectAllBlocks() {
+		List<Block> resultBlocks = new ArrayList<>();
+		List<List<Object>> blocks = new ArrayList<>();
+		
+		try{
+			blocks = selectAll();
+			for(List<Object> block : blocks){
+				resultBlocks.add(convertToBlock(block));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return resultBlocks;
 	}
 
-	@Override
-	public void select(Integer key) throws Exception {
-		// TODO Auto-generated method stub
+	private Block convertToBlock(List<Object> blockContents) {
 
+		int resultBlockId = (Integer) blockContents.get(0);
+		int resultNextBlockId = (Integer) blockContents.get(1);
+		int resultSceneId = (Integer) blockContents.get(2);
+
+		return new Block(resultBlockId, resultNextBlockId, resultSceneId);
 	}
 
 	@Override
@@ -58,12 +105,6 @@ public class BlockDao extends AbstractDao<Block, Integer> {
 
 	@Override
 	public void delete(Integer key) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void query() {
 		// TODO Auto-generated method stub
 
 	}
