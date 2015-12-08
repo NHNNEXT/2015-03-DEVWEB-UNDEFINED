@@ -6,11 +6,16 @@
     >
 
 
-    <ImageView
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/background_image"
-        android:scaleType="centerCrop" />
+        android:id="@+id/background_layout"
+        >
+
+
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,14 +37,5 @@
             android:autoText="false"
             android:textColor="#ffffff" />
     </ScrollView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NEXT >>"
-        android:id="@+id/next_btn"
-        android:layout_gravity="bottom|right"
-        android:textColor="#78ffffff"
-        android:background="#00ffffff" />
 
 </FrameLayout>
