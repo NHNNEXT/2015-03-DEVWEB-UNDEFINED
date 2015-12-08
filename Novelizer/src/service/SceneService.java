@@ -35,6 +35,7 @@ public class SceneService {
 
 	public String saveScene(String sceneData) {
 		Scene scene = jsonHandler.convertToScene(sceneData);
+		scene.setProjectId(1);
 		try {
 			if (sceneDao.hasScene(scene.getSceneId())) {
 				return "Error : Scene already Exist";

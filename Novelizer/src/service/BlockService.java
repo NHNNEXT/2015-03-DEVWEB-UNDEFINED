@@ -22,7 +22,8 @@ public class BlockService {
 	public void saveBlock(Scene scene) throws SQLException {
 		int sceneId = scene.getSceneId();
 		for (Block block : scene.getBlockList()) {
-			blockDao.newBlock(block, sceneId);
+			block.setSceneId(sceneId);
+			blockDao.newBlock(block);
 			actionService.saveAction(block);
 		}
 	}
