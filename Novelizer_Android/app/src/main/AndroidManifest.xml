@@ -6,33 +6,34 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/novelizer"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".controller.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme"
-            >
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".controller.ViewerActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
         </activity>
-
+        <activity
+            android:name=".controller.InputNovelIdActivity"
+            android:label="@string/title_activity_input_novel_id"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import service.SceneService;
+
 @WebServlet("/scene")
 public class SceneController extends HttpServlet {
 	private Logger log = LoggerFactory.getLogger(SceneController.class);
-	
+
 	private SceneService service;
 
 	@Override
@@ -36,7 +38,7 @@ public class SceneController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String sceneId = req.getParameter("sceneId");
+		int sceneId = Integer.parseInt(req.getParameter("sceneId"));
 		log.info("new Get");
 		String result;
 		try {

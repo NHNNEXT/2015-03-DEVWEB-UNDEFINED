@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Novelizer_Android</string>
+    <string name="app_name">Novelizer</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -7,4 +7,5 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_input_novel_id">InputNovelIdActivity</string>
 </resources>

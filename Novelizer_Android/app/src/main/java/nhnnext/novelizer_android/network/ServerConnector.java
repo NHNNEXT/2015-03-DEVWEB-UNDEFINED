@@ -64,4 +64,40 @@ public class ServerConnector {
        return null;
     }
 
+    public String getProject(String projectId){
+
+        novelizerService.getProject(new Callback<Response>() {
+            @Override
+            public void success(Response response, Response response2) {
+                BufferedReader reader = null;
+                StringBuilder sb = new StringBuilder();
+                try {
+
+                    reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
+                    String line;
+
+                    try {
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.i("Retrofit success",sb.toString());
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("Retrofit error", error.toString());
+            }
+        });
+
+        return null;
+
+    }
+
 }

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
   <wb-module deploy-name="Novelizer">
     <property name="context-root" value="/"/>
     <wb-resource deploy-path="/" source-path="webapp"/>
     <property name="java-output-path" value="/webapp/WEB-INF/classes"/>
+<<<<<<< HEAD
     <dependent-module archiveName="dbcp-6.0.44.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/tomcat/dbcp/6.0.44/dbcp-6.0.44.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
@@ -22,6 +22,23 @@
     <dependent-module archiveName="jackson-core-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/fasterxml/jackson/core/jackson-core/2.2.2/jackson-core-2.2.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
+=======
+    <dependent-module archiveName="commons-dbcp2-2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-dbcp2/2.1/commons-dbcp2-2.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="commons-pool2-2.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="commons-logging-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="jackson-annotations-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.2.2/jackson-annotations-2.2.2.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="jackson-core-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/fasterxml/jackson/core/jackson-core/2.2.2/jackson-core-2.2.2.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+>>>>>>> f59a1a0b752e4c218d85a2d5760c94eac2d3f97e
     <dependent-module archiveName="jackson-databind-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.2.2/jackson-databind-2.2.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
@@ -47,5 +64,6 @@
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
   </wb-module>
 </project-modules>
