@@ -53,4 +53,21 @@ public class SqlManager {
 		// 한다. close하지 않을 경우 발생할 수 있는 문제점은?
 		return resultSet;
 	}
+
+	public void testInsert(String query, Object[] args) {
+		Connection conn = null;
+		try {
+			conn = utils.dao.DataSource.getInstance().getConnection();
+			preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, (Integer)args[0]);
+			preparedStatement.setInt(2, (Integer)args[1]);
+			preparedStatement.setString(3, (String)args[2]);
+		} catch (SQLException e) {
+			log.error("excuteSelect " + query + "Error\n" + e);
+			throw new RuntimeException();
+		} catch (Exception e) {
+			log.error("" + e);
+		}
+	}
+
 }

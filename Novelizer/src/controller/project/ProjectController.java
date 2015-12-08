@@ -14,10 +14,14 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dao.SceneDao;
 import model.scene.Scene;
+<<<<<<< HEAD
 import model.scene.SceneDao;
 import project.Project;
 import utils.json.JsonHandler;
+=======
+>>>>>>> iss#50
 
 @WebServlet("/project")
 public class ProjectController extends HttpServlet{
@@ -39,7 +43,7 @@ public class ProjectController extends HttpServlet{
 		// TODO projectId가 존재하지 않을 경우 에러가 발생한다. 이 같은경우 어떻게 처리할 것인가?
 		int projectId = Integer.parseInt(req.getParameter("projectId"));
 		try {
-			List<Scene> scenes = sceneDao.getSceneList(projectId);
+			List<Scene> scenes = sceneDao.selectByProjectId(projectId);
 		} catch (SQLException e) {
 			log.error("SQL Exception");
 			e.printStackTrace();
