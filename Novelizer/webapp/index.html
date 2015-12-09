@@ -21,9 +21,8 @@
                 <div class="left">
                     <div id="preview">
                     <div id="screen" class="dropzones">
-                    이곳에 배경이미지를 드래그 해주세요
-                        <div class="leftChracter" >이곳에 캐릭터를 드래그 해주세요</div>
-                        <div class="rightChracter">이곳에 캐릭터를 드래그 해주세요</div>
+                        <div class="leftChracter dropzones" ></div>
+                        <div class="rightChracter dropzones"></div>
                         <form name="input method="post>
                             <textarea class="textfield textsync" placeholder="이곳에 대사를 입력해주세요" maxlength="300"></textarea>
                         </form>
@@ -41,14 +40,23 @@
                                 <div class="tab_container">
                                     <div id="tab1" class="tab_content" style="display:block">
                                         <div class="backgroundSetBox">
-                                            <span id="droppable" class="backgroundSet draggable"><p>Oh!</p></span></span>
-                                            <span id="droppable" class="backgroundSet draggable"><p>Oh!</p></span>
-                                            <span id="droppable" class="backgroundSet draggable"></span>
-                                            <span id="droppable" class="backgroundSet draggable"></span>
+                                            <span id="droppable" class="backgroundSet draggable"><p><h1>하늘</h1></p></span></span>
+                                            <span id="droppable" class="backgroundSet draggable"><p><h1>마을</h1></p></span>
+                                            <span id="droppable" class="backgroundSet draggable"><p><h1>공원</h1></p></span>
+                                            <span id="droppable" class="backgroundSet draggable"><p><h1>학교</h1></p></span>
 
                                         </div>
                                     </div>
-                                    <div id="tab2" class="tab_content"><img class="draggable  dragzones" src="http://img04.alkislarlayasiyorum.com/images/members/50_50/297/297943_1.jpg"></div>
+                                    <div id="tab2" class="tab_content">
+                                        <div class="backgroundSetBox">
+                                            <span id="droppable" class="backgroundSet draggable character1"><p><h1>영희</h1></p></span>
+                                            <span id="droppable" class="backgroundSet draggable character2"><p><h1>철수</h1></p></span>
+                                           
+
+                                        </div>
+
+
+                                    </div>
                                     <div id="tab3" class="tab_content">기타</div>  
                                 </div>
                                 <!-- .tab_container -->
@@ -85,7 +93,7 @@
             <div id="scenario">시나리오</div>
 
         </main>
-    <script type="text/javascript" src="js/jquery.js"></script>
+
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/dataSync.js"></script>

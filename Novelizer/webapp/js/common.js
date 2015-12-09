@@ -42,11 +42,74 @@ var Editor = { //Editor 객체 형성
 
         
 
-        // $( ".draggable" ).draggable({ // 아래의 내용이 있으니 drag가 안되서 일단 주석처리함.
-        //     //connectToSortable: "#sortable", 
-        //     //helper: "clone", //클론을 하게 되면 그 요소는 복제되어 드래그 된다.
-        //     revert: "valid"
-        // });
+        $( ".draggable" ).draggable({ // 아래의 내용이 있으니 drag가 안되서 일단 주석처리함.
+            //connectToSortable: "#sortable", 
+            //helper: "clone", //클론을 하게 되면 그 요소는 복제되어 드래그 된다.
+            revert: "valid"
+        });
+
+        $(".dropzones").droppable({
+            accept: ".draggable",
+              activeClass: "ui-state-hover",
+              hoverClass: "ui-state-active",
+              drop: function( event, ui ) {
+
+                $("#screen").css({
+                    backgroundImage:"url('https://i.ytimg.com/vi/edaw69Jnjxg/maxresdefault.jpg')"
+                });
+
+                // $(".leftChracter").css({
+                //     backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content2.png')"
+                // });
+
+                // $(".rightChracter").css({
+                //     backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content3.png')"
+                // });
+          }
+
+        });
+
+         $(".leftChracter").droppable({
+               accept: ".character1",
+               activeClass: "ui-state-hover",
+               hoverClass: "ui-state-active",
+               drop: function( event, ui ) {
+
+                $(".leftChracter").css({
+                      backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content2.png')",
+                      border:"0px",
+                });
+            }
+        });
+
+         $(".rightChracter").droppable({
+               accept: ".character2",
+               activeClass: "ui-state-hover",
+               hoverClass: "ui-state-active",
+               drop: function( event, ui ) {
+
+                $(".rightChracter").css({
+                      backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content3.png')",
+                      border:"0px",
+                      
+                });
+            }
+        });
+
+      //           // $(".leftChracter").css({
+      //           //     backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content2.png')"
+      //           // });
+
+      //           // $(".rightChracter").css({
+      //           //     backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content3.png')"
+      //           // });
+      // }
+
+      //   });
+
+
+
+
     },
 
 
@@ -117,12 +180,11 @@ var Editor = { //Editor 객체 형성
 
     backgroundFill : function(){
 
-        alert(1);
+
          $(".dragzones").draggable({
         start: handleDragStart,
         cursor: 'move',
         revert: "invalid",
-        helper: "clone"
         });
         $(".dropzones").droppable({
             drop: handleDropEvent,
@@ -132,6 +194,7 @@ var Editor = { //Editor 객체 형성
         }
 
 }
+
 
 
 $(".tab-edit").on("click",function(event){ //클릭하면 edit으로 넘어감.
