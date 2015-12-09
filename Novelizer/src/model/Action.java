@@ -15,11 +15,22 @@ public class Action {
 	public Action() {
 	}
 
+<<<<<<< HEAD
+	// TODO 이 두 개의 생성자를 하나로 합칠 수는 없을까? 가변 인자를 사용한다면...
+	public Action(int actionId, String type) {
+	
+		this(actionId, type, null);
+	}
+
+	
+	public Action(int actionId, String type, String optionData) {
+=======
 	public Action(int actionId, String type , int blockId) {
 		this(actionId, type, blockId, null);
 	}
 
 	public Action(int actionId, String type, int blockId, String optionData) {
+>>>>>>> f59a1a0b752e4c218d85a2d5760c94eac2d3f97e
 		this.actionId = actionId;
 		this.type = type;
 		this.blockId = blockId;

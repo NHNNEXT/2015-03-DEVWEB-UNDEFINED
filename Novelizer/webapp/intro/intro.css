@@ -1,0 +1,16 @@
+body{
+	margin: 0;
+	background-color: #FFFFFF;
+}
+
+.background{
+
+	width: 100%;
+	height: 1300px;
+	background-color: #F0CA53;
+}
+
+h1{
+margin: 0;
+text-align: center;
+}

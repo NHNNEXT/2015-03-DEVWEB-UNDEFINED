@@ -43,8 +43,97 @@ main{
 			height:73%;
 			width: 100%;
 			border: 1px solid black;
+		}
+
+		#edit #preview #screen{
+
+			height: 95%;
+			width: 97.5%;
+			border: 1px solid black;
+			margin-top:1%;
+			margin-left: 1%;
+			z-index: 0;
+			position: relative;
+			text-align: center;
 
 		}
+/*
+		#edit #preview #screen img{
+
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			opacity: 0%;
+		}
+		*/
+
+	/*	#edit #preview #screen #textbox{
+
+
+			width: 80%;
+			height: 35%;
+			margin: 30% auto 0 auto;
+			border: 1px solid black;
+			background: rgba(0, 0, 0, 0.7);
+
+		}
+		*/
+
+		#edit #preview #screen .leftChracter{
+
+			width: 25%;
+			height: 80%;
+			margin-left: 3.5%;
+			bottom: 0;
+			box-sizing:border-box;
+			border:1px dotted black;
+			position: absolute;
+			text-align: center;
+		}
+		
+
+		#edit #preview #screen .rightChracter{
+
+
+			width: 25%;
+			height: 80%;
+			margin-left: 71.5%;
+			bottom: 0;
+			box-sizing:border-box;
+			border:1px dotted black;
+			position: absolute;
+			text-align: center;
+		}
+
+		#edit #preview #screen form{
+
+
+			width: 90%;
+			height: 35%;
+			margin: 30% auto 0 5%;
+			background: rgba(255, 255, 250, 0.1);
+			position: relative;
+
+		}
+
+		#edit #preview #screen form .textfield{
+			width: 100%;
+			height: 100%;
+			background: rgb(247, 247, 247);
+			opacity: .80;
+			box-sizing:border-box;
+			font-size: 18px;
+			font-family: Times, Georgia, serif;
+			letter-spacing: 0.2em;
+			vertical-align: middle;
+			background-color: #eeeeee;
+			color: #666666;
+			text-shadow: 0.1px 0.1px 0px #000000;
+			padding: 20px;
+			line-height: 1.4em;
+		}
+
 		
 		#edit #toolbox{
 			text-align: center;
@@ -107,6 +196,29 @@ main{
 				    width: 249px;
 				    margin: 0 auto;
 				}
+
+				#edit #toolbox #container .backgroundSetBox{
+
+					display: table;
+					table-layout: fixed;
+					width: 100%;
+
+
+				}
+
+               	#edit #toolbox #container .backgroundSetBox .backgroundSet{
+
+					width: 100px;
+					height: 100px;
+					border: 1px solid black;
+					margin-left: 10px;
+					left: 10px;
+					display: table-cell;
+
+                }
+
+             
+                
 	/**************추가부분**********************/
 
 
@@ -137,9 +249,40 @@ main{
 					background:#eee;
 				}
 
-					#edit #timeline ul .temp-action-option {
+					#edit #timeline ul .temp {
 						display: none;
 				}
+
+					
+
+					 .move {
+					        background: #ff0000;
+					        width: 20px;
+					        height: 19px;
+					        float: right;
+					        color: #fff;
+					        text-align: center;
+					        line-height: 30px;
+					        font-family: Arial;
+					        cursor: move;
+	  				  }
+
+	  				  textarea{
+	  				  	resize: none;
+	  				  	width: 80%;
+	  				  	height: 12px;
+	  				  	vertical-align: middle;
+
+	  				  }
+
+	  				  .taken {
+				        background: #aaa;
+				        width: 200%;
+				        height: 200%;
+				}
+
+
+
 
 /*추가시킨 부분 */
 
