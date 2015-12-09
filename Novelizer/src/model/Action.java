@@ -1,8 +1,7 @@
-package model.action;
+package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import model.option.Option;
 import utils.json.JsonHandler;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

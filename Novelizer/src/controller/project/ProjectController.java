@@ -15,27 +15,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dao.SceneDao;
-import model.scene.Scene;
-<<<<<<< HEAD
-import model.scene.SceneDao;
-import project.Project;
+import model.Project;
+import model.Scene;
+import service.ProjectService;
 import utils.json.JsonHandler;
-=======
->>>>>>> iss#50
 
 @WebServlet("/project")
 public class ProjectController extends HttpServlet{
 	private Logger log = LoggerFactory.getLogger(ProjectController.class);
 	
-	private JsonHandler jsonHandler;
 	private SceneDao sceneDao;
 	private DataSource datasource;
+	private ProjectService service;
 	
 	@Override
 	public void init() throws ServletException {
 		sceneDao = new SceneDao();
 		datasource = (DataSource)getServletContext().getAttribute("DataSource");
-		jsonHandler = new JsonHandler();
 	}
 	
 	@Override
@@ -53,8 +49,14 @@ public class ProjectController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String projectData = req.getParameter("projectData");
-		Project project = jsonHandler.convertToProject(projectData);
-		resp.getWriter().write("1");
+		String result = "";
+		try{
+			result = service.saveProject(projectData);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		resp.getWriter().write(result);
 	}
 	
 }

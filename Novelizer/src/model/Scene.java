@@ -1,8 +1,6 @@
-package model.scene;
+package model;
 
 import java.util.List;
-
-import model.block.Block;
 
 public class Scene {
 	private int sceneId;
@@ -50,12 +48,9 @@ public class Scene {
 		this.blockList = blockList;
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public String toString() {
 		return "Scene [sceneId=" + sceneId + ", name=" + sceneName + ", blockList=" + blockList + "]";
 	}
-	
->>>>>>> iss#50
+
 }

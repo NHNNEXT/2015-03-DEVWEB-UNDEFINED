@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import dao.ActionDao;
 import dao.BlockDao;
 import dao.SceneDao;
-import model.block.Block;
-import model.scene.Scene;
+import model.Block;
+import model.Scene;
 import utils.json.JsonHandler;
 
 public class SceneService {
@@ -40,7 +40,7 @@ public class SceneService {
 				// TODO 추후에 알맞은 데이터로 수정
 				return "result : DB INPUT Success";
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO 추후에 알맞은 데이터로 수정
 			return "error : " + e;
 		}
@@ -48,7 +48,7 @@ public class SceneService {
 
 	public String getScene(int sceneId) throws SQLException {
 		Scene scene = sceneDao.selectScene(sceneId);
-		if(scene == null){
+		if (scene == null) {
 			throw new NullPointerException();
 		}
 		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));

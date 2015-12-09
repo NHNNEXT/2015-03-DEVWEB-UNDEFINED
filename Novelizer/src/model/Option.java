@@ -1,4 +1,4 @@
-package model.option;
+package model;
 
 import java.util.Arrays;
 

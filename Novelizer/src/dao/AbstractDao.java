@@ -11,9 +11,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.jdbc.Statement;
+
 import utils.dao.DataSource;
 
-public abstract class AbstractDao<V, K> implements GenericDao<V, K> {
+public abstract class AbstractDao<V> implements GenericDao<V> {
 	private static final Logger log = LoggerFactory.getLogger(AbstractDao.class);
 	protected String insertQuery;
 	protected String selectQuery;
@@ -35,24 +37,26 @@ public abstract class AbstractDao<V, K> implements GenericDao<V, K> {
 		}
 	}
 
-	public void insert(List<Object> insertList) {
+	public List<Object> insert(List<Object> insertList) {
 		init();
-
+		int key = 0;
 		try {
-			pstmt = conn.prepareStatement(insertQuery);
+			pstmt = conn.prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
 			for (int i = 0; i < insertList.size(); i++) {
 				pstmt.setObject(i + 1, insertList.get(i));
 			}
-			pstmt.executeUpdate();
+			key = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		close();
+		
+		return select(key);
 
 	}
 
-	public List<Object> select(K key) {
+	public List<Object> select(int key) {
 		init();
 
 		List<Object> objects = null;
@@ -91,7 +95,7 @@ public abstract class AbstractDao<V, K> implements GenericDao<V, K> {
 		return allObjects;
 	}
 
-	public List<List<Object>> selectByParentId(K key) {
+	public List<List<Object>> selectByParentId(int key) {
 		init();
 		List<List<Object>> allObjects = new ArrayList<>();
 

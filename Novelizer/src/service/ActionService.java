@@ -3,12 +3,12 @@ package service;
 import java.sql.SQLException;
 
 import dao.ActionDao;
-import model.action.Action;
-import model.block.Block;
+import model.Action;
+import model.Block;
 
 public class ActionService {
 	private ActionDao actionDao;
-	
+
 	public ActionService() {
 		actionDao = new ActionDao();
 	}

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.option.Option;
-import model.scene.Scene;
-import project.Project;
+import model.Option;
+import model.Project;
+import model.Scene;
 
 public class JsonHandler<T> {
 	private static final Logger log = LoggerFactory.getLogger(JsonHandler.class);
@@ -43,19 +43,6 @@ public class JsonHandler<T> {
 		return option;
 	}
 	
-	public Project convertToProject(String jsonData) {
-		ObjectMapper objMapper = new ObjectMapper();
-
-		Project project = null;
-		try {
-			project = objMapper.readValue(jsonData, Project.class);
-		} catch (IOException e) {
-			log.error("JsonString to Project fail \n" + e);
-			throw new RuntimeException();
-		}
-
-		return project;
-	}
 	
 	// Object를 T로 바꿨는데, 잘바꾼지 모르겠음
 	public String convertToJson(T type) {
@@ -84,5 +71,19 @@ public class JsonHandler<T> {
 			throw new RuntimeException();
 		}
 		return t;
+	}
+
+	public Project convertToProject(String projectData) {
+		ObjectMapper objMapper = new ObjectMapper();
+
+		Project project = null;
+		try {
+			project = objMapper.readValue(projectData, Project.class);
+		} catch (IOException e) {
+			log.error("JsonString to Scene fail \n" + e);
+			throw new RuntimeException();
+		}
+
+		return project;
 	}
 }

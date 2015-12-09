@@ -3,8 +3,8 @@ package service;
 import java.sql.SQLException;
 
 import dao.BlockDao;
-import model.block.Block;
-import model.scene.Scene;
+import model.Block;
+import model.Scene;
 
 public class BlockService {
 	private BlockDao blockDao;

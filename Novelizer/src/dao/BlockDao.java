@@ -7,10 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.block.Block;
-import model.scene.Scene;
+import model.Block;
 
-public class BlockDao extends AbstractDao<Block, Integer> {
+public class BlockDao extends AbstractDao<Block> {
 	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);
 
 	private static final String insertQuery = "INSERT INTO block(blockId, nextBlockId, sceneId) VALUES(?, ?, ?);";
@@ -31,7 +30,6 @@ public class BlockDao extends AbstractDao<Block, Integer> {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 
-			insertList.add(block.getBlockId());
 			insertList.add(block.getNextBlockId());
 			insertList.add(block.getSceneId());
 
@@ -104,7 +102,7 @@ public class BlockDao extends AbstractDao<Block, Integer> {
 	}
 
 	@Override
-	public void delete(Integer key) throws Exception {
+	public void delete(int key) throws Exception {
 		// TODO Auto-generated method stub
 
 	}

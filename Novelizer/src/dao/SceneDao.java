@@ -7,9 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.scene.Scene;
+import model.Scene;
 
-public class SceneDao extends AbstractDao<Scene, Integer> {
+public class SceneDao extends AbstractDao<Scene> {
 	private static final Logger log = LoggerFactory.getLogger(SceneDao.class);
 
 	private final String insertQuery = "INSERT INTO scene(sceneId, name, projectId) values(?,?,?);";
@@ -31,7 +31,6 @@ public class SceneDao extends AbstractDao<Scene, Integer> {
 	public void insertScene(Scene scene) {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
-			insertList.add(scene.getSceneId());
 			insertList.add(scene.getSceneName());
 			insertList.add(scene.getProjectId());
 			insert(insertList);
@@ -55,7 +54,7 @@ public class SceneDao extends AbstractDao<Scene, Integer> {
 
 		return scene;
 	}
-	
+
 	public List<Scene> selectByProjectId(int projectId) throws SQLException {
 
 		List<List<Object>> scenes = new ArrayList<>();
@@ -106,11 +105,9 @@ public class SceneDao extends AbstractDao<Scene, Integer> {
 	}
 
 	@Override
-	public void delete(Integer key) throws Exception {
+	public void delete(int key) throws Exception {
 		// TODO Auto-generated method stub
-
+		
 	}
-
-	
 
 }

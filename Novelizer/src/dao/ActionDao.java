@@ -7,24 +7,23 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.action.Action;
+import model.Action;
 
-public class ActionDao extends AbstractDao<Action, Integer> {
+public class ActionDao extends AbstractDao<Action> {
 	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
 	private static final String insertQuery = "INSERT INTO action(actionId, type, blockId) values(?,?,?);";
 	private final String selectByParentIdQuery = "SELECT * FROM action WHERE blockId = ?;";
 
-	public ActionDao(){
+	public ActionDao() {
 		super.insertQuery = insertQuery;
 		super.selectByParentIdQuery = selectByParentIdQuery;
 	}
-	
+
 	public void insertAction(Action action) throws SQLException {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 
-			insertList.add(action.getActionId());
 			insertList.add(action.getType());
 			insertList.add(action.getBlockId());
 
@@ -62,12 +61,12 @@ public class ActionDao extends AbstractDao<Action, Integer> {
 	@Override
 	public void update(Action vo) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void delete(Integer key) throws Exception {
+	public void delete(int key) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

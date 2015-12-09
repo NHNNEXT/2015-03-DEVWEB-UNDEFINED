@@ -1,8 +1,6 @@
-package model.block;
+package model;
 
 import java.util.List;
-
-import model.action.Action;
 
 public class Block {
 	private int blockId;
