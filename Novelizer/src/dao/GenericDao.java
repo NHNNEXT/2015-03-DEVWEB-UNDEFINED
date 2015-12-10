@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 
 public interface GenericDao<V> {
-	public List<Object> insert(List<Object> objects) throws Exception;
+	public int insert(List<Object> objects) throws Exception;
 
 	public List<Object> select(int key) throws Exception;
 

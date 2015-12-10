@@ -52,7 +52,7 @@ function sendProjectData(projectName, callback){
         url : "http://localhost:8080/project",
         method : "POST",
         dataType : "json",
-        data : {projectId:0, projectName : projectName},
+        data : {projectData:JSON.stringify({projectId:0, projectName : projectName})}
     })
     .done(callback);
 };

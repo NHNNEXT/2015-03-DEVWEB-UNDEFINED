@@ -32,6 +32,7 @@ public class ProjectController extends HttpServlet{
 	public void init() throws ServletException {
 		sceneDao = new SceneDao();
 		datasource = (DataSource)getServletContext().getAttribute("DataSource");
+		service = new ProjectService();
 	}
 	
 	@Override
@@ -51,7 +52,7 @@ public class ProjectController extends HttpServlet{
 		String projectData = req.getParameter("projectData");
 		String result = "";
 		try{
-			result = service.saveProject(projectData);
+			result += service.saveProject(projectData);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

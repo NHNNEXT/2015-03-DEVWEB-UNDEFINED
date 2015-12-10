@@ -80,7 +80,7 @@ public class JsonHandler<T> {
 		try {
 			project = objMapper.readValue(projectData, Project.class);
 		} catch (IOException e) {
-			log.error("JsonString to Scene fail \n" + e);
+			log.error("JsonString to Project fail \n" + e);
 			throw new RuntimeException();
 		}
 

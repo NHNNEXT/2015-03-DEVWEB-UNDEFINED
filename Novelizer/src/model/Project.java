@@ -4,6 +4,10 @@ public class Project {
 	private int projectId;
 	private String projectName;
 
+	public Project(){
+		
+	}
+	
 	public Project(int projectId, String projectName) {
 		this.projectId = projectId;
 		this.projectName = projectName;
@@ -17,4 +21,11 @@ public class Project {
 		return projectName;
 	}
 
+	@Override
+	public String toString() {
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + "]";
+	}
+
+	
+	
 }

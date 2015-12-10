@@ -41,7 +41,7 @@ public class ActionDao extends AbstractDao<Action> {
 		try {
 			actions = selectByParentId(blockId);
 			for (List<Object> actionContents : actions) {
-				resulActions.add(convertToBlock(actionContents));
+				resulActions.add(convertToAction(actionContents));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class ActionDao extends AbstractDao<Action> {
 		return resulActions;
 	}
 
-	private Action convertToBlock(List<Object> actionContents) {
+	private Action convertToAction(List<Object> actionContents) {
 		int actionId = (Integer) actionContents.get(0);
 		String type = (String) actionContents.get(1);
 		int blockId = (Integer) actionContents.get(2);

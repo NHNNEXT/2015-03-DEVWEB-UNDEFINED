@@ -21,16 +21,17 @@ public class ProjectDao extends AbstractDao<Project> {
 		super.selectAllQuery = selectAllQuery;
 	}
 
-	public Project insertProject(Project project) {
+	public int insertProject(Project project) {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
+			log.info(insertList.toString());
 			insertList.add(project.getProjectName());
-			return convertToProject(insert(insertList));
+			return insert(insertList);
 		} catch (Exception e) {
 			log.error("Scene Insert Error");
 			e.printStackTrace();
 		}
-		return null;
+		return 0;
 	}
 
 
