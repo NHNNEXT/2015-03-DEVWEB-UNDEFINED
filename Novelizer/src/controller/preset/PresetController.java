@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*
+ * last update : 15.12.14
+ * author : 서동유
+ */
+
 @WebServlet("/preset")
 public class PresetController extends HttpServlet{
 	
