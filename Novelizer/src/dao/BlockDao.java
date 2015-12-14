@@ -12,7 +12,7 @@ import model.Block;
 public class BlockDao extends AbstractDao<Block> {
 	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);
 
-	private static final String insertQuery = "INSERT INTO block(blockId, nextBlockId, sceneId) VALUES(?, ?, ?);";
+	private static final String insertQuery = "INSERT INTO block(nextBlockId, sceneId) VALUES(?, ?);";
 	private final String selectQuery = "SELECT * FROM block WHERE blockId = ?;";
 	private final String selectAllQuery = "SELECT * FROM block;";
 	private final String selectByParentIdQuery = "SELECT * FROM block WHERE sceneId = ?;";
@@ -26,18 +26,19 @@ public class BlockDao extends AbstractDao<Block> {
 		super.selectByParentIdQuery = selectByParentIdQuery;
 	}
 	
-	public void insertBlock(Block block) throws SQLException {
+	public int insertBlock(Block block) throws SQLException {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 
 			insertList.add(block.getNextBlockId());
 			insertList.add(block.getSceneId());
 
-			insert(insertList);
+			return insert(insertList);
 		} catch (Exception e) {
 			log.error("Insert Block Error");
 			e.printStackTrace();
 		}
+		return -1;
 	}
 
 	public Block selectBlock(int blockId) throws SQLException {

@@ -12,7 +12,7 @@ import model.Action;
 public class ActionDao extends AbstractDao<Action> {
 	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
-	private static final String insertQuery = "INSERT INTO action(actionId, type, blockId) values(?,?,?);";
+	private static final String insertQuery = "INSERT INTO action(type, blockId) values(?,?);";
 	private final String selectByParentIdQuery = "SELECT * FROM action WHERE blockId = ?;";
 
 	public ActionDao() {
@@ -20,18 +20,19 @@ public class ActionDao extends AbstractDao<Action> {
 		super.selectByParentIdQuery = selectByParentIdQuery;
 	}
 
-	public void insertAction(Action action) throws SQLException {
+	public int insertAction(Action action) throws SQLException {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 
 			insertList.add(action.getType());
 			insertList.add(action.getBlockId());
 
-			insert(insertList);
+			return insert(insertList);
 		} catch (Exception e) {
 			log.error("Insert Block Error");
 			e.printStackTrace();
 		}
+		return -1;
 	}
 
 	public List<Action> selectByBlockId(int blockId) throws SQLException {

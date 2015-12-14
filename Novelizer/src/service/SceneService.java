@@ -32,13 +32,13 @@ public class SceneService {
 		Scene scene = jsonHandler.convertToScene(sceneData);
 		scene.setProjectId(1);
 		try {
-			if (sceneDao.selectScene(scene.getSceneId()) == null) {
+			if (sceneDao.selectScene(scene.getSceneId()) != null) {
 				return "Error : Scene already Exist";
 			} else {
-				sceneDao.insertScene(scene);
+				int sceneId = sceneDao.insertScene(scene);
 				blockService.saveBlock(scene);
 				// TODO 추후에 알맞은 데이터로 수정
-				return "result : DB INPUT Success";
+				return "sceneId : " + sceneId;
 			}
 		} catch (Exception e) {
 			// TODO 추후에 알맞은 데이터로 수정

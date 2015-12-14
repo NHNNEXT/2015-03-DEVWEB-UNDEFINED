@@ -7,6 +7,10 @@ public class Scene {
 	private String sceneName;
 	private List<Block> blockList;
 	private int projectId;
+	
+	public Scene(String sceneName, int projectId){
+		this(0,sceneName,null,projectId);
+	}
 
 	public Scene(int sceneId, String name, int resultProjectId) {
 		this(sceneId,name,null,resultProjectId);

@@ -1,6 +1,6 @@
 package dao;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +21,11 @@ public class SceneDaoTest {
 
 	@Test
 	public void insertTest() throws Exception {
-		sceneDao.insertScene(new Scene(100,"testScene",null,1));
+		int id = sceneDao.insertScene(new Scene("testScene",1));
+		assertNotEquals(-1,id);
+		System.out.println(id);
 	}
 	
-	@Test
 	public void selectTest() throws Exception {
 		assertNotNull(sceneDao.selectByProjectId(1));
 		log.info(sceneDao.selectByProjectId(1).get(0).toString());
