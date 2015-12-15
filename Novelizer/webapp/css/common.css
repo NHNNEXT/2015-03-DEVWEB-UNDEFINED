@@ -58,20 +58,6 @@ main{
 			background-size:100%;
 		}
 
-		.ui-state-hover{
-				border: 1px solid #cccccc;
-				background: #ededed;
-				font-weight: normal;
-				color: #2b2b2b;
-		}
-
-		.ui-state-active{
-			border: 1px solid #003eff;
-			background: #007fff;
-			font-weight: normal;
-			color: #ffffff;
-		}
-
 		#edit #preview #screen .leftChracter{
 
 			width: 25%;
@@ -213,7 +199,7 @@ main{
 
                 }
 
-                	#edit #toolbox #container .backgroundSetBox .backgroundSet{
+                #edit #toolbox #container .backgroundSetBox .backgroundSet{
 
 					width: 100px;
 					height: 100px;
@@ -231,71 +217,67 @@ main{
 	/**************추가부분**********************/
 
 
-		#edit #timeline{
-			float:right;
-			text-align: center;
-			background:white;
-			border: 1px solid black;
-			height:100%;
-			width:26.8%;
-			overflow: scroll;
+				#edit #timeline{
+					float:right;
+					text-align: center;
+					background:white;
+					border: 1px solid black;
+					height:100%;
+					width:26.8%;
+					overflow: scroll;
 
-		}
-
-			#edit #timeline li{
-				text-align: center;
-				border:1px solid #ccc;
-				margin: 0px auto;
-			}
-
-				#edit #timeline li.block{
-					width: 90%;
-					padding:10px;
 				}
 
+					#edit #timeline li{
+						text-align: center;
+						border:1px solid #ccc;
+						margin: 0px auto;
+					}
 
-				#edit #timeline li.block.selected{
-					background:#eee;
-				}
-
-					#edit #timeline ul .temp {
-						display: none;
-				}
-
-					
-
-					 .move {
-					        background: #ff0000;
-					        width: 20px;
-					        height: 19px;
-					        float: right;
-					        color: #fff;
-					        text-align: center;
-					        line-height: 30px;
-					        font-family: Arial;
-					        cursor: move;
-	  				  }
-
-	  				  textarea{
-	  				  	resize: none;
-	  				  	width: 80%;
-	  				  	height: 12px;
-	  				  	vertical-align: middle;
-
-	  				  }
-
-	  				  .taken {
-				        background: #aaa;
-				        width: 200%;
-				        height: 200%;
-				}
+						#edit #timeline li.block{
+							width: 90%;
+							padding:10px;
+						}
 
 
+						#edit #timeline li.block.selected{
+							background:#eee;
+						}
+
+							#edit #timeline ul .temp {
+								display: none;
+						}
+
+							
+
+							 .move {
+							        background: #ff0000;
+							        width: 20px;
+							        height: 19px;
+							        float: right;
+							        color: #fff;
+							        text-align: center;
+							        line-height: 30px;
+							        font-family: Arial;
+							        cursor: move;
+			  				  }
+
+			  				  textarea{
+			  				  	resize: none;
+			  				  	width: 80%;
+			  				  	height: 12px;
+			  				  	vertical-align: middle;
+
+			  				  }
+
+			  				  .taken {
+						        background: #aaa;
+						        width: 200%;
+						        height: 200%;
+						}
 
 
-/*추가시킨 부분 */
 
-	
 	#preset{
 		display:none;
 	}
@@ -304,6 +286,20 @@ main{
 		display:none;
 	}
 
-.left{
-	float:left;
-}
+	.left{
+		float:left;
+	}
+
+	.ui-state-hover{
+		border: 1px solid #cccccc;
+		background: #ededed;
+		font-weight: normal;
+		color: #2b2b2b;
+	}
+
+	.ui-state-active{
+		border: 1px solid #003eff;
+		background: #007fff;
+		font-weight: normal;
+		color: #ffffff;
+	}
