@@ -19,7 +19,6 @@ public class SceneDaoTest {
 		sceneDao = new SceneDao();
 	}
 
-	@Test
 	public void insertTest() throws Exception {
 		int id = sceneDao.insertScene(new Scene("testScene",1));
 		assertNotEquals(-1,id);

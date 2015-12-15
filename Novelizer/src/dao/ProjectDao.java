@@ -11,7 +11,7 @@ import model.Project;
 public class ProjectDao extends AbstractDao<Project> {
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 
-	private final String insertQuery = "INSERT INTO project(projectId, name) values(?,?);";
+	private final String insertQuery = "INSERT INTO project(name) values(?);";
 	private final String selectQuery = "SELECT * FROM project WHERE projectId = ?;";
 	private final String selectAllQuery = "SELECT * FROM project;";
 
@@ -24,16 +24,24 @@ public class ProjectDao extends AbstractDao<Project> {
 	public int insertProject(Project project) {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
-			log.info(insertList.toString());
 			insertList.add(project.getProjectName());
 			return insert(insertList);
 		} catch (Exception e) {
-			log.error("Scene Insert Error");
+			log.error("Project Insert Error");
 			e.printStackTrace();
 		}
-		return 0;
+		return -1;
 	}
 
+	public List<Project> selectAllProject() {
+		List<Project> projects = new ArrayList<Project>();
+		for (List<Object> project : selectAll()) {
+			projects.add(convertToProject(project));
+		}
+		
+		return projects;
+
+	}
 
 	public Project selectProject(int sceneId) {
 
@@ -58,13 +66,11 @@ public class ProjectDao extends AbstractDao<Project> {
 
 	@Override
 	public void update(Project vo) throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void delete(int key) throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 }
