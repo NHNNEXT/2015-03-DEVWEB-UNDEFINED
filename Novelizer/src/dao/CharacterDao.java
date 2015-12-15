@@ -13,22 +13,37 @@ import model.CharacterVo;
 public class CharacterDao extends AbstractDao<CharacterVo> {
 
 	public int addCharacter(CharacterVo vo) {
-		insertQuery = "INSERT INTO `character` (`projectId`, `name`) VALUES (?, ?)";
+		super.insertQuery = "INSERT INTO `character` (`projectId`, `name`) VALUES (?, ?)";
 		List<Object> dataList = new ArrayList<Object>();
 		dataList.add(vo.getProjectId());
 		dataList.add(vo.getName());
-		
+
 		return super.insert(dataList);
 	}
 
 	public CharacterVo getCharacter(int characterId) {
-		selectQuery = "SELECT * FROM `character` WHERE `id` = "+characterId;
-		List<Object> dataList = super.select(characterId);
+		super.selectQuery = "SELECT * FROM `character` WHERE `id` = ?";
+		List<Object> data = super.select(characterId);
 		CharacterVo vo = new CharacterVo();
-		vo.setCharacterId((int)dataList.get(0));
-		vo.setProjectId((int)dataList.get(1));
-		vo.setName((String)dataList.get(2));
+		vo.setCharacterId((int) data.get(0));
+		vo.setProjectId((int) data.get(1));
+		vo.setName((String) data.get(2));
 		return vo;
+	}
+
+	public List<CharacterVo> getCharacters() {
+		super.selectQuery = "SELECT * FROM `character`";
+		List<List<Object>> dataList = super.selectAll();
+		List<CharacterVo> voList = new ArrayList<CharacterVo>();
+
+		for (List<Object> data : dataList) {
+			CharacterVo vo = new CharacterVo();
+			vo.setCharacterId((int) data.get(0));
+			vo.setProjectId((int) data.get(1));
+			vo.setName((String) data.get(2));
+			voList.add(vo);
+		}
+		return voList;
 	}
 
 	@Override

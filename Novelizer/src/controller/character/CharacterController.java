@@ -1,6 +1,8 @@
 package controller.character;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,17 +34,22 @@ public class CharacterController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String result;
-		
-		if(req.getParameter("characterId") != null){
+		String result = "";
+
+		if (req.getParameter("characterId") != null) {
 			int characterId = Integer.parseInt(req.getParameter("characterId"));
 			CharacterVo vo = characterDao.getCharacter(characterId);
-			// TODO 해당 캐릭터 정보 리턴
-		}else{
-			// TODO 전체 캐릭터 리스트 리턴
+			result = vo.toString();
+		} else {
+			List<CharacterVo> list = characterDao.getCharacters();
+			result += "[";
+			for (CharacterVo vo : list) {
+				result += vo + ",";
+			}
+			result += "]";
 		}
 
-		//resp.getWriter().write();
+		resp.getWriter().write(result);
 	}
 
 	@Override
@@ -50,14 +57,14 @@ public class CharacterController extends HttpServlet {
 		String result;
 		String name = req.getParameter("name");
 		int projectId = Integer.parseInt(req.getParameter("projectId"));
-		
+
 		CharacterVo vo = new CharacterVo();
 		vo.setProjectId(projectId);
 		vo.setName(name);
-		
+
 		int characterId = characterDao.addCharacter(vo);
 		result = "{\"characterId\" :" + characterId + "}";
-		
+
 		resp.getWriter().write(result);
 	}
 
