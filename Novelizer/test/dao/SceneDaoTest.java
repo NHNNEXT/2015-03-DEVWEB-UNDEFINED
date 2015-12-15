@@ -19,13 +19,13 @@ public class SceneDaoTest {
 		sceneDao = new SceneDao();
 	}
 
-	@Test
 	public void insertTest() throws Exception {
 		int id = sceneDao.insertScene(new Scene("testScene",1));
 		assertNotEquals(-1,id);
 		System.out.println(id);
 	}
 	
+	@Test
 	public void selectTest() throws Exception {
 		assertNotNull(sceneDao.selectByProjectId(1));
 		log.info(sceneDao.selectByProjectId(1).get(0).toString());

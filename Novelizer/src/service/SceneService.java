@@ -18,13 +18,7 @@ public class SceneService {
 
 	public SceneService() {
 		jsonHandler = new JsonHandler<>();
-		// TODO singleton 패턴은 JVM에 하나의 인스턴스만 만들고 싶다. 그런데 이와 같이 구현할 경우 여기서 1개의
-		// 인스턴스, ProjectController에도 하나의 인스턴스가 생성된다.
-		// 인스턴스를 하나만 생성하고 싶다. 어떻게 구현하는 것이 좋을까? singleton 패턴 적용하면 될까?
 		sceneDao = new SceneDao();
-		blockDao = new BlockDao();
-		actionDao = new ActionDao();
-
 		blockService = new BlockService();
 	}
 
@@ -37,11 +31,9 @@ public class SceneService {
 			} else {
 				int sceneId = sceneDao.insertScene(scene);
 				blockService.saveBlock(scene);
-				// TODO 추후에 알맞은 데이터로 수정
 				return "sceneId : " + sceneId;
 			}
 		} catch (Exception e) {
-			// TODO 추후에 알맞은 데이터로 수정
 			return "error : " + e;
 		}
 	}

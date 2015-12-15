@@ -36,19 +36,19 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		}
 	}
 
-	//java reflection && ResultSetMetaData cloumn name 을 가지고 자동화 
+	//TODO java reflection && ResultSetMetaData cloumn name 을 가지고 자동화
 	public int insert(List<Object> insertList) {
 		init();
 		int key = 0;
 		try {
-			pstmt = conn.prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
+			pstmt = conn.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 			for (int i = 0; i < insertList.size(); i++) {
 				pstmt.setObject(i + 1, insertList.get(i));
 			}
 			pstmt.executeUpdate();
-			
+
 			rs = pstmt.getGeneratedKeys();
-			if(rs.next()){
+			if (rs.next()) {
 				key = rs.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -56,7 +56,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		}
 
 		close();
-		
+
 		return key;
 
 	}

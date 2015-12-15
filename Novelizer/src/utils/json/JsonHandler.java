@@ -1,6 +1,7 @@
 package utils.json;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,19 @@ public class JsonHandler<T> {
 		return option;
 	}
 	
+	
+	public String convertToJsonArray(List<T> jsonArray){
+		ObjectMapper objMapper = new ObjectMapper();
+
+		String resultJson = null;
+		try {
+			resultJson = objMapper.writeValueAsString(jsonArray);
+		} catch (IOException e) {
+			log.error("Object to Json Fail \n" + e);
+			throw new RuntimeException();
+		}
+		return resultJson;
+	}
 	
 	// Object를 T로 바꿨는데, 잘바꾼지 모르겠음
 	public String convertToJson(T type) {
