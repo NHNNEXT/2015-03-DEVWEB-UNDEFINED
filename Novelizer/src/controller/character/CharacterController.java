@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.project.ProjectController;
 import dao.CharacterDao;
 import model.CharacterVo;
 
@@ -22,7 +21,7 @@ import model.CharacterVo;
 
 @WebServlet("/character")
 public class CharacterController extends HttpServlet {
-	private Logger log = LoggerFactory.getLogger(ProjectController.class);
+	private Logger log = LoggerFactory.getLogger(CharacterController.class);
 	private CharacterDao characterDao;
 
 	@Override
