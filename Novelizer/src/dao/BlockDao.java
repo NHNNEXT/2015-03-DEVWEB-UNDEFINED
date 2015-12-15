@@ -12,10 +12,10 @@ import model.Block;
 public class BlockDao extends AbstractDao<Block> {
 	private static final Logger log = LoggerFactory.getLogger(BlockDao.class);
 
-	private static final String insertQuery = "INSERT INTO block(nextBlockId, sceneId) VALUES(?, ?);";
-	private final String selectQuery = "SELECT * FROM block WHERE blockId = ?;";
+	private static final String insertQuery = "INSERT INTO block(next_block_id, scene_id) VALUES(?, ?);";
+	private final String selectQuery = "SELECT * FROM block WHERE block_id = ?;";
 	private final String selectAllQuery = "SELECT * FROM block;";
-	private final String selectByParentIdQuery = "SELECT * FROM block WHERE sceneId = ?;";
+	private final String selectByParentIdQuery = "SELECT * FROM block WHERE scene_id = ?;";
 	private final String updateQuery = "";
 	private final String deleteQuery = "";
 

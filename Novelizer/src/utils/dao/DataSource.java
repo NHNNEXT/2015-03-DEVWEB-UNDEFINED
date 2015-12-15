@@ -15,8 +15,8 @@ public class DataSource {
 		ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUsername("root");
-		ds.setPassword("novel");
-		ds.setUrl("jdbc:mysql://125.209.195.85:8080//novelizer?useUnicode=true&chracterEncoding=UTF-8");
+		ds.setPassword("db1004");
+		ds.setUrl("jdbc:mysql://localhost/novelizer");
 
 		// the settings below are optional -- dbcp can work with defaults
 		ds.setMinIdle(100);

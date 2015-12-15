@@ -12,8 +12,8 @@ import model.Action;
 public class ActionDao extends AbstractDao<Action> {
 	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
-	private static final String insertQuery = "INSERT INTO action(type, blockId) values(?,?);";
-	private final String selectByParentIdQuery = "SELECT * FROM action WHERE blockId = ?;";
+	private static final String insertQuery = "INSERT INTO action(type, block_id) values(?,?);";
+	private final String selectByParentIdQuery = "SELECT * FROM action WHERE block_id = ?;";
 
 	public ActionDao() {
 		super.insertQuery = insertQuery;

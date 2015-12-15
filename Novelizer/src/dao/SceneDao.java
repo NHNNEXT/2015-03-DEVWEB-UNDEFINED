@@ -12,10 +12,10 @@ import model.Scene;
 public class SceneDao extends AbstractDao<Scene> {
 	private static final Logger log = LoggerFactory.getLogger(SceneDao.class);
 
-	private final String insertQuery = "INSERT INTO scene(name, projectId) values(?,?);";
-	private final String selectQuery = "SELECT * FROM scene WHERE sceneId = ?;";
+	private final String insertQuery = "INSERT INTO scene(scene_name, project_id) values(?,?);";
+	private final String selectQuery = "SELECT * FROM scene WHERE scene_id = ?;";
 	private final String selectAllQuery = "SELECT * FROM scene;";
-	private final String selectByParentIdQuery = "SELECT * FROM scene WHERE projectId = ?;";
+	private final String selectByParentIdQuery = "SELECT * FROM scene WHERE project_id = ?;";
 	private final String updateQuery = "";
 	private final String deleteQuery = "";
 

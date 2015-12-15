@@ -3,14 +3,16 @@ package model;
 public class Project {
 	private int projectId;
 	private String projectName;
+	private int userId;
 
 	public Project(){
 		
 	}
 	
-	public Project(int projectId, String projectName) {
+	public Project(int projectId, String projectName , int userId) {
 		this.projectId = projectId;
 		this.projectName = projectName;
+		this.userId = userId;
 	}
 
 	public int getProjectId() {
@@ -21,6 +23,10 @@ public class Project {
 		return projectName;
 	}
 
+	public int getUserId(){
+		return userId;
+	}
+	
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", projectName=" + projectName + "]";

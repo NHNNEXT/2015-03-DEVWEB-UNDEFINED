@@ -13,7 +13,7 @@ import model.CharacterVo;
 public class CharacterDao extends AbstractDao<CharacterVo> {
 
 	public int addCharacter(CharacterVo vo) {
-		super.insertQuery = "INSERT INTO `character` (`projectId`, `name`) VALUES (?, ?)";
+		super.insertQuery = "INSERT INTO `character` (`project_id`, `character_name`) VALUES (?, ?)";
 		List<Object> dataList = new ArrayList<Object>();
 		dataList.add(vo.getProjectId());
 		dataList.add(vo.getName());
@@ -22,7 +22,7 @@ public class CharacterDao extends AbstractDao<CharacterVo> {
 	}
 
 	public CharacterVo getCharacter(int characterId) {
-		super.selectQuery = "SELECT * FROM `character` WHERE `id` = ?";
+		super.selectQuery = "SELECT * FROM `character` WHERE `character_id` = ?";
 		List<Object> data = super.select(characterId);
 		CharacterVo vo = new CharacterVo();
 		vo.setCharacterId((int) data.get(0));

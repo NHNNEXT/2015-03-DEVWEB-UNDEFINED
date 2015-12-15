@@ -8,144 +8,14 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
--- -----------------------------------------------------
 -- Schema novelizer
+-- -----------------------------------------------------
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema novelizer
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `novelizer` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `mydb`.`student`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`student` (
-  `s_num` INT NOT NULL,
-  `s_name` VARCHAR(45) NOT NULL,
-  `s_grade` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`s_num`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`teacher`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`teacher` (
-  `t_num` INT NOT NULL,
-  PRIMARY KEY (`t_num`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`class`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`class` (
-  `c_num` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`c_num`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`subject`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`subject` (
-  `sub_num` INT NOT NULL,
-  `sub_name` VARCHAR(45) NOT NULL,
-  `sub_time` INT NOT NULL,
-  PRIMARY KEY (`sub_num`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`subject_has_teacher`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`subject_has_teacher` (
-  `subject_sub_num` INT NOT NULL,
-  `teacher_t_num` INT NOT NULL,
-  PRIMARY KEY (`subject_sub_num`, `teacher_t_num`),
-  INDEX `fk_subject_has_teacher_teacher1_idx` (`teacher_t_num` ASC),
-  INDEX `fk_subject_has_teacher_subject_idx` (`subject_sub_num` ASC),
-  CONSTRAINT `fk_subject_has_teacher_subject`
-    FOREIGN KEY (`subject_sub_num`)
-    REFERENCES `mydb`.`subject` (`sub_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_subject_has_teacher_teacher1`
-    FOREIGN KEY (`teacher_t_num`)
-    REFERENCES `mydb`.`teacher` (`t_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`student_has_subject`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`student_has_subject` (
-  `student_s_num` INT NOT NULL,
-  `subject_sub_num` INT NOT NULL,
-  `s_day` CHAR(5) NOT NULL,
-  `s_time` INT NOT NULL,
-  PRIMARY KEY (`student_s_num`, `subject_sub_num`),
-  INDEX `fk_student_has_subject_subject1_idx` (`subject_sub_num` ASC),
-  INDEX `fk_student_has_subject_student1_idx` (`student_s_num` ASC),
-  CONSTRAINT `fk_student_has_subject_student1`
-    FOREIGN KEY (`student_s_num`)
-    REFERENCES `mydb`.`student` (`s_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_student_has_subject_subject1`
-    FOREIGN KEY (`subject_sub_num`)
-    REFERENCES `mydb`.`subject` (`sub_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`class_has_subject`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`class_has_subject` (
-  `class_c_num` INT NOT NULL,
-  `subject_sub_num` INT NOT NULL,
-  `c_time` INT NOT NULL,
-  PRIMARY KEY (`class_c_num`, `subject_sub_num`),
-  INDEX `fk_class_has_subject_subject1_idx` (`subject_sub_num` ASC),
-  INDEX `fk_class_has_subject_class1_idx` (`class_c_num` ASC),
-  CONSTRAINT `fk_class_has_subject_class1`
-    FOREIGN KEY (`class_c_num`)
-    REFERENCES `mydb`.`class` (`c_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_class_has_subject_subject1`
-    FOREIGN KEY (`subject_sub_num`)
-    REFERENCES `mydb`.`subject` (`sub_num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`preset_character`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`preset_character` (
-  `preset_id` INT NOT NULL,
-  `project_id` INT NOT NULL,
-  `character_id` INT NOT NULL,
-  `image` TEXT(200) NOT NULL,
-  `preset_character_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`preset_id`))
-ENGINE = InnoDB;
 
 USE `novelizer` ;
 
@@ -153,11 +23,11 @@ USE `novelizer` ;
 -- Table `novelizer`.`action`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`action` (
-  `action_id` INT NOT NULL,
+  `action_id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(10) NULL DEFAULT NULL,
   `option_data` TEXT(500) NULL DEFAULT NULL,
   `block_id` INT NOT NULL,
-  PRIMARY KEY (, `action_id`))
+  PRIMARY KEY (`action_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -170,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`preset_background` (
   `project_id` INT NOT NULL,
   `image` TEXT(200) NOT NULL,
   `preset_background_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`preset_id`, ),
-  INDEX `fk_background_action1_idx` ( ASC))
+  PRIMARY KEY (`preset_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -183,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`block` (
   `block_id` INT NOT NULL AUTO_INCREMENT,
   `next_block_id` INT NULL DEFAULT '0',
   `scene_id` INT NOT NULL,
-  PRIMARY KEY (`block_id`, ))
+  PRIMARY KEY (`block_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -195,8 +64,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`charater` (
   `character_id` INT NOT NULL,
   `project_id` INT NOT NULL,
   `character_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (, `character_id`),
-  INDEX `fk_charater_action1_idx` ( ASC))
+  PRIMARY KEY (`character_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -207,7 +75,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_id` INT NOT NULL AUTO_INCREMENT,
   `project_name` VARCHAR(45) NULL,
-  `userId` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`project_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
@@ -222,8 +90,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`scene` (
   `project_id` INT NOT NULL,
   `start_block_id` INT NULL,
   `scene_name` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`scene_id`, ),
-  INDEX `fk_scene_project1_idx` (`project_id` ASC))
+  PRIMARY KEY (`scene_id` ))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -236,8 +103,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`text` (
   `character_id` VARCHAR(10) NOT NULL,
   `text` TEXT NOT NULL,
   `option` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`action_id`),
-  INDEX `fk_text_action1_idx` (`action_id` ASC))
+  PRIMARY KEY (`action_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

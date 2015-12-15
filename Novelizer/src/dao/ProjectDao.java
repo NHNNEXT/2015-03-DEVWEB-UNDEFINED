@@ -11,8 +11,8 @@ import model.Project;
 public class ProjectDao extends AbstractDao<Project> {
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 
-	private final String insertQuery = "INSERT INTO project(name) values(?);";
-	private final String selectQuery = "SELECT * FROM project WHERE projectId = ?;";
+	private final String insertQuery = "INSERT INTO project(project_name, user_id) values(?, ?);";
+	private final String selectQuery = "SELECT * FROM project WHERE project_id = ?;";
 	private final String selectAllQuery = "SELECT * FROM project;";
 
 	public ProjectDao() {
@@ -25,6 +25,8 @@ public class ProjectDao extends AbstractDao<Project> {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 			insertList.add(project.getProjectName());
+			//TODO User객체가 없어서 임시로 1번으로 user_id설정 추후 수정 
+			insertList.add(1);
 			return insert(insertList);
 		} catch (Exception e) {
 			log.error("Project Insert Error");
@@ -61,7 +63,7 @@ public class ProjectDao extends AbstractDao<Project> {
 	private Project convertToProject(List<Object> projectContents) {
 		int projectId = (int) projectContents.get(0);
 		String projectName = (String) projectContents.get(1);
-		return new Project(projectId, projectName);
+		return new Project(projectId, projectName, 1);
 	}
 
 	@Override
