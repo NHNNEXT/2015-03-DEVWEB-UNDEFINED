@@ -25,7 +25,6 @@ public class SceneDaoTest {
 		System.out.println(id);
 	}
 	
-	@Test
 	public void selectTest() throws Exception {
 		assertNotNull(sceneDao.selectByProjectId(1));
 		log.info(sceneDao.selectByProjectId(1).get(0).toString());
