@@ -1,0 +1,245 @@
+body,p,ul,form,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+body,html{
+	height: 100%;
+	overflow: hidden;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* layout */
+navigation{
+	width: 100%;
+}
+	navigation li{
+		float: left;
+		text-align: center;
+
+		width: 150px;
+		padding: 10px 0;
+
+		border: 1px solid #ccc;
+		border-bottom: none;
+	}
+		navigation li a{
+			color: #000;
+		}
+
+main{
+	clear: both;
+
+	width: 100%;
+	height: 100%;
+
+	border: 2px solid #ddd;
+}
+
+	#editor{
+		height: 100%;
+	}
+		#editor .layout-left{
+			float: left;
+
+			width: 70%;
+			height: 100%;
+			box-sizing: border-box;
+
+			border-right: 1px solid #ddd;
+		}
+
+		#editor .layout-right{
+			float: right;
+
+			width: 30%;
+			height: 100%;
+			box-sizing: border-box;
+			padding: 10px;
+		}
+
+/* preview */
+#preview{
+	position: relative;
+
+	width: 100%;
+	height: 70%;
+	overflow: scroll;
+
+	background: #ccc;
+}
+	#preview #screen{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		width: 640px;
+		height: 480px;
+		margin-top: -240px;
+		margin-left: -320px;
+		box-sizing: border-box;
+
+		background: #fff;
+		border: 1px solid #aaa;
+	}
+
+		#preview #screen .layer{
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			width: 100%;
+			height: 100%;
+		}
+
+		#preview #screen #layer-background{
+			z-index: 10;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+		}
+
+		#preview #screen #layer-object{
+			z-index: 20;
+		}
+
+		#preview #screen #layer-text{
+			z-index: 30;
+		}
+
+
+/* toolbox */
+#toolbox{
+	position: relative;
+
+	width: 100%;
+	height: 30%;
+}
+	#toolbox .tab-menu{
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		height:20px;
+		padding:5px;
+	}
+		#toolbox .tab-menu li{
+			float: left;
+			text-align:center;
+
+			width: 80px;
+		}
+
+	#toolbox .container{
+		padding-top: 30px;
+		box-sizing: border-box;
+	}
+
+	#toolbox-background .background-item-list .background-item{
+		float: left;
+		text-align: center;
+
+		padding: 5px;
+		margin-right: 5px;
+
+		border: 1px solid #ddd;
+	} 
+		#toolbox-background .background-item-list .background-item img{
+			width: 100px;
+			height: 100px;
+
+			border: 1px solid #ddd;
+		} 
+
+/* timeline */
+#timeline{
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+	#timeline #block-list .block{
+		position: relative;
+
+		margin-bottom: 5px;
+		padding-left: 20px;
+	}
+
+		#timeline #block-list .block .handler{
+			position: absolute;
+			left: 0px;
+
+			width: 20px;
+			height: 100%;
+
+			cursor: all-scroll;
+		}
+			#timeline #block-list .block.selected .handler{
+				color: #ffaaaa;
+			}
+
+		#timeline #block-list .block .container{
+			position: relative;
+
+			padding: 5px;
+			padding-right: 30px;
+			border-radius: 5px;
+
+			background: #fff;
+			border: 1px solid #ccc;
+			font-size: 12px;
+		}
+			#timeline #block-list .block.selected .container{
+				border-color: #ffaaaa;
+			}
+
+		#timeline #block-list .block-menu-box{
+			position: absolute;
+			right: 0px;
+			top: 0px;
+
+			width: 25px;
+		}
+
+			#timeline #block-list .block-menu-box .action-type-list{
+				display:none;
+				position: absolute;
+				right: 0px;
+				top: 20px;
+				z-index: 100;
+
+				width: 40px;
+
+				border: 1px solid #ccc;
+				background: #fff;
+				font-size: 11px;
+				text-align: center;
+			}
+
+				#timeline #block-list .block-menu-box .action-type-list li{
+					padding: 3px;
+				}
+
+				#timeline #block-list .block-menu-box .action-type-list li:hover{
+					background: #ccc;
+				}
+
+		#timeline #block-list .block .action-list{
+		}
+
+			#timeline #block-list .block .action-list .action{
+				padding: 2px 0px;
+			}
+
+				#timeline #block-list .block .action-list .action .action-text{
+					vertical-align: middle;
+
+					width: 70%;
+					height: 20px;
+					resize: none;
+
+					border: none;
+					font-size: 12px;
+				}

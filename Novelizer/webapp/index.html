@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
 </head>
 <body>
         <navigation>
@@ -31,7 +32,7 @@
                     </div>
               
                     <div id="toolbox">
-                        <div id="container"> <!--Question - container를 빼는게 더 좋은건지 보통 어떻게 하는건지-->
+                        <div id="container">
                             <ul class="tabs">
                                 <li class="active" rel="tab1">배경</li>
                                 <li rel="tab2">캐릭터</li>
@@ -65,9 +66,9 @@
                     </div>
                  </div>
                 
-                    <div id="timeline">
+                <!-- start timeline -->
+                <div id="timeline">
                     <h1>TimeLines</h1>
-                    <div class="sortable">
                     <ol id="block-list">
                     </ol>
                     <ul>
@@ -79,18 +80,11 @@
                         </select>
                     </ul>
                     </div>
-                    <button id="button-add-block">블록추가하기</button>
-                    <button id="button-add-action">액션추가하기</button>
-                    <button id="button-remove">삭제하기</button>
-                </div>
-            </div>
-            <div id="preset">프리셋</div>
-              <form action="/file-upload" class="dropzone">
-                      <div class="fallback">
-                        <input name="file" type="file" multiple/>
-                      </div>
-                 </form> 
-            <div id="scenario">시나리오</div>
+                        <button id="button-add-block">블록추가하기</button>
+                        <button id="button-add-action">액션추가하기</button>
+                        <button id="button-remove">삭제하기</button>
+                    </div>
+                </div> <!-- //end timeline -->
 
         </main>
 

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>drog&amp;drop</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/editor.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
+</head>
+<body>
+        <navigation>
+            <ul>
+                <li class="tab-edit"><a href="#none;">편집</a></li>
+                <li class="tab-preset"><a href="#none;">프리셋</a></li>
+                <li class="tab-scenario"><a href="#none;">시나리오</a></li>
+            </ul>
+        </navigation>
+        <main>
+            <div id="editor">
+                <div class="layout-left">
+                    <!--start preview-->
+                    <div id="preview"> 
+                        <div id="screen">
+                            <div id="layer-background" class="layer"></div>
+                            <div id="layer-object" class="layer">
+                                <div class="character-left"></div>
+                                <div class="character-right"></div>
+                            </div>
+                            <div id="layer-text" class="layer">
+                                <textarea class="preview-text-box" placeholder="이곳에 대사를 입력해주세요" maxlength="300"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--//end preview-->
+
+                    <!--start toolbox-->
+                    <div id="toolbox">
+                        <ul class="tab-menu">
+                            <li class="tab-background">배경</li>
+                            <li class="tab-character">캐릭터</li>
+                        </ul>
+                        <div class="container">
+                            <div id="toolbox-background" class="toolbox-tab">
+                                <ul class="background-item-list">
+                                <!--start template-->
+                                <script id="background-preset-template" type="text/x-handlebars-template">
+                                    {{#each backgroundPreset}}
+                                    <li class="background-item draggable" data-image="{{image}}" data-preset-id="{{presetId}}">
+                                        <img src="{{image}}" />
+                                        <h4>{{name}}</h4>
+                                    </li>
+                                    {{/each}}
+                                </script>
+                                <!--//end template-->
+                                </ul>
+                            </div>
+                            <div id="toolbox-character" class="toolbox-tab">
+                                <ul class="character-item-list">
+                                <!--start template-->
+                                <script id="character-preset-template" type="text/x-handlebars-template">
+                                    {{#each characterPreset}}
+                                    <li class="character-item draggable" data-character-id="{{characterId}}">
+                                        <img src="{{image}}" />
+                                        <h4>{{name}}</h4>
+                                    </li>
+                                    {{/each}}
+                                </script>
+                                <!--//end template-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--//end toolbox-->
+                </div>
+                <div class="layout-right">
+                    <!--start timeline-->
+                    <div id="timeline"> 
+                        <h1>TimeLine</h1>
+                        <ol id="block-list">
+                        <!--start template-->
+                        <script id="timeline-template" type="text/x-handlebars-template">
+                            {{#each blockList}}
+                            <li class="block" data-block-id="{{blockId}}">
+                                <div class="handler">
+                                    {{blockId}}
+                                </div>
+                                <div class="container">
+                                    <ul class="action-list">
+                                        {{#each actionList}}
+                                        <li class="action {{actionType}}" data-action-id="{{actionId}}">
+                                            {{#if isText}}
+                                                <select class="action-select">
+                                                    <option value="0">독백</option>
+                                                    <option value="1">영희</option>
+                                                    <option value="2">철수</option>
+                                                </select>
+                                                <textarea class="editable action-text" placeholder="대사를 입력하세요"></textarea>
+                                            {{/if}}
+
+                                            {{#if isBackground}}
+                                                배경화면
+                                                <select class="action-select">
+                                                    <option value="0">학교</option>
+                                                    <option value="1">집</option>
+                                                    <option value="2">공원</option>
+                                                </select>
+                                                <select class="action-select">
+                                                    <option value="0">등장</option>
+                                                    <option value="1">이동</option>
+                                                    <option value="2">퇴장</option>
+                                                </select>
+                                            {{/if}}
+
+                                            {{#if isCharacter}}
+                                                캐릭터
+                                                <select class="action-select">
+                                                    <option value="0">영희</option>
+                                                    <option value="1">철수</option>
+                                                </select>
+                                                <select class="action-select">
+                                                    <option value="0">등장</option>
+                                                    <option value="1">이동</option>
+                                                    <option value="2">퇴장</option>
+                                                </select>
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                    <div class="block-menu-box">
+                                        <button class="button-add-action">+</button>
+                                        <ul class="action-type-list">
+                                            <li>텍스트</li>
+                                            <li>캐릭터</li>
+                                            <li>배경</li>
+                                        </ul>
+                                        <button class="button-remove-block">x</button>
+                                    </div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </script>
+                        <!--//end template-->
+                        </ol>
+                        <div>
+                            <button class="button-add-block">블록 추가하기</button>
+                        </div>
+                    </div> 
+                    <!--//end timeline-->
+                </div>
+            </div>
+        </main>
+
+    <script type="text/javascript" src="js/editor.js"></script>
+    <script type="text/javascript" src="js/dataSync.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            Timeline.init();
+            EditorDataSync.init();
+        })
+    </script>
+</body>
+</html>

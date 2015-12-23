@@ -25,7 +25,8 @@ var Editor = { //Editor 객체 형성
 
         // action-list li 태그를 이동할 수 있게 
         $( "#block-list" ).sortable({
-            revert: true //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
+            revert: true, //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
+            handle: ".handler"
         });
 
         $( ".draggable" ).draggable({ 
@@ -144,16 +145,6 @@ var Editor = { //Editor 객체 형성
         }
 }
 
-$(".tab-edit").on("click",function(event){ //클릭하면 edit으로 넘어감.
-    switchTab("edit");
-})
-$(".tab-preset").on("click",function(event){ // 클릭하면 preset으로 넘어감. 
-    switchTab("preset");
-})
-$(".tab-scenario").on("click",function(event){ // 클릭하면 scenario로 넘어감. 
-    switchTab("scenario");
-})
-
 //툴 박스에서의 탭 전환
  $(function () {
     $(".tab_content").hide();
@@ -166,15 +157,4 @@ $(".tab-scenario").on("click",function(event){ // 클릭하면 scenario로 넘�
         $("#" + activeTab).fadeIn()
     });
 });
-
-
-//탭바꾸기 
-function switchTab(tabid){
-    var tabList = document.querySelectorAll("main>div");
-    for(var i = 0; i < tabList.length; ++i){
-        tabList[i].style.display="none";
-    }
-    
-    document.querySelector("#"+tabid).style.display="block";
-}
 
