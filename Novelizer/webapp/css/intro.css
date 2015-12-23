@@ -1,0 +1,186 @@
+body{
+
+	background: url("image/desk.jpg") no-repeat center center fixed;
+	background-size: cover;
+	/*font-size: 16px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;*/
+}
+h2 {
+	text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 1.4em;
+	line-height: 2.8em;
+}
+.header{
+
+
+	/*border: 1px solid white;*/
+	width: 290px;
+	height: 90px;
+	margin: 21% auto 0 40%;
+	border-radius: 10px;
+	/*background-color: rgba(0,0,0,0.3);*/
+}
+
+#title {
+
+	font-family: 'Roboto Slab', serif;
+	font-size: 50px;
+	color: white;
+	text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 8px;
+}
+
+/*#subtitle{
+
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.4em;
+	color: white;
+	text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	text-align: center;
+	margin-left: 10%;
+	margin-top: 10px;
+}
+*/
+#signUp{
+
+	width: 100px;
+	height: 40px;
+	border:1px solid white;
+	border-radius: 8px;
+	font-size: 17px;
+	color: white;
+	text-align: center;
+	margin-left: 42%;
+	margin-top: 17%;
+	background-color: rgba(0,0,0,0.2);
+	box-sizing:border-box;
+	padding-top: 9px;
+	float: left;
+}
+
+#login{
+
+	width: 100px;
+	height: 40px;
+	border:1px solid white;
+	border-radius: 8px;
+	font-size: 17px;
+	color: white;
+	text-align: center;
+	background-color: rgba(0,0,0,0.2);
+	box-sizing:border-box;
+	padding-top: 9px;
+	margin-top: 17%;
+	margin-left: 4%;
+	float: left;
+}
+
+.login-box {
+	background-color: white;
+	width: 340px;
+	height: 400px;
+	margin: -8% auto 0 38.3%;
+	position: absolute;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+	text-align: center;
+	display: none;
+}
+
+.login-box .box-header {
+	background-color: #665851;
+	border-radius: 5px 5px 0 0;
+	height: 13%;
+	margin-bottom: 40px;
+	margin-top: -19px;
+}
+
+.login-box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: #888;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+.login-box input {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #888;
+}
+
+.login-box input:focus {
+	outline: none;
+	border-color: #665851;
+	transition: 0.5s;
+	color: #665851;
+}
+
+.login-box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: #665851;
+	cursor:pointer;
+	outline: none;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	color: #aeaeae;
+}
+
+p.small {
+	font-size: 0.8em;
+	margin: 20px 0 0;
+}
+
+
+.selected {
+	color: #665851!important;
+	transition: 0.5s;
+}
+
+
+/* Animation Delay */
+#logo {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 2s;
+}
+
+.login-box {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+}
