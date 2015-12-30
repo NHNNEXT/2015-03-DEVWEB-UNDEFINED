@@ -26,6 +26,11 @@ public class ProjectService {
 		return jsonHandler.convertToJsonArray(projects);
 
 	}
+	
+	public String getProjectsByUserId(int userId) {
+		List<Project> projects = projectDao.selectProjectsByUserId(userId);
+		return jsonHandler.convertToJsonArray(projects);
+	}
 
 	public int saveProject(String projectData) {
 		Project project = jsonHandler.convertToProject(projectData);

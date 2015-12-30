@@ -11,8 +11,6 @@ import model.Project;
 public class ProjectDao extends AbstractDao<Project> {
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 
-	private final String selectAllQuery = "SELECT * FROM project;";
-
 	public ProjectDao() {
 		super.insertQuery = insertQuery;
 		super.selectQuery = selectQuery;
@@ -37,7 +35,7 @@ public class ProjectDao extends AbstractDao<Project> {
 	}
 
 	public List<Project> selectAllProject() {
-		super.selectAllQuery =  "SELECT * FROM project WHERE project_id = ?;";
+		super.selectAllQuery =  "SELECT * FROM project;";
 		
 		List<Project> projects = new ArrayList<Project>();
 		for (List<Object> project : selectAll()) {
@@ -47,15 +45,26 @@ public class ProjectDao extends AbstractDao<Project> {
 		return projects;
 
 	}
+	
+	public List<Project> selectProjectsByUserId(int userId) {
+		super.selectByParentIdQuery = "SELECT * FROM project WHERE user_id = ?";
+		
+		List<Project> projects = new ArrayList<Project>();
+		for (List<Object> project : selectByParentId(userId)) {
+			projects.add(convertToProject(project));
+		}
+		
+		return projects;
+	}
 
-	public Project selectProject(int sceneId) {
+	public Project selectProject(int projectId) {
 		super.selectQuery = "SELECT * FROM project WHERE project_id = ?;";
 		
 		List<Object> projectContents = new ArrayList<>();
 		Project project = null;
 
 		try {
-			projectContents = select(sceneId);
+			projectContents = select(projectId);
 			project = convertToProject(projectContents);
 		} catch (Exception e) {
 			e.printStackTrace();
