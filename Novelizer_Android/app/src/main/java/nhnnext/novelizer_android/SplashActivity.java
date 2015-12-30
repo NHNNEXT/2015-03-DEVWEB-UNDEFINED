@@ -3,8 +3,6 @@ package nhnnext.novelizer_android;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-
 
 /**
  * Created by Henry on 2015. 11. 23..

@@ -13,18 +13,18 @@ import javax.servlet.annotation.WebFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter(urlPatterns={"/*"})
+@WebFilter(urlPatterns = { "/*" })
 public class CharacterEncodingFilter implements Filter {
 	private static final Logger logger = LoggerFactory.getLogger(CharacterEncodingFilter.class);
-	
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		logger.info("character encoding filter init");
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		chain.doFilter(request, response);
 		response.setContentType("text/plain;charset=UTF-8");

@@ -16,7 +16,7 @@ import nhnnext.novelizer_android.R;
 import nhnnext.novelizer_android.controller.ViewerActivity;
 
 public class NovelListFragment extends Fragment {
-    private ArrayList<NovelSummary> novelSummarys;
+    private ArrayList<NovelSummary> novelSummaries;
 
     interface Listener{
 
@@ -24,18 +24,18 @@ public class NovelListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_novel_list, container, false);
-        novelSummarys = new ArrayList<NovelSummary>();
+        novelSummaries = new ArrayList<NovelSummary>();
 
-        getNovelSummaryData(novelSummarys);
+        getNovelSummaryData(novelSummaries);
 
         GridView gridView = (GridView) root.findViewById(R.id.novel_list_grid_view);
-        NovelListAdapter adapter = new NovelListAdapter(getActivity(), R.layout.novel_item, novelSummarys);
+        NovelListAdapter adapter = new NovelListAdapter(getActivity(), R.layout.novel_item, novelSummaries);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ViewerActivity.class);
-                intent.putExtra("novelId", novelSummarys.get(position).getNovelId());
+                intent.putExtra("novelId", novelSummaries.get(position).getNovelId());
                 startActivity(intent);
             }
         });
@@ -43,7 +43,7 @@ public class NovelListFragment extends Fragment {
         return root;
     }
 
-    private void getNovelSummaryData(ArrayList<NovelSummary> novelSummarys){
+    private void getNovelSummaryData(ArrayList<NovelSummary> novelSummaries){
         /* novel summary data를 받아오는 model부분 후에 추가 구현  */
         /* Dummy data */
         NovelSummary dummy1 = new NovelSummary("novel1 name", "novel1 id");
@@ -51,10 +51,10 @@ public class NovelListFragment extends Fragment {
         NovelSummary dummy3 = new NovelSummary("novel3 name", "novel3 id");
         NovelSummary dummy4 = new NovelSummary("novel4 name", "novel4 id");
         NovelSummary dummy5 = new NovelSummary("novel5 name", "novel5 id");
-        novelSummarys.add(dummy1);
-        novelSummarys.add(dummy2);
-        novelSummarys.add(dummy3);
-        novelSummarys.add(dummy4);
-        novelSummarys.add(dummy5);
+        novelSummaries.add(dummy1);
+        novelSummaries.add(dummy2);
+        novelSummaries.add(dummy3);
+        novelSummaries.add(dummy4);
+        novelSummaries.add(dummy5);
     }
 }

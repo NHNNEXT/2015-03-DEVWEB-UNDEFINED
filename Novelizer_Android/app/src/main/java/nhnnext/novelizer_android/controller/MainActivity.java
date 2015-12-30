@@ -18,6 +18,24 @@ public class MainActivity extends Activity {
     private Handler dialogHandler = new Handler();
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        startActivity(new Intent(this, SplashActivity.class));
+        setContentView(R.layout.activity_main);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplication(), InputNovelIdActivity.class);
+                startActivityForResult(intent, LAUNCHED_ACTIVITY);
+            }
+
+
+        });
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(data != null) {
@@ -40,24 +58,6 @@ public class MainActivity extends Activity {
 
 
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, SplashActivity.class));
-        setContentView(R.layout.activity_main);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), InputNovelIdActivity.class);
-                startActivityForResult(intent, LAUNCHED_ACTIVITY);
-            }
-
-
-        });
     }
 
 }

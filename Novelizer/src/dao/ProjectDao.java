@@ -11,8 +11,6 @@ import model.Project;
 public class ProjectDao extends AbstractDao<Project> {
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 
-	private final String insertQuery = "INSERT INTO project(project_name, user_id) values(?, ?);";
-	private final String selectQuery = "SELECT * FROM project WHERE project_id = ?;";
 	private final String selectAllQuery = "SELECT * FROM project;";
 
 	public ProjectDao() {
@@ -22,9 +20,12 @@ public class ProjectDao extends AbstractDao<Project> {
 	}
 
 	public int insertProject(Project project) {
+		super.insertQuery = "INSERT INTO project(project_name, project_info, user_id) values(?, ?, ?);";
+		
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 			insertList.add(project.getProjectName());
+			insertList.add(project.getProjectInfo());
 			//TODO User객체가 없어서 임시로 1번으로 user_id설정 추후 수정 
 			insertList.add(1);
 			return insert(insertList);
@@ -36,6 +37,8 @@ public class ProjectDao extends AbstractDao<Project> {
 	}
 
 	public List<Project> selectAllProject() {
+		super.selectAllQuery =  "SELECT * FROM project WHERE project_id = ?;";
+		
 		List<Project> projects = new ArrayList<Project>();
 		for (List<Object> project : selectAll()) {
 			projects.add(convertToProject(project));
@@ -46,7 +49,8 @@ public class ProjectDao extends AbstractDao<Project> {
 	}
 
 	public Project selectProject(int sceneId) {
-
+		super.selectQuery = "SELECT * FROM project WHERE project_id = ?;";
+		
 		List<Object> projectContents = new ArrayList<>();
 		Project project = null;
 
@@ -63,7 +67,8 @@ public class ProjectDao extends AbstractDao<Project> {
 	private Project convertToProject(List<Object> projectContents) {
 		int projectId = (int) projectContents.get(0);
 		String projectName = (String) projectContents.get(1);
-		return new Project(projectId, projectName, 1);
+		String projectInfo = (String) projectContents.get(2);
+		return new Project(projectId, projectName, projectInfo, 1);
 	}
 
 	@Override

@@ -15,6 +15,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema novelizer
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `novelizer`;
+
 CREATE SCHEMA IF NOT EXISTS `novelizer` DEFAULT CHARACTER SET utf8 ;
 
 USE `novelizer` ;
@@ -75,6 +77,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_id` INT NOT NULL AUTO_INCREMENT,
   `project_name` VARCHAR(45) NULL,
+  `project_info` VARCHAR(1000) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`project_id`))
 ENGINE = InnoDB
