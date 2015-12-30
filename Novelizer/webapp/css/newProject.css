@@ -219,10 +219,11 @@ white
 	height: 90%;
 	margin: 0;
 	overflow: auto;
-/*	float: left;*/
+	float: left;
 	position: relative;
 }
 
+/*
 .sceneArea .scenePlus{
 
 	width: 50px;
@@ -230,12 +231,10 @@ white
 	border:1px solid white;
 	border-radius: 100%;
 	content: "";
-	float: right;
-	margin-top: 15%;
+	margin-top: 40%;
 	margin-left: 50%;
-	position: fixed;
-
-}
+	position: absolute;
+}*/
 
 /*#scenePlus{
 
@@ -246,7 +245,21 @@ white
 
 }*/
 
-.sceneArea .newScene {
+.plusButton {
+
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 50%;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	float: right;
+	line-height: 50px;
+	margin-top: -3.5%;
+	margin-right: 1%;
+	cursor: pointer;
+}
+
+.sceneArea .newS {
 
 	width: 130px;
 	height: 130px;
@@ -268,7 +281,7 @@ white
 
 }
 
-.newScene input {
+.newS input {
 
 	background-color: rgba(255, 255, 255, 0);
 	border: 1px solid gray;
@@ -285,8 +298,3 @@ white
 
 }
 
-.sceneArea .newScene .plus {
-
-	padding-top: 90%;
-
-}

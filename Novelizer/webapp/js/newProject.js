@@ -36,20 +36,23 @@ $(function() {
     function addTab() {
     	var label = tabTitle.val() || "Tab " + tabCounter,
     	id = "tabs-" + tabCounter,
+        sceneNum = 1,
     	li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
     	tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent.val()+"</div></div>" + 
-                         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newScene plus'><br/>"+"+"+"</div><div class='scenePlus'>"+"+"+"</div></div>"; 
-
+                         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div></div>"; 
     	tabs.find( ".ui-tabs-nav" ).append( li );
     	tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p>" );
+        $("#"+id).append("<div class='plusButton'>"+"+"+"</div>");
     	tabs.tabs( "refresh" );
-    	var sceneNum = 1;
-    	$('.newScene').on('click', function(){
-    		$(this).after("<div class='newScene'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
-    		sceneNum++;
-    	});
+    	
+    	$('.plusButton').on('click', function(){           
+            sceneNum++;
+    		$(".newScene"+sceneNum-1).after("<div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
+        });
+
 
     	$( "#sortable"+tabCounter).sortable();
+
         tabCounter++;
     	// $( "#sortable" ).disableSelection();
     }
