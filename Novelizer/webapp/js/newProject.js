@@ -1,10 +1,10 @@
 $(function() {
-     var tabTitle = $( "#tab_title" ),
-     tabContent = $( "#tab_content" ),
-     tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
-     tabCounter = 2;
+ var tabTitle = $( "#tab_title" ),
+ tabContent = $( "#tab_content" ),
+ tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
+ tabCounter = 1;
 
-    var tabs = $( "#tabs" ).tabs();
+ var tabs = $( "#tabs" ).tabs();
 
     // modal dialog init: custom buttons and a "close" callback resetting the form inside
     var dialog = $( "#dialog" ).dialog({
@@ -29,6 +29,7 @@ $(function() {
     	addTab();
     	dialog.dialog( "close" );
     	event.preventDefault();
+
     });
 
     // actual addTab function: adds new tab using the input from the form above
@@ -36,20 +37,20 @@ $(function() {
     	var label = tabTitle.val() || "Tab " + tabCounter,
     	id = "tabs-" + tabCounter,
     	li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
-    	tabContentHtml = "<div class='projectContents'><div class='projectContentsTest'>"+tabContent.val()+"</div></div>" + "<div id='sortable' class='sceneArea'><div class='newScene plus'><br/>"+"+"+"</div></div>"; 			
+    	tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent.val()+"</div></div>" + 
+                         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newScene plus'><br/>"+"+"+"</div><div class='scenePlus'>"+"+"+"</div></div>"; 
 
     	tabs.find( ".ui-tabs-nav" ).append( li );
-    	tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+    	tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p>" );
     	tabs.tabs( "refresh" );
-    	tabCounter++;
-
     	var sceneNum = 1;
     	$('.newScene').on('click', function(){
-    		$(this).before("<div class='newScene'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
+    		$(this).after("<div class='newScene'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
     		sceneNum++;
     	});
 
-    	$( "#sortable" ).sortable();
+    	$( "#sortable"+tabCounter).sortable();
+        tabCounter++;
     	// $( "#sortable" ).disableSelection();
     }
 
@@ -74,12 +75,4 @@ $(function() {
     		tabs.tabs( "refresh" );
     	}
     });
-
-
-
-    
-
-
-
-
 });
