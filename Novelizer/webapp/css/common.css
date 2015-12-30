@@ -1,305 +1,282 @@
-body,p,ul,form,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{
-	margin:0;
-	padding:0;
-	list-style:none;
+body, p, ul, form, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-body,html{
-	height:100%;
+body, html {
+	height: 100%;
 }
 
-a{
-	text-decoration:none;
+a {
+	text-decoration: none;
 }
 
-navigation{
-	width:100%;
-}
-	navigation li{
-		float:left;
-		width:150px;
-		padding:10px 0;
-		text-align:center;
-		border:1px solid #ccc;
-	}
-		navigation li a{
-			color:#000;
-		}
-
-main{
-	clear:both;
-	width:100%;
-	height:100%;
+navigation {
+	width: 100%;
 }
 
-	#edit{
-		height:100%;
-	}
-		#edit .left{
-			width:73%;
-			height:91%;
-		}
-		#edit #preview{
-			height:73%;
-			width: 100%;
-			border: 1px solid black;
-		}
+navigation li {
+	float: left;
+	width: 150px;
+	padding: 10px 0;
+	text-align: center;
+	border: 1px solid #ccc;
+}
 
-		#edit #preview #screen{
+navigation li a {
+	color: #000;
+}
 
-			height: 95%;
-			width: 97.5%;
-			border: 1px solid black;
-			margin-top:1%;
-			margin-left: 1%;
-			z-index: 0;
-			position: relative;
-			text-align: center;
-			background-size:100%;
-		}
+main {
+	clear: both;
+	width: 100%;
+	height: 100%;
+}
 
-		#edit #preview #screen .leftChracter{
+#edit {
+	height: 100%;
+}
 
-			width: 25%;
-			height: 80%;
-			margin-left: 3.5%;
-			bottom: 0;
-			box-sizing:border-box;
-			border:1px dotted black;
-			position: absolute;
-			text-align: center;
-			background-image: 100%;
-			background-repeat: no-repeat;
-		}
-		
+#edit .left {
+	width: 73%;
+	height: 91%;
+}
 
-		#edit #preview #screen .rightChracter{
+#edit #preview {
+	height: 73%;
+	width: 100%;
+	border: 1px solid black;
+}
 
+#edit #preview #screen {
+	height: 95%;
+	width: 97.5%;
+	border: 1px solid black;
+	margin-top: 1%;
+	margin-left: 1%;
+	z-index: 0;
+	position: relative;
+	text-align: center;
+	background-size: 100%;
+}
 
-			width: 25%;
-			height: 80%;
-			margin-left: 71.5%;
-			bottom: 0;
-			box-sizing:border-box;
-			border:1px dotted black;
-			position: absolute;
-			text-align: center;
-			background-repeat: no-repeat;
-		}
+#edit #preview #screen .leftChracter {
+	width: 25%;
+	height: 80%;
+	margin-left: 3.5%;
+	bottom: 0;
+	box-sizing: border-box;
+	border: 1px dotted black;
+	position: absolute;
+	text-align: center;
+	background-image: 100%;
+	background-repeat: no-repeat;
+}
 
-		#edit #preview #screen form{
+#edit #preview #screen .rightChracter {
+	width: 25%;
+	height: 80%;
+	margin-left: 71.5%;
+	bottom: 0;
+	box-sizing: border-box;
+	border: 1px dotted black;
+	position: absolute;
+	text-align: center;
+	background-repeat: no-repeat;
+}
 
+#edit #preview #screen form {
+	width: 90%;
+	height: 35%;
+	margin: 28% auto 0 5%;
+	background: rgba(255, 255, 250, 0.1);
+	position: relative;
+}
 
-			width: 90%;
-			height: 35%;
-			margin: 28% auto 0 5%;
-			background: rgba(255, 255, 250, 0.1);
-			position: relative;
-		
+#edit #preview #screen form .textfield {
+	width: 100%;
+	height: 100%;
+	background: rgb(247, 247, 247);
+	opacity: .80;
+	box-sizing: border-box;
+	font-size: 18px;
+	font-family: Times, Georgia, serif;
+	letter-spacing: 0.2em;
+	vertical-align: middle;
+	background-color: #eeeeee;
+	color: #666666;
+	text-shadow: 0.1px 0.1px 0px #000000;
+	padding: 20px;
+	line-height: 1.4em;
+}
 
-		}
+#edit #toolbox {
+	text-align: center;
+	height: 36.5%;
+	width: 100%;
+	border: 1px solid black;
+}
 
-		#edit #preview #screen form .textfield{
-			width: 100%;
-			height: 100%;
-			background: rgb(247, 247, 247);
-			opacity: .80;
-			box-sizing:border-box;
-			font-size: 18px;
-			font-family: Times, Georgia, serif;
-			letter-spacing: 0.2em;
-			vertical-align: middle;
-			background-color: #eeeeee;
-			color: #666666;
-			text-shadow: 0.1px 0.1px 0px #000000;
-			padding: 20px;
-			line-height: 1.4em;
-		}
+#edit #toolbox li {
+	float: left;
+	width: 150px;
+	padding: 10px 0;
+	text-align: center;
+	border: 1px solid #ccc;
+}
 
-		
-		#edit #toolbox{
-			text-align: center;
-			height:36.5%;
-			width:100%;
-			border: 1px solid black;
-		}
+#edit #toolbox li a {
+	color: #000;
+}
 
-		 #edit #toolbox li{
-		float:left;
-		width:150px;
-		padding:10px 0;
-		text-align:center;
-		border:1px solid #ccc;
-	}
-		#edit #toolbox li a{
-			color:#000;
-		}
+/**************추가부분**********************/
+#edit #toolbox ul.tabs {
+	float: left;
+	height: 20px;
+	width: 100%;;
+	font-size: 12px;
+}
 
-			/**************추가부분**********************/
-			#edit #toolbox ul.tabs {
-		    float: left;
-		    height: 20px;
-		    width: 100%;;
-		    font-size:12px;
-		     }
+#edit #toolbox ul.tabs li {
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	width: 100px;
+	height: 11px;
+	text-align: center;
+	border: 1px solid #eee;
+	border-left: none;
+	font-weight: bold;
+	background: #fafafa;
+	overflow: hidden;
+	position: relative;
+}
 
-				#edit #toolbox ul.tabs li {
-				    float: left;
-				    text-align:center;
-				    cursor: pointer;
-				    width:100px;
-				    height: 11px;
-				    text-align: center;
-				    border: 1px solid #eee;
-				    border-left: none;
-				    font-weight: bold;
-				    background: #fafafa;
-				    overflow: hidden;
-				    position: relative;
-				}
+#edit #toolbox .tab_container {
+	border-top: none;
+	clear: both;
+	float: left;
+	width: 248px;
+	background: #FFFFFF;
+}
 
-				#edit #toolbox .tab_container {
+#edit #toolbox .tab_content {
+	margin-top: 30px;
+	padding: 5px;
+	font-size: 12px;
+	display: none;
+}
 
-				    border-top: none;
-				    clear: both;
-				    float: left;
-				    width: 248px;
-				    background: #FFFFFF;
-				}
-				#edit #toolbox .tab_content {
-				    margin-top: 30px;
-				    padding: 5px;
-				    font-size: 12px;
-				    display: none;
-				}
+;
+#edit #toolbox #container {
+	width: 249px;
+	margin: 0 auto;
+}
 
-				;
-				#edit #toolbox #container {
-				    width: 249px;
-				    margin: 0 auto;
-				}
+#edit #toolbox #container .backgroundSetBox {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
 
-				#edit #toolbox #container .backgroundSetBox{
+#edit #toolbox #container .backgroundSetBox .backgroundSet {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	margin-left: 10px;
+	left: 10px;
+	display: table-cell;
+}
 
-					display: table;
-					table-layout: fixed;
-					width: 100%;
+#edit #toolbox #container .backgroundSetBox .backgroundSet {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	margin-left: 10px;
+	left: 10px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
 
+/**************추가부분**********************/
+#edit #timeline {
+	float: right;
+	text-align: center;
+	background: white;
+	border: 1px solid black;
+	height: 100%;
+	width: 26.8%;
+	overflow: scroll;
+}
 
-				}
+#edit #timeline li {
+	text-align: center;
+	border: 1px solid #ccc;
+	margin: 0px auto;
+}
 
-               	#edit #toolbox #container .backgroundSetBox .backgroundSet{
+#edit #timeline li.block {
+	width: 90%;
+	padding: 10px;
+}
 
-					width: 100px;
-					height: 100px;
-					border: 1px solid black;
-					margin-left: 10px;
-					left: 10px;
-					display: table-cell;
+#edit #timeline li.block.selected {
+	background: #eee;
+}
 
-                }
+#edit #timeline ul .temp {
+	display: none;
+}
 
-                #edit #toolbox #container .backgroundSetBox .backgroundSet{
+.move {
+	background: #ff0000;
+	width: 20px;
+	height: 19px;
+	float: right;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	font-family: Arial;
+	cursor: move;
+}
 
-					width: 100px;
-					height: 100px;
-					border: 1px solid black;
-					margin-left: 10px;
-					left: 10px;
-					display: table-cell;
-					text-align: center;
-					vertical-align: middle;
+textarea {
+	resize: none;
+	width: 80%;
+	height: 12px;
+	vertical-align: middle;
+}
 
-                }
+.taken {
+	background: #aaa;
+	width: 200%;
+	height: 200%;
+}
 
-             
-                
-	/**************추가부분**********************/
+#preset {
+	display: none;
+}
 
+#scenario {
+	display: none;
+}
 
-				#edit #timeline{
-					float:right;
-					text-align: center;
-					background:white;
-					border: 1px solid black;
-					height:100%;
-					width:26.8%;
-					overflow: scroll;
+.left {
+	float: left;
+}
 
-				}
+.ui-state-hover {
+	border: 1px solid #cccccc;
+	background: #ededed;
+	font-weight: normal;
+	color: #2b2b2b;
+}
 
-					#edit #timeline li{
-						text-align: center;
-						border:1px solid #ccc;
-						margin: 0px auto;
-					}
-
-						#edit #timeline li.block{
-							width: 90%;
-							padding:10px;
-						}
-
-
-						#edit #timeline li.block.selected{
-							background:#eee;
-						}
-
-							#edit #timeline ul .temp {
-								display: none;
-						}
-
-							
-
-							 .move {
-							        background: #ff0000;
-							        width: 20px;
-							        height: 19px;
-							        float: right;
-							        color: #fff;
-							        text-align: center;
-							        line-height: 30px;
-							        font-family: Arial;
-							        cursor: move;
-			  				  }
-
-			  				  textarea{
-			  				  	resize: none;
-			  				  	width: 80%;
-			  				  	height: 12px;
-			  				  	vertical-align: middle;
-
-			  				  }
-
-			  				  .taken {
-						        background: #aaa;
-						        width: 200%;
-						        height: 200%;
-						}
-
-
-
-	#preset{
-		display:none;
-	}
-	
-	#scenario{
-		display:none;
-	}
-
-	.left{
-		float:left;
-	}
-
-	.ui-state-hover{
-		border: 1px solid #cccccc;
-		background: #ededed;
-		font-weight: normal;
-		color: #2b2b2b;
-	}
-
-	.ui-state-active{
-		border: 1px solid #003eff;
-		background: #007fff;
-		font-weight: normal;
-		color: #ffffff;
-	}
+.ui-state-active {
+	border: 1px solid #003eff;
+	background: #007fff;
+	font-weight: normal;
+	color: #ffffff;
+}

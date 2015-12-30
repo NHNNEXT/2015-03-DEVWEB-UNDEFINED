@@ -1,4 +1,18 @@
 $(function() {
+	
+	getProjectList(function(response){
+		
+		var projectList = [];
+		for(var i=0; i<respons.length; ++i){
+			var data = response[i];
+			var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
+			projectList.push(list);
+		}
+		$("#projectList").append(projectList);
+		
+		
+	})
+
  var tabTitle = $( "#tab_title" ),
  tabContent = $( "#tab_content" ),
  tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
@@ -46,8 +60,7 @@ $(function() {
     	tabs.tabs( "refresh" );
     	
     	$('.plusButton').on('click', function(){           
-            sceneNum++;
-    		$(".newScene"+sceneNum-1).after("<div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
+    		$(".newScene"+sceneNum).append("<div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>");
         });
 
 
@@ -78,4 +91,16 @@ $(function() {
     		tabs.tabs( "refresh" );
     	}
     });
+    
 });
+
+
+function getProjectList(callback){
+    $.ajax({
+        url : "http://localhost:8080/project",
+        method : "GET",
+        dataType : "json",
+        data: "userId : 1"
+    })
+    .done(callback);
+}

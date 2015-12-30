@@ -57,6 +57,7 @@ function sendProjectData(projectName, callback){
     .done(callback);
 };
 
+
 function getSceneData(projectId, callback){
     $.ajax({
         url : "http://localhost:8080/scene",
@@ -66,6 +67,7 @@ function getSceneData(projectId, callback){
     })
     .done(callback);
 }
+
 
 function getUserId(userId, callback){
 	$.ajax({
@@ -77,5 +79,37 @@ function getUserId(userId, callback){
 	.done(callback);
 }
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getProjectList(callback){
+    $.ajax({
+        url : "http://localhost:8080/project",
+        method : "GET",
+        dataType : "json",
+    })
+    .done(callback);
+}
+
+function sendUserId(userId, callback){
+	$.ajax({
+		url : "http://localhost:8080/userId",
+		method : "GET",
+		dataType : "json"
+		data: "userId : 1"
+	})
+	
+function getSceneList()
+	
+	
+}
+
+//getProjectList
+//sendUserId(
+	
+get
+)
 	
 }

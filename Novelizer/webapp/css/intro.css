@@ -1,5 +1,4 @@
-body{
-
+body {
 	background: url("image/desk.jpg") no-repeat center center fixed;
 	background-size: cover;
 	/*font-size: 16px;
@@ -8,6 +7,7 @@ body{
 	margin: 0;
 	color: #666;*/
 }
+
 h2 {
 	text-transform: uppercase;
 	color: white;
@@ -16,9 +16,8 @@ h2 {
 	font-size: 1.4em;
 	line-height: 2.8em;
 }
-.header{
 
-
+.header {
 	/*border: 1px solid white;*/
 	width: 290px;
 	height: 90px;
@@ -28,11 +27,10 @@ h2 {
 }
 
 #title {
-
 	font-family: 'Roboto Slab', serif;
 	font-size: 50px;
 	color: white;
-	text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 	text-align: center;
 	margin-top: 20px;
 	margin-left: 8px;
@@ -49,34 +47,32 @@ h2 {
 	margin-top: 10px;
 }
 */
-#signUp{
-
+#signUp {
 	width: 100px;
 	height: 40px;
-	border:1px solid white;
+	border: 1px solid white;
 	border-radius: 8px;
 	font-size: 17px;
 	color: white;
 	text-align: center;
 	margin-left: 42%;
 	margin-top: 17%;
-	background-color: rgba(0,0,0,0.2);
-	box-sizing:border-box;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
 	padding-top: 9px;
 	float: left;
 }
 
-#login{
-
+#login {
 	width: 100px;
 	height: 40px;
-	border:1px solid white;
+	border: 1px solid white;
 	border-radius: 8px;
 	font-size: 17px;
 	color: white;
 	text-align: center;
-	background-color: rgba(0,0,0,0.2);
-	box-sizing:border-box;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
 	padding-top: 9px;
 	margin-top: 17%;
 	margin-left: 4%;
@@ -90,7 +86,7 @@ h2 {
 	margin: -8% auto 0 38.3%;
 	position: absolute;
 	border-radius: 5px;
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 	text-align: center;
 	display: none;
 }
@@ -139,7 +135,7 @@ h2 {
 	font-size: 0.7em;
 	letter-spacing: 1px;
 	background-color: #665851;
-	cursor:pointer;
+	cursor: pointer;
 	outline: none;
 }
 
@@ -167,20 +163,18 @@ p.small {
 	margin: 20px 0 0;
 }
 
-
 .selected {
-	color: #665851!important;
+	color: #665851 !important;
 	transition: 0.5s;
 }
 
-
 /* Animation Delay */
 #logo {
-  -webkit-animation-duration: 1s;
-  -webkit-animation-delay: 2s;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: 2s;
 }
 
 .login-box {
-  -webkit-animation-duration: 1s;
-  -webkit-animation-delay: 1s;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: 1s;
 }
