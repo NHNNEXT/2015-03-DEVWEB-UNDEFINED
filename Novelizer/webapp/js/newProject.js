@@ -55,7 +55,7 @@ $(function() {
         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div></div>"; 
         tabs.find( ".ui-tabs-nav" ).append( li );
         tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p>" );
-        $("#"+id).append("<div class='plusButton'>"+"+"+"</div>").hide().fadeIn(500);
+        $("#"+id).append("<div class='plusButton'>"+"+"+"</div>");
         tabs.tabs( "refresh" );
 
         $('.plusButton').on('click', function(){ 

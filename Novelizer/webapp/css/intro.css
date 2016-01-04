@@ -61,6 +61,12 @@ h2 {
 	box-sizing: border-box;
 	padding-top: 9px;
 	float: left;
+	cursor: pointer;
+}
+
+#signUp:hover, #login:hover {
+	background: rgba(0,0,0,0.5);
+	transition: 0.8s;
 }
 
 #login {
@@ -77,6 +83,7 @@ h2 {
 	margin-top: 17%;
 	margin-left: 4%;
 	float: left;
+	cursor: pointer;
 }
 
 .login-box {
@@ -91,7 +98,22 @@ h2 {
 	display: none;
 }
 
-.login-box .box-header {
+#sign-up-box {
+
+	background-color: white;
+	width: 340px;
+	height: 400px;
+	margin: -8% auto 0 38.3%;
+	position: absolute;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+	text-align: center;
+	display: none;
+
+}
+
+
+.login-box .box-header, #sign-up-box .box-header {
 	background-color: #665851;
 	border-radius: 5px 5px 0 0;
 	height: 13%;
@@ -99,7 +121,7 @@ h2 {
 	margin-top: -19px;
 }
 
-.login-box label {
+.login-box label, #sign-up-box label {
 	font-weight: 700;
 	font-size: .8em;
 	color: #888;
@@ -108,7 +130,7 @@ h2 {
 	line-height: 2em;
 }
 
-.login-box input {
+.login-box input, #sign-up-box input {
 	margin-bottom: 20px;
 	padding: 8px;
 	border: 1px solid #ccc;
@@ -117,14 +139,14 @@ h2 {
 	color: #888;
 }
 
-.login-box input:focus {
+.login-box input:focus, #sign-up-box input:focus {
 	outline: none;
 	border-color: #665851;
 	transition: 0.5s;
 	color: #665851;
 }
 
-.login-box button {
+.login-box button, #sign-up-box button{
 	margin-top: 0px;
 	border: 0;
 	border-radius: 2px;
@@ -139,19 +161,19 @@ h2 {
 	outline: none;
 }
 
-.login-box button:hover {
+.login-box button:hover, #sign-up-box button:hover {
 	opacity: 0.7;
 	transition: 0.5s;
 }
 
-.login-box button:hover {
+.login-box button:hover, #sign-up-box button:hover{
 	opacity: 0.7;
 	transition: 0.5s;
 }
 
 a {
 	text-decoration: none;
-	color: #666;
+	color: #FDF2F2;
 }
 
 a:hover {
@@ -174,7 +196,7 @@ p.small {
 	-webkit-animation-delay: 2s;
 }
 
-.login-box {
+.login-box, #sign-up-box {
 	-webkit-animation-duration: 1s;
 	-webkit-animation-delay: 1s;
 }

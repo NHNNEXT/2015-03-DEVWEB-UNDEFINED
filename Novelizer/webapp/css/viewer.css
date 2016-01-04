@@ -1,36 +1,36 @@
-main{
+main {
 	position: relative;
-
 	width: 1000px;
 	height: 600px;
 	margin: 0 auto;
 }
-	div.layer{
-		position: absolute;
-		top: 0;
-		left: 0;
 
-		width: inherit;
-		height: inherit;
-	}
-		div#layer-bg{
-			z-index: 1;
-		}
-		div#layer-obj{
-			z-index: 10;
-		}
-			div#layer-obj .character{
-				position: absolute;
-			}
+div.layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: inherit;
+}
 
-		div#layer-text{
-			top: auto;
-			bottom: 0px;
-			z-index: 1000;
+div#layer-bg {
+	z-index: 1;
+}
 
-			width: 960px;
-			height: 160px;
-			padding: 20px;
-			
-			background: #eee;
-		}
+div#layer-obj {
+	z-index: 10;
+}
+
+div#layer-obj .character {
+	position: absolute;
+}
+
+div#layer-text {
+	top: auto;
+	bottom: 0px;
+	z-index: 1000;
+	width: 960px;
+	height: 160px;
+	padding: 20px;
+	background: #eee;
+}

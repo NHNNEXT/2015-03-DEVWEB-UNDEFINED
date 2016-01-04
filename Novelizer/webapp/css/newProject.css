@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	position: fixed;
+	overflow-x: hidden;
 }
 
 .background {
@@ -62,6 +63,13 @@ h1 {
 	cursor: pointer;
 }
 
+	#add_tab:hover{
+		background: rgba(0,0,0,0.5);
+		transition: 0.8s;
+		
+	}
+
+
 #tabs {
 	margin-top: 1em;
 	height: 90%;
@@ -69,6 +77,10 @@ h1 {
 
 #tabs li .ui-icon-close {
 	float: left;
+	width: 10px;
+	height: 10px;
+	line-height: 10px;
+	font-size: 5px;
 	margin: 0.4em 0.2em 0 0;
 	cursor: pointer;
 	color: black;
@@ -179,29 +191,29 @@ border:1px solid blue;
 
 .ui-state-default
  
-a
-:link
-,
-{
-color
-:
- 
-white
-;
+a:link {
 
-	
+color:white;
+
 }
+
 .projectContents {
 
 	width: 18%;
 	height: 90%;
 	overflow: auto;
-	border: 1px solid;
-	border-color: rgba(255, 255, 255, 0.6);
 	margin-top: 0;
 	margin-left: 1.5%;
 	float: left;
+	background-color: rgba(255,255,255,0.7);
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	color: rgba(0, 0, 0, 0.5);
+	border-top-color: #665851;
+	border-top-width: 15px;
+	border-top-style: solid;
+	border-radius: 5px;
+	overflow-x: hidden;
 }
 
 
@@ -211,6 +223,9 @@ white
 	width: 80%;
 	height: 80%;
 	margin: 15% auto 0 auto;
+	overflow: auto;
+	font-size: 20px;
+	color: rgba(0,0,0,0.5);
 }
 
 .sceneArea {
