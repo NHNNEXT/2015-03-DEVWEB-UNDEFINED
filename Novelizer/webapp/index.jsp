@@ -1,66 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Novelizer</title>
-	<link rel='stylesheet'
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel='stylesheet'
 	href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css'>
-	<link
+<link
 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
 	rel='stylesheet' type='text/css'>
 
-	<link rel="stylesheet" type="text/css" href="css/intro.css">
-	<script type="text/javascript"
+<link rel="stylesheet" type="text/css" href="./css/intro.css">
+<script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript"></script>
+<script type="text/javascript"></script>
 </head>
 <body>
+
 	<div class="header">
 		<div id="title">Novelizer</div>
 	</div>
-	<div id="signUp">Sign Up</div>
-	<div id="login">Login</div>
-	
-	<!-- 회원 가입 화 -->
-	<div id ="sign-up-box" class="animated fadeInUp">
-		<div class="box-header">
-			<h2>SIGN UP</h2>
+
+	<%
+		Object errorMessage = request.getAttribute("errorMessage");
+	%>
+
+	<c:if test="${not empty errorMessage}">
+		<div class="control-group">
+			<label class="error"> <%
+ 	out.println(errorMessage);
+ %></label>
 		</div>
-		<form class="loginForm" action="#" method="post">
-			<label for="username">Username</label> <br /> 
-			<input type="text" id="username"> <br /> 
-			<label for="password">Password</label><br /> 
-			<input type="password" id="password"> <br />
-			<button type="submit">
-				<a href="newproject.html">Sign Up</a>
-			</button>
+	</c:if>
+
+
+	<%
+		Object userId = session.getAttribute("userId");
+	%>
+	<c:choose>
+		<c:when test="${not empty userId}">
+			<div id="logout">
+				<a href="/users/logout">logout</a>
+			</div>
+			<div id="make">
+				<a href="/newProject.jsp">make 
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div id="signUp">Sign Up</div>
+			<div id="login">Login</div>
+		</c:otherwise>
+	</c:choose>
+
+	<div class="SignUp-box animated fadeInUp">
+		<div class="box-header">
+			<h2>Sign Up</h2>
+		</div>
+		<!-- <form class="form" action="/form_action.jsp" method="post"> -->
+		<form class="form" action="/users/save" method="post">
+			<label for="userId">UserId</label> <br /> <input type="text"
+				id="userId" name="userId"> <br /> <label for="password">Password</label><br />
+			<input type="password" id="password" name="password"> <br />
+			<button type="submit">Sign up</button>
+			<br />
 		</form>
 	</div>
 
-	<!-- 로그인 박스화면 -->
 	<div class="login-box animated fadeInUp">
 		<div class="box-header">
 			<h2>LogIn</h2>
 		</div>
-		<form class="loginForm" action="newProject.html" method="post">
-			<label for="username">Username</label> <br /> 
-			<input type="text" id="username"> <br /> 
-			<label for="password">Password</label><br /> 
-			<input type="password" id="password"> <br />
-			<button type="submit">
-				<a href="newproject.html">Sign In</a>
-			</button>
+		<form class="form" action="/users/login" method="post">
+			<label for="userId">UserId</label> <br /> <input type="text"
+				name="userId"> <br /> <label for="password">Password</label><br />
+			<input type="password" name="password"> <br />
+			<button type="submit">Sign in</button>
+			<br />
 		</form>
-		<br /> <a href="#"><p class="small">Forgot your password?</p></a>
+		<a href="#"><p class="small">Forgot your password?</p></a>
 	</div>
 
-	
+	<script type="text/javascript" src="./js/intro.js"></script>
+	<script>
+		$(document).ready(function() {
 
-	<script type="text/javascript" src="js/intro.js"></script>
+			$("#signUp").on("click", function() {
+				$('.SignUp-box').fadeIn(1000).css('display', 'block');
+			});
 
+			$("#login").on("click", function() {
+				$('.login-box').fadeIn(1000).css('display', 'block');
+			});
+
+			/* $("#logout").on("click", function() {
+				$('.login-box').fadeIn(1000).css('display', 'block');
+			}); */
+
+			$('#logo').addClass('animated fadeInDown');
+			$("input:text:visible:first").focus();
+		});
+		$('#username').focus(function() {
+			$('label[for="username"]').addClass('selected');
+		});
+		$('#username').blur(function() {
+			$('label[for="username"]').removeClass('selected');
+		});
+		$('#password').focus(function() {
+			$('label[for="password"]').addClass('selected');
+		});
+		$('#password').blur(function() {
+			$('label[for="password"]').removeClass('selected');
+		});
+	</script>
 </body>
 </html>

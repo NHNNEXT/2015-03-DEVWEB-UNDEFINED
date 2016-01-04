@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Novelizer</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+
+	</script>
+	<style type="text/css">
+
+		body{
+
+			background: url("css/image/wood.jpg") ;
+			background-size: cover;
+			margin: 0;
+			padding: 0;
+			position: fixed;
+		}
+
+		.background{
+
+			width: 100%;
+			height: 110%;
+			background-color: rgba(0,0,0,0.1);
+			position: fixed;
+			margin-top: -2%;
+		}
+
+
+
+		#text3d {
+			color: rgba(251,229,193,0.9);
+			letter-spacing: .15em;
+			text-shadow: 
+			-1px -1px 1px #efede3, 
+			0px 1px 0 #2e2e2e, 
+			0px 2px 0 #2c2c2c, 
+			0px 3px 0 #2a2a2a, 
+			0px 4px 0 #282828, 
+			0px 5px 0 #262626, 
+			0px 6px 0 #242424, 
+			0px 7px 0 #222, 
+			0px 8px 0 #202020, 
+			0px 9px 0 #1e1e1e, 
+			0px 10px 0 #1c1c1c, 
+			0px 11px 0 #1a1a1a, 
+			0px 12px 0 #181818, 
+			0px 13px 0 #161616, 
+			0px 14px 0 #141414, 
+			0px 15px 0 #121212,
+			2px 20px 5px rgba(0, 0, 0, 0.9),
+			5px 23px 5px rgba(0, 0, 0, 0.3),
+			8px 27px 8px rgba(0, 0, 0, 0.5),
+			8px 28px 35px rgba(0, 0, 0, 0.9);
+		}
+
+
+		h1 {
+			width: 90%;
+			margin: 0 auto 0 auto;
+			font-family: 'Lato', sans-serif;
+			font-size: 80px;
+			padding: 60px 50px;
+			text-align: center;
+			text-transform: uppercase;
+
+		}
+
+		.background #projectArea{
+
+			width: 90%;
+			height: 60%;
+			/*border:1px solid white;*/
+			margin: -1% auto 0 auto;
+			position: relative;
+		}
+
+		#add_tab{
+
+			background-color: rgba(0,0,0,0.3);
+			color: white;
+			border:none;
+		}
+
+
+		#dialog label, #dialog input { display:block; }
+		#dialog label { margin-top: 0.5em; }
+		#dialog input, #dialog textarea { width: 95%; }
+		#tabs { 
+			margin-top: 1em; 
+			height: 90%;
+
+		}
+		#tabs li .ui-icon-close { 
+			float: left; 
+			margin: 0.4em 0.2em 0 0; 
+			cursor: pointer; 
+			color: black;
+			background-color: rgba(255,255,255,0.4);
+			border-radius: 100%;
+		}
+		#add_tab { cursor: pointer; }
+
+		.ui-dialog{
+
+			background-color: rgba(0,0,0,0.4);
+			color: rgba(255,255,255,0.8);
+			border:1px solid;
+			border-color: rgba(255,255,255,0.5);
+			box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+
+		}
+		.ui-dialog-titlebar{
+			background-color: rgba(0,0,0,0.4);
+			color: rgba(255,255,255,0.8);
+			border:none;
+
+
+		}
+		.ui-dialog-buttonpane{
+			background-color: rgba(0,0,0,0);
+		}
+
+		.ui-widget-header{
+			background-color: rgba(0,0,0,0);
+		}
+
+		
+	/*	.ui-dialog-titlebar-close {
+			display: block;
+			color: white;
+		}*/
+
+
+		.ui-helper-reset{
+			color: rgba(255,255,255,0.8);
+		}
+
+		
+
+		.ui-state-default,
+		.ui-widget-content .ui-state-default,
+		.ui-widget-header .ui-state-default {
+			border: 1px solid #c5c5c5;
+			background: rgba(0,0,0,0);
+			font-weight: normal;
+			color: white;
+		}
+
+		#tab_title, #tab_content{
+
+			background-color: rgba(255,255,255,0);
+			border-bottom: 1px solid white;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+		}
+
+		.ui-tabs .ui-tabs-panel {
+			display: block;
+			padding: 1em 1.4em;
+			background:none;
+			border:1px solid white;
+			height: 80%;
+
+
+		}
+
+		.ui-widget-content {
+
+			background: rgba(0,0,0,0,4);
+			border:0.5px solid white;
+			color: #333333;
+		}
+
+
+		.ui-widget-header{
+			border:none;
+
+		}
+
+		.ui-state-default {
+
+			color: rgba(255,255,255,0.3);
+		}
+
+		.ui-state-default a:link,{
+
+			color: white;
+		}
+
+		.sceneArea{
+
+			width: 100%;
+			height: 100%;
+			margin:0;
+			overflow: auto;
+		}
+
+		.sceneArea .newScene{
+
+			width: 130px;
+			height: 130px;
+			background-color: rgba(255,255,255,0.8);
+			padding-top: 2%;
+			float: left;
+			border-radius: 5px;
+			box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+			font-size: 20px;
+			text-align: center;
+			box-sizing: border-box;
+			color: rgba(0,0,0,0.5);
+			border-top-color: #665851;
+			border-top-width: 15px;
+			border-top-style: solid;
+			margin-left: 2%;
+			margin-bottom: 2%;
+			position: relative;
+
+		}
+
+		.sceneArea .newScene .plus{
+			padding-top: 90%;
+		}
+
+
+
+		.newScene input{
+
+			background-color: rgba(255,255,255,0);
+			border:1px solid gray;
+			border-left: none;
+			border-right: none;
+			border-top: none;
+			font-size: 14px;
+			color: #665851;
+			width: 100px;
+			height: 30px;
+			margin-top: 20px;
+			position: relative;
+			text-align: center;
+
+
+		}
+
+
+	</style>
+}
+</head>
+<body>
+	<div class="background">
+		<h1 id="text3d">Project List</h1>
+
+
+		<div id="projectArea">
+			<div id="dialog" title="새 프로젝트">
+				<form>
+					<fieldset class="ui-helper-reset">
+						<label for="tab_title">project name</label>
+						<input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all"><br/>
+						<label for="tab_content">Content</label>
+						<textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
+					</fieldset>
+				</form>
+			</div>
+
+			<button id="add_tab">new project</button>
+
+			<div id="tabs">
+				<ul>
+
+				</ul> 
+				
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+
+		$(function() {
+			var tabTitle = $( "#tab_title" ),
+			tabContent = $( "#tab_content" ),
+			tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
+			tabCounter = 2;
+
+			var tabs = $( "#tabs" ).tabs();
+
+    // modal dialog init: custom buttons and a "close" callback resetting the form inside
+    var dialog = $( "#dialog" ).dialog({
+    	autoOpen: false,
+    	modal: true,
+    	buttons: {
+    		Add: function() {
+    			addTab();
+    			$( this ).dialog( "close" );
+    		},
+    		Cancel: function() {
+    			$( this ).dialog( "close" );
+    		}
+    	},
+    	close: function() {
+    		form[ 0 ].reset();
+    	}
+    });
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).submit(function( event ) {
+    	addTab();
+    	dialog.dialog( "close" );
+    	event.preventDefault();
+    });
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+    	var label = tabTitle.val() || "Tab " + tabCounter,
+    	id = "tabs-" + tabCounter,
+    	li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+    	tabContentHtml = tabContent.val() + "<div id='sortable' class='sceneArea'><div class='newScene plus'><br/>"+"+"+"</div></div>"; 
+
+    	tabs.find( ".ui-tabs-nav" ).append( li );
+    	tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+    	tabs.tabs( "refresh" );
+    	tabCounter++;
+
+    	var sceneNum = 1;
+    	$('.newScene').on('click', function(){
+    		$(this).after("<div class='newScene'>"+"scene"+"<input type='textarea' class='sceneText'></textarea></div>");
+    	});
+
+    	$( "#sortable" ).sortable();
+    	$( "#sortable" ).disableSelection();
+
+
+
+    	
+    }
+
+    // addTab button: just opens the dialog
+    $( "#add_tab" )
+    .button()
+    .click(function() {
+    	dialog.dialog( "open" );
+
+    });
+
+    // close icon: removing the tab on click
+    tabs.delegate( "span.ui-icon-close", "click", function() {
+    	var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+    	$( "#" + panelId ).remove();
+    	tabs.tabs( "refresh" );
+    });
+
+    tabs.bind( "keyup", function( event ) {
+    	if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+    		var panelId = tabs.find( ".ui-tabs-active" ).remove().attr( "aria-controls" );
+    		$( "#" + panelId ).remove();
+    		tabs.tabs( "refresh" );
+
+    	}
+    });
+
+
+
+    
+
+
+
+
+});
+
+</script>
+
+
+</body>
+</html>
