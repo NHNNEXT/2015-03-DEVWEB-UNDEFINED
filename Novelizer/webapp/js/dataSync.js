@@ -75,10 +75,10 @@ var EditorDataSync = {
  			method : "POST",
  			dataType : "json",
  			data : {
- 					sceneData:{
+ 					sceneData: JSON.stringify([{
  						sceneId : this.sceneId,
- 						data : JSON.stringify(this.blockList)
- 					}
+ 						blockList : JSON.stringify(this.blockList)
+ 					}]))
  				},
  		})
 		.done(callback[done])
