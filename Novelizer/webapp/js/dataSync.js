@@ -42,7 +42,7 @@ var EditorDataSync = {
         },
     ],
  	init : function(sceneId){
- 		this.sceneId = sceneId;
+ 		//this.sceneId = sceneId;
 
  		//this.getTimelineData();
  		//this.getCharacterData();
@@ -77,7 +77,7 @@ var EditorDataSync = {
  			data : {
  					sceneData: JSON.stringify([{
  						sceneId : this.sceneId,
- 						blockList : JSON.stringify(this.blockList)
+ 						blockList : this.blockList
  					}])
  				},
  		})

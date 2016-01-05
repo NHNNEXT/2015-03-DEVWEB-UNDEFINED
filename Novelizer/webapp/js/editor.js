@@ -44,7 +44,7 @@ var Editor = {
     save : function(){
         EditorDataSync.postTimelineData({
             done : function(){
-                
+
             },
             fail : function(){
 
