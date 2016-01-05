@@ -1,10 +1,23 @@
 body {
+
+}
+
+
+
+#editor {
+	
 	background: url("image/wood.jpg");
 	background-size: cover;
 	margin: 0;
 	padding: 0;
 	position: fixed;
 	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	margin-left: 0;
+	left: 0px;
+	top: 0px;
+	
 }
 
 .background {
@@ -238,29 +251,16 @@ color:white;
 	position: relative;
 }
 
-/*
-.sceneArea .scenePlus{
-
-	width: 50px;
-	height: 50px;
-	border:1px solid white;
-	border-radius: 100%;
-	content: "";
-	margin-top: 40%;
-	margin-left: 50%;
+.sceneArea .sceneExplain {
+	
+	margin-top: 33%;
+	margin-left: 28%;
 	position: absolute;
-}*/
+	text-align: center;
+	color: rgba(255,255,255,0.7);
+}
 
-/*#scenePlus{
-
-	width: 100px;
-	height: 100px;
-	border:1px solid white;
-	content: "";
-
-}*/
-
-.plusButton {
+.sceneArea .plusButton {
 
 	background-color: rgba(255,255,255,0.3);
 	border-radius: 50%;
@@ -269,9 +269,16 @@ color:white;
 	height: 50px;
 	float: right;
 	line-height: 50px;
-	margin-top: -3.5%;
-	margin-right: 1%;
+	margin-top: 23%;
+	margin-left: 67%;
 	cursor: pointer;
+	position: fixed;
+	z-index: 999;
+}
+
+.sceneArea .plusButton:hover {
+
+	background-color: rgba(0,0,0,0.5);
 }
 
 .sceneArea .newS {
@@ -288,7 +295,7 @@ color:white;
 	box-sizing: border-box;
 	color: rgba(0, 0, 0, 0.5);
 	border-top-color: #665851;
-	border-top-width: 15px;
+	border-top-width: 17px;
 	border-top-style: solid;
 	margin-left: 2%;
 	margin-bottom: 2%;
@@ -296,20 +303,43 @@ color:white;
 
 }
 
-.newS input {
-
-	background-color: rgba(255, 255, 255, 0);
-	border: 1px solid gray;
-	border-left: none;
-	border-right: none;
-	border-top: none;
-	font-size: 14px;
-	color: #665851;
-	width: 100px;
-	height: 30px;
-	margin-top: 20px;
-	position: relative;
-	text-align: center;
-
-}
+		.newS input {
+		
+			background-color: rgba(255, 255, 255, 0);
+			border: 1px solid gray;
+			border-left: none;
+			border-right: none;
+			border-top: none;
+			font-size: 14px;
+			color: #665851;
+			width: 100px;
+			height: 30px;
+			margin-top: 20px;
+			position: relative;
+			text-align: center;
+		
+		}
+		
+		.newS input:hover {
+		
+			border: 1px solid black;
+			border-left: none;
+			border-right: none;
+			border-top: none;
+	
+		}
+		
+ 	.sceneArea .newS .removeScene {
+		
+			color: rgba(255,255,255,0.6);
+			float: right;
+			margin-top: -30px;
+			margin-right: 5px;
+			width: 5px;
+			height: 5px;
+			background-color: rgba(255,255,255,0.6);
+			border-radius: 5px;
+			cursor: pointer;
+					
+		}
 

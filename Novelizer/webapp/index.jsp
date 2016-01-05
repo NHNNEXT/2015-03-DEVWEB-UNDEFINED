@@ -24,7 +24,7 @@
 <body>
 
 	<div class="header">
-		<div id="title">Novelizer</div>
+		<div id="title"></div>
 	</div>
 
 	<%

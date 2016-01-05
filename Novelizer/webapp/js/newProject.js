@@ -11,13 +11,13 @@ getProjectList(function(response){
 
 $(function() {
 	
-   var tabTitle = $( "#tab_title" ),
-   tabContent = $( "#tab_content" ),
-   tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
-   tabCounter = 0;
-   sceneAreaNum = 1;
-
-   var tabs = $( "#tabs" ).tabs();
+ var tabTitle = $( "#tab_title" ),
+ tabContent = $( "#tab_content" ),
+ tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>x</span></li>",
+ tabCounter = 0,
+ sceneNumber = 1,
+ sceneAreaNum = 1;
+ var tabs = $( "#tabs" ).tabs();
 
     // modal dialog init: custom buttons and a "close" callback resetting the form inside
     var dialog = $( "#dialog" ).dialog({
@@ -43,34 +43,46 @@ $(function() {
     	dialog.dialog( "close" );
     	event.preventDefault();
 
-    });
+    }); 
+
+
 
     // actual addTab function: adds new tab using the input from the form above
     function addTab() {
-    	var label = tabTitle.val() || "Tab " + tabCounter,
+    	var label = tabTitle.val() || "undefined",
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
         tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent.val()+"</div></div>" + 
-        "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div></div>"; 
-        tabs.find( ".ui-tabs-nav" ).append( li );
+        "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'><div class='removeScene'></div>"+"scene"+sceneNum+++"<input type='textarea' class='sceneText'></textarea></div><div class='sceneExplain'>If you want to make story just double click! <br /> if you want to sortable scenes, just sort with click</div></div>"; 
+//    	
+    	tabs.find( ".ui-tabs-nav" ).append( li );
         tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p>" );
-        $("#"+id).append("<div class='plusButton'>"+"+"+"</div>");
+        $("#sortable"+tabCounter).append("<div class='plusButton'>"+"+"+"</div>");
         tabs.tabs( "refresh" );
 
         $('.plusButton').on('click', function(){ 
-          $("#sortable"+tabCounter).append("<div class='newS newScene"+sceneNum+++"'>"+"scene"+sceneNum+"<input type='textarea' class='sceneText'></textarea></div>").children(':last').hide().fadeIn(1000);
-
-      });
-
-
-
-
+          $("#sortable"+tabCounter).append("<div class='newS newScene"+sceneNum+++"'>"+"scene"+(sceneNum-1)+"<input type='textarea' class='sceneText'></textarea></div>").children(':last').hide().fadeIn(1000);
+          addEditor();
+        });  
+        
+        $('.removeScene').on('click', function(){
+        	alert(1);
+        	$(this).remove("newS");
+        });
+        
         $( "#sortable"+tabCounter).sortable();
         // tabCounter++;
     	// $( "#sortable" ).disableSelection();
     }
+    
+    function addEditor() {
 
+    	$(".newS").on("dblclick", function(){          
+      		$('body').load('editor.jsp');
+              }); 
+    }
+    
     // addTab button: just opens the dialog
     $( "#add_tab" )
     .button()
@@ -79,6 +91,8 @@ $(function() {
         tabCounter++;
 
     });
+
+
 
     // close icon: removing the tab on click
     tabs.delegate( "span.ui-icon-close", "click", function() {
@@ -94,6 +108,9 @@ $(function() {
     		tabs.tabs( "refresh" );
     	}
     });
+
+
+
     
 });
 

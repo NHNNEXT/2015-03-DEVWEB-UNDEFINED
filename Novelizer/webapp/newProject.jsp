@@ -13,7 +13,8 @@
 
 </head>
 <body>
-		<div class="background">
+	<div id="editor">
+		<div class="background">		
 		<h1 id="text3d">Project List</h1>
 
 		<div id="projectArea">
@@ -38,6 +39,7 @@
 				<div class="plusBotton">
 			</div>
 		</div>
+	</div>
 	</div>
 	<script type="text/javascript" src="js/newProject.js"></script>
 </body>
