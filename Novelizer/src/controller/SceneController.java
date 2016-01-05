@@ -27,6 +27,7 @@ public class SceneController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String sceneData = req.getParameter("sceneData");
+		log.info(sceneData);
 		String result;
 		try {
 			result = service.saveScene(sceneData);

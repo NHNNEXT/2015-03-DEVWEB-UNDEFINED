@@ -11,9 +11,9 @@ public class UserDao {
 
 	public Connection getConnection() {
 
-		String url = "jdbc:mysql://localhost:3306/Novelizer";
+		String url = "jdbc:mysql://125.209.195.85:3306/novelizer";
 		String id = "root";
-		String pw = "ehdwns1q";
+		String pw = "novel";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

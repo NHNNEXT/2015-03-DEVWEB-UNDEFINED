@@ -23,6 +23,7 @@ public class JsonHandler<T> {
 			scene = objMapper.readValue(jsonData, Scene.class);
 		} catch (IOException e) {
 			log.error("JsonString to Scene fail \n" + e);
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 

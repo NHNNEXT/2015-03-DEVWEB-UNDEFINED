@@ -4,9 +4,11 @@ import java.util.List;
 
 public class Block {
 	private int blockId;
+	private List<Action> actionList;
 	private int nextBlockId;
 	private int sceneId;
-	private List<Action> actionList;
+	
+	public Block(){}
 
 	public Block(int blockId, int nextBlockId, int sceneId) {
 		super();
@@ -39,4 +41,11 @@ public class Block {
 		this.sceneId = sceneId;
 	}
 
+	@Override
+	public String toString() {
+		return "Block [blockId=" + blockId + ", actionList=" + actionList + ", nextBlockId=" + nextBlockId
+				+ ", sceneId=" + sceneId + "]";
+	}
+
+	
 }

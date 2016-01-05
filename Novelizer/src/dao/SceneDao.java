@@ -12,12 +12,12 @@ import model.Scene;
 public class SceneDao extends AbstractDao<Scene> {
 	private static final Logger log = LoggerFactory.getLogger(SceneDao.class);
 
-	private final String insertQuery = "INSERT INTO scene(scene_name, project_id) values(?,?);";
+	private final String insertQuery = "INSERT INTO scene(scene_id, scene_name, project_id) values(?,?,?);";
 	private final String selectQuery = "SELECT * FROM scene WHERE scene_id = ?;";
 	private final String selectAllQuery = "SELECT * FROM scene;";
 	private final String selectByParentIdQuery = "SELECT * FROM scene WHERE project_id = ?;";
 	private final String updateQuery = "";
-	private final String deleteQuery = "";
+	private final String deleteQuery = "DELETE FROM scene WHERE scene_id = ?;";
 
 	public SceneDao() {
 		super();
@@ -25,12 +25,14 @@ public class SceneDao extends AbstractDao<Scene> {
 		super.selectAllQuery = selectAllQuery;
 		super.selectQuery = selectQuery;
 		super.selectByParentIdQuery = selectByParentIdQuery;
+		super.deleteQuery = deleteQuery;
 	}
 
 	// 현재 projectId가 1로 고정 추후 project객체 생성시 수정 필요
 	public int insertScene(Scene scene) {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
+			insertList.add(scene.getSceneId());
 			insertList.add(scene.getSceneName());
 			insertList.add(scene.getProjectId());
 			return insert(insertList);

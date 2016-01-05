@@ -42,7 +42,7 @@ var EditorDataSync = {
         },
     ],
  	init : function(sceneId){
- 		this.sceneId = sceneId;
+ 		//this.sceneId = sceneId;
 
  		//this.getTimelineData();
  		//this.getCharacterData();
@@ -59,7 +59,7 @@ var EditorDataSync = {
  	},
  	getTimelineData : function(){	// 현재 씬의 블록 리스트 데이터를 가져옴
  		$.ajax({
- 			url : this.url+"/blockList",
+ 			url : this.url+"/scene",
  			method : "GET",
  			dataType : "json",
  			data : {sceneId : this.sceneId},
@@ -71,11 +71,15 @@ var EditorDataSync = {
  	},
  	postTimelineData : function(callback){
  		$.ajax({
- 			url : this.url+"/blockList",
+ 			url : this.url+"/scene",
  			method : "POST",
  			dataType : "json",
- 			data : {sceneId : this.sceneId,
- 					data : JSON.stringify(this.blockList)},
+ 			data : {
+ 					sceneData: JSON.stringify({
+ 						sceneId : this.sceneId,
+ 						blockList : this.blockList
+ 					})
+ 				},
  		})
 		.done(callback[done])
 		.fail(callback[fail]);

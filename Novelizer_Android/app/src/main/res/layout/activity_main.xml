@@ -8,6 +8,7 @@
         android:name="nhnnext.novelizer_android.view.NovelListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/novel_list_fragment" />
+        android:id="@+id/novel_list_fragment"
+    />
 
 </LinearLayout>

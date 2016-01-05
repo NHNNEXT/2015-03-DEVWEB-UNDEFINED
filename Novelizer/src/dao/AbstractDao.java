@@ -22,6 +22,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 	protected String selectByParentIdQuery;
 	protected String updateQuery;
 	protected String deleteQuery;
+	protected String deleteByParentIdQuery;
 
 	Connection conn;
 	PreparedStatement pstmt;
@@ -36,7 +37,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		}
 	}
 
-	//TODO java reflection && ResultSetMetaData cloumn name 을 가지고 자동화
+	// TODO java reflection && ResultSetMetaData cloumn name 을 가지고 자동화
 	public int insert(List<Object> insertList) {
 		init();
 		int key = 0;
@@ -72,7 +73,10 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 
-			objects = makeObjects(rsmd);
+			while (rs.next()) {
+				rsmd = rs.getMetaData();
+				objects = makeObjects(rsmd);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +100,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		close();
 
 		return allObjects;
 	}
@@ -115,7 +120,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		close();
 		return allObjects;
 	}
 
@@ -125,9 +130,40 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 
 		for (int i = 0; i < rsmd.getColumnCount(); i++) {
 			objects.add(rs.getObject(i + 1));
+
 		}
 
 		return objects;
+	}
+	
+	public void deleteByParentId(int id){
+		init();
+		try {
+			pstmt = conn.prepareStatement(deleteByParentIdQuery);
+			pstmt.setObject(1, id);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		close();
+	}
+
+	public int deleteById(int id) {
+		init();
+		int key = 0;
+		try {
+			pstmt = conn.prepareStatement(deleteQuery);
+			pstmt.setObject(1, id);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		close();
+		return key;
 	}
 
 	private void close() {
