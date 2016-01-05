@@ -1,6 +1,7 @@
 package nhnnext.novelizer_android.network;
 
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -27,72 +28,11 @@ public class Proxy {
 
     }
 
-    public String getScene() {
+    public String getProjectsByJson(int userId, Callback callback) {
+        Log.e("test", "Get Project Start");
+        String reslut;
+        novelizerService.getProjects(userId, callback);
 
-            novelizerService.getScene(new Callback<Response>() {
-                @Override
-                public void success(Response response, Response response2) {
-                    BufferedReader reader = null;
-                    StringBuilder sb = new StringBuilder();
-                    try {
-
-                        reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
-                        String line;
-
-                        try {
-                            while ((line = reader.readLine()) != null) {
-                                sb.append(line);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Log.i("Retrofit success",sb.toString());
-
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    Log.e("Retrofit error", error.toString());
-                }
-            });
-
-       return null;
-    }
-
-    public String getProjectsByJson(int userId){
-
-        novelizerService.getProjects(userId, new Callback<Response>() {
-            @Override
-            public void success(Response response, Response response2) {
-                BufferedReader reader = null;
-                StringBuilder sb = new StringBuilder();
-                try {
-
-                    reader = new BufferedReader(new InputStreamReader(response.getBody().in()));
-                    String line;
-
-                    try {
-                        while ((line = reader.readLine()) != null) {
-                            sb.append(line);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Log.i("Retrofit success",sb.toString());
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("Retrofit error", error.toString());
-            }
-        });
 
         return null;
 

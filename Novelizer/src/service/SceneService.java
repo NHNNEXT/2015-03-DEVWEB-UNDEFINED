@@ -38,16 +38,16 @@ public class SceneService {
 		}
 	}
 
-	public String getScene(int sceneId) throws SQLException {
-		Scene scene = sceneDao.selectScene(sceneId);
-		if (scene == null) {
-			throw new NullPointerException();
-		}
-		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));
-		for (Block block : scene.getBlockList()) {
-			block.setActionList(actionDao.selectByBlockId((block.getBlockId())));
-		}
-		return jsonHandler.convertToJson(scene);
-	}
+//	public String getScene(int sceneId) throws SQLException {
+//		Scene scene = sceneDao.selectScene(sceneId);
+//		if (scene == null) {
+//			throw new NullPointerException();
+//		}
+//		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));
+//		for (Block block : scene.getBlockList()) {
+//			block.setActionList(actionDao.selectByBlockId((block.getBlockId())));
+//		}
+//		return jsonHandler.convertToJson(scene);
+//	}
 
 }

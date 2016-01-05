@@ -26,26 +26,18 @@ USE `novelizer` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`action` (
   `action_id` INT NOT NULL AUTO_INCREMENT,
-  `type` VARCHAR(10) NULL DEFAULT NULL,
-  `option_data` TEXT(500) NULL DEFAULT NULL,
+  `action_type` VARCHAR(10) NULL DEFAULT NULL,
+  `character_id` INT NULL DEFAULT '0',
+  `preset_id` INT NULL DEFAULT '0',
+  `option_id` INT NULL DEFAULT '0',
+  `posX` FLOAT NULL DEFAULT '0.0',
+  `posY` FLOAT NULL DEFAULT '0.0',
+  `animation` VARCHAR(50) DEFAULT NULL,
+  `text` TEXT(500) DEFAULT NULL,  
   `block_id` INT NOT NULL,
   PRIMARY KEY (`action_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `novelizer`.`preset_background`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `novelizer`.`preset_background` (
-  `preset_id` INT NOT NULL,
-  `project_id` INT NOT NULL,
-  `image` TEXT(200) NOT NULL,
-  `preset_background_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`preset_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `novelizer`.`block`
@@ -60,24 +52,12 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `novelizer`.`charater`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `novelizer`.`charater` (
-  `character_id` INT NOT NULL,
-  `project_id` INT NOT NULL,
-  `character_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`character_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `novelizer`.`project`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_id` INT NOT NULL AUTO_INCREMENT,
   `project_name` VARCHAR(45) NULL,
-  `project_info` VARCHAR(1000) NULL,
+  `project_info` TEXT(500) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`project_id`))
 ENGINE = InnoDB
@@ -94,19 +74,6 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`scene` (
   `start_block_id` INT NULL,
   `scene_name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`scene_id` ))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `novelizer`.`text`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `novelizer`.`text` (
-  `action_id` INT(11) NOT NULL,
-  `character_id` VARCHAR(10) NOT NULL,
-  `text` TEXT NOT NULL,
-  `option` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`action_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

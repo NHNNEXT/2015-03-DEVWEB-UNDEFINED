@@ -1,57 +1,79 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import utils.json.JsonHandler;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreType
 public class Action {
 
 	private int actionId;
-	private String type;
-	private Option optionData;
+	private String actionType;
+	private int characterId;
+	private int presetId;
+	private int optionId;
+	private float posX;
+	private float posY;
+	private String animation;
+	private String text;
+
 	private int blockId;
 
 	public Action() {
 	}
-	
+
 	public Action(int actionId, String type, int blockId) {
 		this(actionId, type, blockId, null);
 	}
 
 	public Action(int actionId, String type, int blockId, String optionData) {
 		this.actionId = actionId;
-		this.type = type;
+		this.actionType = type;
 		this.blockId = blockId;
-
-		if (optionData != null) {
-			this.optionData = new JsonHandler().convertToOption(optionData);
-		}
 	}
 
 	public int getActionId() {
 		return actionId;
 	}
 
-	public String getType() {
-		return type;
+	public String getActionType() {
+		return actionType;
 	}
 
-	public Option getOptionData() {
-		return optionData;
+	public int getOptionId() {
+		return optionId;
 	}
 
 	public int getBlockId() {
 		return blockId;
 	}
 
-	public void setBlockId(int blockId) {
-		this.blockId = blockId;
+	public int getCharacterId() {
+		return characterId;
 	}
 
-	@Override
-	public String toString() {
-		return "Action [actionId=" + actionId + ", type=" + type + ", optionData=" + optionData + "]";
+	public int getPresetId() {
+		return presetId;
+	}
+
+	public float getPosX() {
+		return posX;
+	}
+
+	public float getPosY() {
+		return posY;
+	}
+
+	public String getAnimation() {
+		return animation;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setBlockId(int blockId) {
+		this.blockId = blockId;
 	}
 
 }

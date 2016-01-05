@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-
-import android.view.View;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -22,23 +19,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         startActivity(new Intent(this, SplashActivity.class));
         setContentView(R.layout.activity_main);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), InputNovelIdActivity.class);
-                startActivityForResult(intent, LAUNCHED_ACTIVITY);
-            }
-
-
-        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data != null) {
+        if (data != null) {
             Toast.makeText(this, data.getStringExtra("novelId"), Toast.LENGTH_LONG).show();
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -52,9 +38,6 @@ public class MainActivity extends Activity {
                     progressDialog.dismiss();
                 }
             }, 3000);
-
-
-
 
 
         }

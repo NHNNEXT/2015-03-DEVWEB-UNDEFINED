@@ -2,11 +2,18 @@ package model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
+@JsonIgnoreType
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Scene {
 	private int sceneId;
-	private String sceneName;
 	private List<Block> blockList;
+	private String sceneName;
 	private int projectId;
+	
+	public Scene(){}
 	
 	public Scene(String sceneName, int projectId){
 		this(0,sceneName,null,projectId);
