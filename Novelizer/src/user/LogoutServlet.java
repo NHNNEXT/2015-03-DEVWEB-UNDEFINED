@@ -1,4 +1,4 @@
-package net.slipp.user;
+package user;
 
 import java.io.IOException;
 

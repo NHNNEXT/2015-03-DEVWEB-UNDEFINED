@@ -86,7 +86,6 @@ public class JsonHandler<T> {
 		}
 		return t;
 	}
-
 	public Project convertToProject(String projectData) {
 		ObjectMapper objMapper = new ObjectMapper();
 

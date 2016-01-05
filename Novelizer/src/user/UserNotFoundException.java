@@ -1,4 +1,4 @@
-package net.slipp.user;
+package user;
 
 public class UserNotFoundException extends Exception {
 

@@ -6,8 +6,6 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -18,12 +16,12 @@ import retrofit.client.Response;
 /**
  * Created by JaeBong on 15. 11. 21..
  */
-public class ServerConnector {
+public class Proxy {
 
     RestAdapter retrofit;
     NovelizerService novelizerService;
 
-    public ServerConnector() {
+    public Proxy() {
         retrofit = new RestAdapter.Builder().setEndpoint("http://10.0.3.2:8080").build();
         novelizerService = retrofit.create(NovelizerService.class);
 
@@ -64,9 +62,9 @@ public class ServerConnector {
        return null;
     }
 
-    public String getProject(String projectId){
+    public String getProjectsByJson(int userId){
 
-        novelizerService.getProject(new Callback<Response>() {
+        novelizerService.getProjects(userId, new Callback<Response>() {
             @Override
             public void success(Response response, Response response2) {
                 BufferedReader reader = null;

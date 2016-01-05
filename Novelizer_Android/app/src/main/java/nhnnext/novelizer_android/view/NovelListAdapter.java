@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nhnnext.novelizer_android.Entity.NovelSummary;
 import nhnnext.novelizer_android.R;
@@ -19,11 +20,11 @@ import nhnnext.novelizer_android.R;
  */
 public class NovelListAdapter extends ArrayAdapter<NovelSummary>{
 
-    private ArrayList<NovelSummary> items;
+    private List<NovelSummary> items;
     private Context context;
     private int layoutResourceId;
 
-    public NovelListAdapter(Context context, int layoutResourceId, ArrayList<NovelSummary> items){
+    public NovelListAdapter(Context context, int layoutResourceId, List<NovelSummary> items){
         super(context, layoutResourceId, items);
         this.context = context;
         this.layoutResourceId = layoutResourceId;

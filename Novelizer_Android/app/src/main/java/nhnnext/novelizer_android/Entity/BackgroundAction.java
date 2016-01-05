@@ -1,6 +1,5 @@
 package nhnnext.novelizer_android.Entity;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -12,7 +11,7 @@ public class BackgroundAction extends Action {
     private String option;
     /* 이후 애니메이션 관련 구현 추가 예정 */
 
-    public BackgroundAction(int actionId, String type, Drawable img, String option){
+    public BackgroundAction(int actionId, String type, Drawable img, String option) {
         super(actionId, type);
         this.img = img;
         this.option = option;
@@ -23,15 +22,7 @@ public class BackgroundAction extends Action {
         return img;
     }
 
-    public void setImg(Drawable img) {
-        this.img = img;
-    }
-
     public String getOption() {
         return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
     }
 }
