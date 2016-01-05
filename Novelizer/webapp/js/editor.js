@@ -1,24 +1,4 @@
 // TODO 데이터객체 모델로 분리 
-// 더미 
-var timelineContext = {
-    blockList:[
-        {
-            blockId:1,
-            actionList:[
-                {actionId:1, isText:true, actionType:"text"},
-                {actionId:2, isBackground:true, actionType:"background"}
-            ]
-        },
-        {
-            blockId:2,
-            actionList:[
-                {actionId:1, isCharacter:true, actionType:"character"},
-                {actionId:2, isText:true, actionType:"text"}
-            ]
-        },
-    ]
-};
-
 // 더미
 var backgroundPresetContext = {
     backgroundPreset : [
@@ -35,170 +15,370 @@ var backgroundPresetContext = {
     ]
 }
 
-var Template = {
-    timelineSource : ,
-    backgroundPresetSource : $("#background-preset-template").html(),
-    TimelineTemplate : null,
+// 더미
+var characterPresetContext = {
+    characterPreset : [
+        {
+            characterId : 1,
+            image : "http://www.mhsh.co.kr/multi/images/section1/content2.png",
+            name : "영희"
+        },
+        {
+            characterId : 2,
+            image : "http://www.mhsh.co.kr/multi/images/section1/content3.png",
+            name : "철수"
+        },
+    ]
+}
 
-    compileTimeline : function(context){
-        // Closure로 개선
-        if(this.TimelineTemplate == null){
-            this.TimelineTemplate = Handlebars.compile($("#timeline-template").html());
+var Editor = {
+    init : function(){
+        EditorDataSync.init();
+        var dataObject = EditorDataSync.getDataObject();
+        Template.init(dataObject);
+        Timeline.init();
+        Preview.init();
+        Toolbox.init();
+    },
+    addBlock : function(callback){
+        EditorDataSync.addBlock(callback);
+    },
+    removeBlock : function(blockId, callback){
+        var callback = callback || function(){};
+        EditorDataSync.removeBlock(blockId);
+        var dataObject = EditorDataSync.getDataObject();
+        Timeline.selectedBlockId = 0;
+        Preview.previewBlockId = 0;
+        Template.compileTimeline(dataObject);
+        Preview.updateBlock(this.getBlockPreviewData(0));
+        callback();
+    },
+    selectBlock : function(blockId){
+        Timeline.selectedBlockId = blockId;
+        Preview.previewBlockId = blockId;
+        Preview.updateBlock(this.getBlockPreviewData(blockId));
+    },
+    compileTimeline : function(){
+        var dataObject = EditorDataSync.getDataObject();
+        Template.compileTimeline(dataObject);
+    },
+    changeText : function(blockId, text, characterId){
+        EditorDataSync.modifyTextAction(blockId, text, characterId);
+        Preview.updateText(text, characterId);
+    },
+    changeTextPreset : function(blockId, text, characterId){
+        EditorDataSync.modifyTextAction(blockId, text, characterId);
+        var dataObject = EditorDataSync.getDataObject();
+        Template.compileTimeline(dataObject);
+        Preview.updateText(text, characterId);
+    },
+    addBackground : function(blockId, presetId, callback){
+        var callback = callback || function(){};
+        var actionData = EditorDataSync.addBackgroundAction(blockId, presetId);
+        var dataObject = EditorDataSync.getDataObject();
+        var image = EditorDataSync.getPreset(actionData.presetId).image;
+        Template.compileTimeline(dataObject);
+        Preview.updateBackground(image);
+        callback();
+    },
+    changeBackground : function(blockId, actionId, presetId){
+        var presetData = EditorDataSync.getPreset(presetId);
+        Preview.updateBackground(presetData.image);
+        EditorDataSync.modifyBackgroundAction(blockId, actionId, presetId);
+    },
+    addCharacter : function(blockId, characterId, callback){
+        var callback = callback || function(){};
+        var actionData = EditorDataSync.addCharacterAction(blockId, characterId);
+        var DataObject = EditorDataSync.getDataObject();
+        var character = EditorDataSync.getCharacter(actionData.characterId);
+        Template.compileTimeline(DataObject);
+        Preview.updateCharacter(character, actionData.posX, actionData.posY);
+        callback();
+    },
+    changeCharacter : function(blockId, actionId, characterId, optionId, posX, posY){
+        var callback = callback || function(){};
+        var actionData = EditorDataSync.modifyCharacterAction(blockId, actionId, characterId, optionId, posX, posY);
+        var character = EditorDataSync.getCharacter(actionData.characterId);
+        Preview.updateBlock(this.getBlockPreviewData(blockId));
+        callback();
+    },
+    changeCharacterPreset : function(blockId, characterId, posX, posY){
+        var action = EditorDataSync.getCharacterAction(blockId, characterId);
+        if(action){
+            EditorDataSync.modifyCharacterAction(blockId, action.actionId, characterId, action.optionId, posX, posY);
+        }else{
+            EditorDataSync.addCharacterAction(blockId, characterId, posX, posY);
         }
-        var html = $(this.TimelineTemplate(context));
-        $("#block-list").empty().append(html);
+        var DataObject = EditorDataSync.getDataObject();
+        Template.compileTimeline(DataObject);
+    },
+    removeAction : function(blockId, actionId, callback){
+        var callback = callback || function(){};
+        EditorDataSync.removeAction(blockId, actionId);
+        var dataObject = EditorDataSync.getDataObject();
+        Template.compileTimeline(dataObject);
+        Preview.updateBlock(this.getBlockPreviewData(blockId));
+        callback();
+    },
+    getBlockPreviewData : function(blockId){
+        /*
+        data{
+            background:{image},
+            character:[{characterData,posX,posY}],
+            text:{characterId, text}
+        }
+        */
+        var data = {
+            background : null,
+            character : null,
+            text : null,
+        }
+        data.background = EditorDataSync.getBackgroundActionData(blockId);
+        data.text = EditorDataSync.getTextActionData(blockId);
+        data.character = EditorDataSync.getCharacterActionData(blockId);
+        return data;
+    },
+}
+
+var Template = {
+    init : function(dataObject){
+        Handlebars.registerHelper("equals", function (a, b, options) {
+            if(a == b){
+                return options.fn(this);
+            }else{
+                return options.inverse(this);
+            }
+        });
+
+        Template.compileTimeline(dataObject);
+        Template.compileBackgroundPreset(dataObject);
+        Template.compileCharacterPreset(dataObject);
+    },
+    compileTimeline : function(context){
+        var template = Handlebars.compile($("#timeline-template").html());
+
+        this.compileTimeline = function(context){
+            var html = $(template(context));
+            $("#block-list").empty().append(html);
+        }
+
+        this.compileTimeline(context);
     },
     compileBackgroundPreset : function(context){
-        var template = Handlebars.compile(this.backgroundPresetSource);
-        var html = $(template(context));
-        $("#toolbox-background .background-item-list").empty().append(html);
+        var template = Handlebars.compile($("#background-preset-template").html());
 
+        this.compileBackgroundPreset = function(context){
+            var html = $(template(context));
+            $("#toolbox-background .background-item-list").empty().append(html);
+        }
+
+        this.compileBackgroundPreset(context);
     },
     compileCharacterPreset : function(context){
+        var template = Handlebars.compile($("#character-preset-template").html());
 
+        this.compileCharacterPreset = function(context){
+            var html = $(template(context));
+            $("#toolbox-character .character-item-list").empty().append(html);
+        }
+
+        this.compileCharacterPreset(context);
     }
 }
 
 var Timeline = {
     selectedBlockId : 0,
     init : function(){
-        Template.compileTimeline(timelineContext);
-        Template.compileBackgroundPreset(backgroundPresetContext);
 
-        $(".button-add-block").click(this.addBlock);
+        $(".button-add-block").click(this.addBlock.bind(this));
+        $("#block-list").on("click", ".button-add-action", this.toggleActionMenu.bind(this));  
+        $("#block-list").on("click", ".button-remove-block", this.removeBlock.bind(this));
+        $("#block-list").on("click", ".block", this.selectBlock.bind(this));
+        $("#block-list").on("click", ".add-character-action", this.addCharacterAction.bind(this));
+        $("#block-list").on("click", ".add-background-action", this.addBackgroundAction.bind(this));
+        $("#block-list").on("click", ".button-remove-action", this.removeAction.bind(this));
 
-        $("#block-list").on("click",".button-add-action", this.addAction);  
-        $("#block-list").on("click",".button-remove-block", this.removeBlock);
-        $("#block-list").on("click",".block", this.selectBlock);
+        $("#block-list").on("change", ".action.background select", this.changeBackgroundAction.bind(this));
+        $("#block-list").on("change", ".action.character select", this.changeCharacterAction.bind(this));
+        $("#block-list").on("keyup", ".action.character input", this.changeCharacterAction.bind(this));
+        $("#block-list").on("change", ".action.text select", this.changeTextAction.bind(this));
+        $("#block-list").on("keyup", ".action.text textarea", this.changeTextAction.bind(this));
 
-        // 텍스트박스 동기화 
-        $("#block-list").on("keyup", ".action-text", this.copyText);
-
-        // action-list li 태그를 이동할 수 있게 
         $( "#block-list" ).sortable({
-            revert: true, //revert는 디폴트가 false이다. 드래그가 스탑되면 원래 자리로 돌아간다. revert가 true이면 그 요소는 언제나 되돌아 간다.
-            handle: ".handler"
+            revert: true,
+            handle: ".handler",
+            deactivate : this.sortBlock.bind(this)
         });
 
-        $( ".draggable" ).draggable({ 
-            revert: true
-        });
-
-        $("#screen").droppable({
-            accept: ".draggable",
-            hoverClass: "ui-state-hover",
-            drop: function(event, ui){
-                var item = ui.draggable;
-
-                if(item.hasClass("background-item")){
-                    $("#layer-background").css({
-                        backgroundImage : "url('"+item.data("image")+"')"
-                    })
-                }else if(item.hasClass("character-item")){
-
-                }
-            }
-        });
-
-         $(".leftChracter").droppable({
-               accept: ".character1",
-               activeClass: "ui-state-hover",
-               hoverClass: "ui-state-active",
-               drop: function( event, ui ) {
-
-                $(".leftChracter").css({
-                      backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content2.png')",
-                      border:"0px",
-                });
-            }
-        });
-
-         $(".rightChracter").droppable({
-               accept: ".character2",
-               activeClass: "ui-state-hover",
-               hoverClass: "ui-state-active",
-               drop: function( event, ui ) {
-
-                $(".rightChracter").css({
-                      backgroundImage:"url('http://www.mhsh.co.kr/multi/images/section1/content3.png')",
-                      border:"0px",
-                });
-            }
-        });
     },
-
-
-    addBlock : function(){
-        //EditorDataSync.addBlock(function(data){
-            timelineContext.blockList.push({
-                blockId:1,
-                actionList:[
-                    {actionId:1, isText:true, actionType:"text"},
-                ]
-            })
-            Template.compileTimeline(timelineContext);
-        //}); 
+    addBlock : function(e){
+        Editor.addBlock(function(){
+            Editor.compileTimeline();
+            $("li.block[data-block-id="+this.selectedBlockId+"]").addClass("selected");
+        }.bind(this));
     },
-
-    removeBlock : function(){
-        EditorDataSync.removeBlock(this.selectedBlockId);
-        $("li.selected").remove();
+    removeBlock : function(e){
+        var blockId = $(e.target).closest("li.block").data("blockId");
+        Editor.removeBlock(blockId);
     },
-
-    //TODO: removeAction
-
-    //블록선택 
-    selectBlock : function(){
-        this.selectedBlockId = $(this).data("blockId"); //jQuery( ":data(key)" ) key: The data key.
+    sortBlock : function(e, ui){
+        var target = $(ui.item);
+        var blockId = target.data("blockId");
+        var changePrevBlockId = target.prev("li.block").data("blockId");
+        EditorDataSync.sortBlock(blockId, changePrevBlockId);
+    },
+    selectBlock : function(e){
+        var blockId = $(e.target).closest("li.block").data("blockId");
         $("li.selected").removeClass("selected");
-        $(this).addClass("selected"); // 매개변수인 selected를 클래스 특성에 추가한다. 이미 존재하는 class 특성 값에 새로운 값 추가
+        $(e.target).closest("li.block").addClass("selected");
+        Editor.selectBlock(blockId);
     },
-
-    selectAction : function(){
-         this.selectedActionId = $(this).data("actionId");
-        $(this).removeClass("selected");
-        console.log(this.selectedActionId);
+    toggleActionMenu : function(e){
+        $(".action-type-list").hide();
+        $(e.target).next(".action-type-list").show();
     },
-
-    addAction : function(){
-        EditorDataSync.addAction(this.selectedBlockId,function(data){
-           var select = $("select.temp.action-option").clone();
-           var selectText = $("option.textAction");
-           select.removeClass("temp");
-           var li = $("<li><div class='move'></div></li>");
-          
-           li.data("actionId",data.actionId).append(select);
-           $("li.selected ul.action-list").append(li);
+    addCharacterAction : function(e){
+        var blockId = $(e.target).closest("li.block").data("blockId");
+        Editor.addCharacter(blockId, 1, function(){
+            $(".action-type-list").hide();
         });
     },
-
-     changeOption : function(){
-      var textArea = $("<textarea class='textsync' placeholder='이곳에 대사를 입력해주세요' maxlength='300'></textarea>");
-         if($(this).val() == "text")
-            $(this).closest("li").append(textArea);
-         // else if($(this).val() == "character")
-         //    $(this).closest("li").append(textArea);               
-     },
-
-     copyText :  function(){
-           $(".textfield").val($(this).val());
-        },
-
-     backgroundFill : function(){
-
-         $(".dragzones").draggable({
-        start: handleDragStart,
-        cursor: 'move',
-        revert: "invalid",
+    addBackgroundAction : function(e){
+        var blockId = $(e.target).closest("li.block").data("blockId");
+        Editor.addBackground(blockId, 0, function(){
+            $(".action-type-list").hide();
         });
-        $(".dropzones").droppable({
-            drop: handleDropEvent,
-            tolerance: "touch",              
+    },
+    changeCharacterAction : function(e){
+        var targetAction = $(e.target).closest("li.action");
+        var blockId = targetAction.closest("li.block").data("blockId");
+        var actionId = targetAction.data("actionId");
+
+        var characterId = parseInt(targetAction.children(".character-select").val());
+        var optionId = parseInt(targetAction.children(".option-select").val());
+        var posX = targetAction.children(".character-pos-x").val();
+        var posY = targetAction.children(".character-pos-y").val();
+        Editor.changeCharacter(blockId, actionId, characterId, optionId, posX, posY);
+    },
+    changeBackgroundAction : function(e){
+        var targetAction = $(e.target).closest("li.action");
+        var blockId = targetAction.closest("li.block").data("blockId");
+        var actionId = targetAction.data("actionId");
+
+        var presetId = parseInt(targetAction.children(".preset-select").val());
+        var optionId = parseInt(targetAction.children(".option-select").val());
+
+        Editor.changeBackground(blockId, actionId, presetId, optionId);
+    },
+    changeTextAction : function(e){
+        var targetAction = $(e.target).closest("li.action");
+        var blockId = targetAction.closest("li.block").data("blockId");
+        var actionId = targetAction.data("actionId");
+
+        var text = targetAction.children(".action-text").val();
+        var characterId = targetAction.children(".character-select").val();
+
+        Editor.changeText(blockId, text, characterId);
+    },
+    removeAction : function(e){
+        var blockId = $(e.target).closest("li.block").data("blockId");
+        var actionId = $(e.target).closest("li.action").data("actionId");
+        Editor.removeAction(blockId, actionId);
+    }
+}
+
+var Preview = {
+    previewBlockId : 0,
+    init : function(){
+        $("#screen").droppable({
+            accept: ".toolbox-item",
+            hoverClass: "ui-state-hover",
+            drop: this.screenDropEvent.bind(this)
         });
-        validateDropzones();
+        $(".preview-select-character").on("change", this.changeText.bind(this));
+        $(".preview-text-box").on("keyup", this.changeText.bind(this));
+    },
+    screenDropEvent : function(e, ui){
+        if(this.previewBlockId == 0){
+            alert("먼저 장면을 선택하세요");
+            return;
         }
+        if(ui.draggable.hasClass("background-item")){
+            this.addBackground(e,ui);
+        }else if(ui.draggable.hasClass("character-item")){
+            this.addCharacter(e,ui);
+        }
+    },
+    addBackground : function(e, ui){
+        var item = ui.draggable;
+        Editor.addBackground(this.previewBlockId, item.data("presetId"));
+    },
+    addCharacter : function(e, ui){
+        var item = ui.draggable;
+        Editor.addCharacter(this.previewBlockId, item.data("characterId"));
+    },
+    moveCharacter : function(e, ui){
+        var characterId = $(e.target).data("characterId");
+        var posX = ui.position.left / $("#screen").width() * 100;
+        var posY = ui.position.top / $("#screen").height() * 100;
+        Editor.changeCharacterPreset(this.previewBlockId, characterId, posX, posY);
+    },
+    changeText : function(e){
+        var text = $(".preview-text-box").val();
+        var characterId = $(".preview-select-character").val();
+        Editor.changeTextPreset(this.previewBlockId, text, characterId);
+    },
+    updateBlock : function(data){
+        this.updateBackground(data.background.image);
+        this.updateText(data.text.text, data.text.characterId);
+        $("#layer-object").empty();
+        for(var i = 0; i < data.character.length; ++i){
+            var character = data.character[i];
+            this.updateCharacter(character.data, character.posX, character.posY);
+        }
+    },
+    updateText : function(text, characterId){
+        $("#layer-text .preview-text-box").val(text);
+        $("#layer-text .preview-select-character").val(characterId);
+    },
+    updateBackground : function(image){
+        $("#layer-background").css({
+            backgroundImage : "url('"+image+"')"
+        })
+    },
+    updateCharacter : function(data, posX, posY){
+        var container = $("#layer-object .character[data-character-id="+data.characterId+"]");
+        if(container.length == 0){
+            var newImage = $("<img>")
+                .attr("src",data.image)
+            var container = $("<div>")
+                .attr("data-character-id",data.characterId)
+                .addClass("character")
+                .append(newImage)
+                .appendTo("#layer-object")
+                .css({
+                    "top" : posY+"%",
+                    "left" : posX+"%",
+                })
+                .draggable({stop:this.moveCharacter.bind(this)});
+        }else{
+            container.css({
+                "top" : posY+"%",
+                "left" : posX+"%"
+            })
+        }
+    },
 }
 
-var Toolbar = {
+var Toolbox = {
+    init : function(){
+        $(".toolbox-item").draggable({ 
+            helper: "clone"
+        });
+    },
+    switchTab : function(id){
 
+    }
 }
+
+Editor.init();

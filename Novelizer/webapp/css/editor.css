@@ -105,10 +105,42 @@ main{
 		#preview #screen #layer-object{
 			z-index: 20;
 		}
+			#preview #screen #layer-object .character{
+				position: absolute;
+
+				box-sizing: border-box;
+				max-width: 100%;
+				max-height: 100%;
+
+				border: 1px dashed #aaa;
+				cursor: all-scroll;
+			}
 
 		#preview #screen #layer-text{
+			top: auto;
+			bottom: 0;
 			z-index: 30;
+
+			box-sizing: border-box;
+			width: 100%;
+			height: 30%;
+			padding: 10px;
 		}
+			#preview #screen #layer-text .preview-text-box{
+				box-sizing: border-box;
+
+				width: 100%;
+				height: 100%;
+				resize: none;
+				padding: 10px;
+
+				font-size: 16px;
+			}
+
+			#preview #screen #layer-text .preview-select-character{
+				position: absolute;
+				top: -15px;
+			}
 
 
 /* toolbox */
@@ -138,16 +170,28 @@ main{
 		box-sizing: border-box;
 	}
 
-	#toolbox-background .background-item-list .background-item{
+	#toolbox .background-item{
 		float: left;
 		text-align: center;
 
 		padding: 5px;
 		margin-right: 5px;
-
-		border: 1px solid #ddd;
 	} 
-		#toolbox-background .background-item-list .background-item img{
+		#toolbox .background-item img{
+			width: 100px;
+			height: 100px;
+
+			border: 1px solid #ddd;
+		} 
+
+	#toolbox .character-item{
+		float: left;
+		text-align: center;
+
+		padding: 5px;
+		margin-right: 5px;
+	} 
+		#toolbox .character-item img{
 			width: 100px;
 			height: 100px;
 
@@ -220,6 +264,7 @@ main{
 
 				#timeline #block-list .block-menu-box .action-type-list li{
 					padding: 3px;
+					cursor: pointer;
 				}
 
 				#timeline #block-list .block-menu-box .action-type-list li:hover{
@@ -227,10 +272,14 @@ main{
 				}
 
 		#timeline #block-list .block .action-list{
+			width:100%;
 		}
 
 			#timeline #block-list .block .action-list .action{
-				padding: 2px 0px;
+				position: relative;
+
+				padding: 2px;
+				margin: 2px 0px;
 			}
 
 				#timeline #block-list .block .action-list .action .action-text{
@@ -242,4 +291,10 @@ main{
 
 					border: none;
 					font-size: 12px;
+				}
+
+				#timeline #block-list .block .action-list .action .button-remove-action{
+					cursor: pointer;
+					position: absolute;
+					right: 0px;
 				}

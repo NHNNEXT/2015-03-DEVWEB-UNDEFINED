@@ -29,6 +29,11 @@
                                 <div class="character-right"></div>
                             </div>
                             <div id="layer-text" class="layer">
+                                <select class="preview-select-character">
+                                    <option value="0">독백</option>
+                                    <option value="1">영희</option>
+                                    <option value="2">철수</option>
+                                </select>
                                 <textarea class="preview-text-box" placeholder="이곳에 대사를 입력해주세요" maxlength="300"></textarea>
                             </div>
                         </div>
@@ -46,8 +51,8 @@
                                 <ul class="background-item-list">
                                 <!--start template-->
                                 <script id="background-preset-template" type="text/x-handlebars-template">
-                                    {{#each backgroundPreset}}
-                                    <li class="background-item draggable" data-image="{{image}}" data-preset-id="{{presetId}}">
+                                    {{#each presetList}}
+                                    <li class="background-item toolbox-item" data-image="{{image}}" data-preset-id="{{presetId}}">
                                         <img src="{{image}}" />
                                         <h4>{{name}}</h4>
                                     </li>
@@ -60,8 +65,8 @@
                                 <ul class="character-item-list">
                                 <!--start template-->
                                 <script id="character-preset-template" type="text/x-handlebars-template">
-                                    {{#each characterPreset}}
-                                    <li class="character-item draggable" data-character-id="{{characterId}}">
+                                    {{#each characterList}}
+                                    <li class="character-item toolbox-item" data-image="{{image}}" data-character-id="{{characterId}}">
                                         <img src="{{image}}" />
                                         <h4>{{name}}</h4>
                                     </li>
@@ -77,63 +82,60 @@
                 <div class="layout-right">
                     <!--start timeline-->
                     <div id="timeline"> 
-                        <h1>TimeLine</h1>
+                        <h1>Timeline</h1>
                         <ol id="block-list">
                         <!--start template-->
                         <script id="timeline-template" type="text/x-handlebars-template">
                             {{#each blockList}}
                             <li class="block" data-block-id="{{blockId}}">
                                 <div class="handler">
-                                    {{blockId}}
+                                    ::
                                 </div>
                                 <div class="container">
                                     <ul class="action-list">
                                         {{#each actionList}}
                                         <li class="action {{actionType}}" data-action-id="{{actionId}}">
-                                            {{#if isText}}
-                                                <select class="action-select">
-                                                    <option value="0">독백</option>
-                                                    <option value="1">영희</option>
-                                                    <option value="2">철수</option>
+                                            {{#equals actionType "text"}}
+                                                <select class="character-select">
+                                                    <option value="0" {{#equals characterId 0}}selected{{/equals}}>독백</option>
+                                                    <option value="1" {{#equals characterId 1}}selected{{/equals}}>영희</option>
+                                                    <option value="2" {{#equals characterId 2}}selected{{/equals}}>철수</option>
                                                 </select>
-                                                <textarea class="editable action-text" placeholder="대사를 입력하세요"></textarea>
-                                            {{/if}}
+                                                <textarea class="editable action-text" placeholder="대사를 입력하세요">{{text}}</textarea>
+                                            {{/equals}}
 
-                                            {{#if isBackground}}
-                                                배경화면
-                                                <select class="action-select">
-                                                    <option value="0">학교</option>
-                                                    <option value="1">집</option>
-                                                    <option value="2">공원</option>
+                                            {{#equals actionType "background"}}
+                                                배경
+                                                <select class="preset-select">
+                                                    <option value="0" {{#equals presetId 1}}selected{{/equals}}>없음</option>
+                                                    <option value="1" {{#equals presetId 1}}selected{{/equals}}>하늘</option>
+                                                    <option value="2" {{#equals presetId 2}}selected{{/equals}}>공원</option>
                                                 </select>
-                                                <select class="action-select">
-                                                    <option value="0">등장</option>
-                                                    <option value="1">이동</option>
-                                                    <option value="2">퇴장</option>
-                                                </select>
-                                            {{/if}}
+                                                <span class="button-remove-action">x</span>
+                                            {{/equals}}
 
-                                            {{#if isCharacter}}
+                                            {{#equals actionType "character"}}
                                                 캐릭터
-                                                <select class="action-select">
-                                                    <option value="0">영희</option>
-                                                    <option value="1">철수</option>
+                                                <select class="character-select">
+                                                    <option value="1" {{#equals characterId 1}}selected{{/equals}}>영희</option>
+                                                    <option value="2" {{#equals characterId 2}}selected{{/equals}}>철수</option>
                                                 </select>
-                                                <select class="action-select">
-                                                    <option value="0">등장</option>
-                                                    <option value="1">이동</option>
-                                                    <option value="2">퇴장</option>
+                                                <select class="option-select">
+                                                    <option value="0" {{#equals optionId 0}}selected{{/equals}}>등장</option>
+                                                    <option value="1" {{#equals optionId 1}}selected{{/equals}}>퇴장</option>
                                                 </select>
-                                            {{/if}}
+                                                x:<input type="text" class="character-pos-x" size="2" value="{{posX}}" />
+                                                y:<input type="text" class="character-pos-y" size="2" value="{{posY}}" />
+                                                <span class="button-remove-action">x</span>
+                                            {{/equals}}
                                         </li>
                                         {{/each}}
                                     </ul>
                                     <div class="block-menu-box">
                                         <button class="button-add-action">+</button>
                                         <ul class="action-type-list">
-                                            <li>텍스트</li>
-                                            <li>캐릭터</li>
-                                            <li>배경</li>
+                                            <li class="add-character-action">캐릭터</li>
+                                            <li class="add-background-action">배경</li>
                                         </ul>
                                         <button class="button-remove-block">x</button>
                                     </div>
@@ -152,13 +154,9 @@
             </div>
         </main>
 
-    <script type="text/javascript" src="js/editor.js"></script>
     <script type="text/javascript" src="js/dataSync.js"></script>
+    <script type="text/javascript" src="js/editor.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            Timeline.init();
-            EditorDataSync.init();
-        })
     </script>
 </body>
 </html>
