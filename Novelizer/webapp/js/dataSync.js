@@ -74,8 +74,12 @@ var EditorDataSync = {
  			url : this.url+"/scene",
  			method : "POST",
  			dataType : "json",
- 			data : {sceneId : this.sceneId,
- 					data : JSON.stringify(this.blockList)},
+ 			data : {
+ 					sceneData:{
+ 						sceneId : this.sceneId,
+ 						data : JSON.stringify(this.blockList)
+ 					}
+ 				},
  		})
 		.done(callback[done])
 		.fail(callback[fail]);
