@@ -32,13 +32,24 @@ public class SceneService {
 	public String saveScene(String sceneData) throws NullPointerException{
 		Scene scene = jsonHandler.convertToScene(sceneData);
 		scene.setProjectId(1);
+		int sceneId = scene.getSceneId();
 		try {
-			if (sceneDao.selectScene(scene.getSceneId()) != null) {
-				return "Error : Scene already Exist";
-			} else {
-				int sceneId = sceneDao.insertScene(scene);
+			if (sceneDao.selectScene(sceneId) != null) {
+			
+				for(Block block : blockDao.selectBySceneId(sceneId)){
+					actionDao.deleteByParentId(block.getBlockId());
+				}
+				blockDao.deleteByParentId(sceneId);
+				sceneDao.deleteById(scene.getSceneId());
+				
+				sceneDao.insertScene(scene);
 				blockService.saveBlock(scene);
-				return "sceneId : " + sceneId;
+				return "Scene update";
+			} else {
+				log.info(scene.toString());
+				int insertedSceneId = sceneDao.insertScene(scene);
+				blockService.saveBlock(scene);
+				return "insertedSceneId : " + insertedSceneId;
 			}
 		} catch (Exception e) {
 			return "error : " + e;

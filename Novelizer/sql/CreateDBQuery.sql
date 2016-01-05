@@ -25,7 +25,7 @@ USE `novelizer` ;
 -- Table `novelizer`.`action`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`action` (
-  `action_id` INT NOT NULL AUTO_INCREMENT,
+  `action_id`  INT NOT NULL DEFAULT 0,
   `action_type` VARCHAR(10) NULL DEFAULT NULL,
   `character_id` INT NULL DEFAULT '0',
   `preset_id` INT NULL DEFAULT '0',
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`action` (
   `animation` VARCHAR(50) DEFAULT NULL,
   `text` TEXT(500) DEFAULT NULL,  
   `block_id` INT NOT NULL,
-  PRIMARY KEY (`action_id`))
+  PRIMARY KEY (`action_id`,`block_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -43,10 +43,10 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `novelizer`.`block`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`block` (
-  `block_id` INT NOT NULL AUTO_INCREMENT,
+  `block_id`  INT NOT NULL DEFAULT 0,
   `next_block_id` INT NULL DEFAULT '0',
   `scene_id` INT NOT NULL,
-  PRIMARY KEY (`block_id`))
+  PRIMARY KEY (`block_id`,`scene_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -55,7 +55,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `novelizer`.`project`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
-  `project_id` INT NOT NULL AUTO_INCREMENT,
+  `project_id`  INT NOT NULL DEFAULT 0,
   `project_name` VARCHAR(45) NULL,
   `project_info` TEXT(500) NULL,
   `user_id` INT NOT NULL,
@@ -69,11 +69,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `novelizer`.`scene`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`scene` (
-  `scene_id` INT NOT NULL AUTO_INCREMENT,
+  `scene_id` INT NOT NULL DEFAULT 0,
   `project_id` INT NOT NULL,
   `start_block_id` INT NULL,
   `scene_name` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`scene_id` ))
+  PRIMARY KEY (`scene_id`,`project_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

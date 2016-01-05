@@ -70,8 +70,14 @@ var Viewer = {
 
 		if(action.actionType == "text")
 		{
-			layer = $("#layer-text");
-			layer.html(action.text);
+			if(this.getCharacter(action.characterId)){
+				$("#layer-text .character-name")
+					.show()
+					.text(this.getCharacter(action.characterId).name);
+			}else{
+				$("#layer-text .character-name").hide();
+			}
+			$("#layer-text p").text(action.text);
 		}
 		else if(action.actionType == "character")
 		{
@@ -79,14 +85,14 @@ var Viewer = {
 			// ISSUE! object요소에 z-index attr 추가 
 			if(action.optionId == 0){
 				if($("#character"+action.characterId).length == 0){
+					var img = $("<img>")
+						.attr("src",this.getCharacter(action.characterId).image);
 					$("<div id='character"+action.characterId+"' class='character'></div>")
 						.css({
-							backgroundImage:"url('"+this.getCharacter(action.characterId).image+"')",
-							width:"200px",
-							height:"500px",
 							left:action.posX + "%",
 							top:action.posY + "%"
 						})
+						.append(img)
 						.appendTo(layer);
 				}else{
 					$("#character"+action.characterId)

@@ -12,18 +12,21 @@ import model.Action;
 public class ActionDao extends AbstractDao<Action> {
 	private static final Logger log = LoggerFactory.getLogger(ActionDao.class);
 
-	private static final String insertQuery = "INSERT INTO action(action_type, character_id, preset_id, option_id, posX, posY, animation, text, block_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String insertQuery = "INSERT INTO action(action_id, action_type, character_id, preset_id, option_id, posX, posY, animation, text, block_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	private final String selectByParentIdQuery = "SELECT * FROM action WHERE block_id = ?;";
+	private final String deleteByParentIdQuery = "DELETE FROM action WHERE block_id = ?;";
 
 	public ActionDao() {
 		super.insertQuery = insertQuery;
 		super.selectByParentIdQuery = selectByParentIdQuery;
+		super.deleteByParentIdQuery = deleteByParentIdQuery;
 	}
 
 	public int insertAction(Action action) throws SQLException {
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
-
+			
+			insertList.add(action.getActionId());
 			insertList.add(action.getActionType());
 			insertList.add(action.getCharacterId());
 			insertList.add(action.getPresetId());
