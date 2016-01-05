@@ -3,6 +3,35 @@ var Viewer = {
 	sceneId : 1,
 	blockList : [],
 	currentBlock : null,
+	presetList : [
+        {
+            presetId : 0,
+            image : "",
+            name : "없음"
+        },
+        {
+            presetId : 1,
+            image : "https://i.ytimg.com/vi/edaw69Jnjxg/maxresdefault.jpg",
+            name : "하늘"
+        },
+        {
+            presetId : 2,
+            image : "https://i.ytimg.com/vi/edaw69Jnjxg/maxresdefault.jpg",
+            name : "하늘"
+        },
+    ],
+	characterList : [
+        {
+            characterId : 1,
+            image : "http://www.mhsh.co.kr/multi/images/section1/content2.png",
+            name : "영희"
+        },
+        {
+            characterId : 2,
+            image : "http://www.mhsh.co.kr/multi/images/section1/content3.png",
+            name : "철수"
+        },
+    ],
 	presetData : ["http://placekitten.com/g/200/500","http://placekitten.com/g/205/500","http://placehold.it/1000x600"],//임시 데이터
 	init : function(){
 		this.getSceneData(this.startScene.bind(this));
@@ -18,7 +47,7 @@ var Viewer = {
 	},
 	getSceneData : function(callbackDone){
  		var request = $.ajax({
- 			url : this.url+"/blockList",
+ 			url : this.url+"/scene",
  			method : "GET",
  			dataType : "json",
  			data : {sceneId : this.sceneId},
@@ -41,30 +70,38 @@ var Viewer = {
 	doAction : function(action){
 		var layer;
 
-		if(action.type == "TEXT")
+		if(action.actionType == "text")
 		{
 			layer = $("#layer-text");
 			layer.html(action.text);
 		}
-		else if(action.type == "CHARACTER")
+		else if(action.actionType == "character")
 		{
 			layer = $("#layer-obj");
 			// ISSUE! object요소에 z-index attr 추가 
-			if(action.option == "APPEAR"){
-				$("<div id='character"+action.characterId+"' class='character'></div>")
-					.css({
-						backgroundImage:"url('"+this.presetData[action.presetId-1]+"')",
-						width:"200px",
-						height:"500px",
-						left:action.position[0],
-						top:action.position[1]
-					})
-					.appendTo(layer);
-			}else if(action.option=="DISAPPEAR"){
+			if(action.optionId == 0){
+				if($("#character"+action.characterId).length == 0){
+					$("<div id='character"+action.characterId+"' class='character'></div>")
+						.css({
+							backgroundImage:"url('"+this.presetData[action.presetId-1]+"')",
+							width:"200px",
+							height:"500px",
+							left:action.posX + "%",
+							top:action.posY + "%"
+						})
+						.appendTo(layer);
+				}else{
+					$("#character"+action.characterId)
+						.css({
+							left:action.posX + "%",
+							top:action.posY + "%"
+						})
+				}
+			}else if(action.optionId == 1){
 				$("#character"+action.characterId).remove();
 			}
 		}
-		else if(action.type=="BACKGROUND")
+		else if(action.actionType=="background")
 		{
 			layer = $("#layer-bg");
 			layer.css({
