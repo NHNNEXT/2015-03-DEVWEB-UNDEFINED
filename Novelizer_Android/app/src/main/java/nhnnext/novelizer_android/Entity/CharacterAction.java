@@ -13,7 +13,7 @@ public class CharacterAction extends Action {
     private String characterId;
     /* 이후 애니메이션 관련 구현 추가 예정 */
 
-    public CharacterAction(int actionId, String type, int[] position, Drawable img, String characterId, String option){
+    public CharacterAction(int actionId, String type, int[] position, Drawable img, String characterId, String option) {
         super(actionId, type);
         this.position = position;
         this.img = img;
@@ -27,31 +27,16 @@ public class CharacterAction extends Action {
         return position;
     }
 
-    public void setPosition(int[] position) {
-        this.position = position;
-    }
-
     public Drawable getImg() {
         return img;
-    }
-
-    public void setImg(Drawable img) {
-        this.img = img;
     }
 
     public String getOption() {
         return option;
     }
 
-    public void setOption(String option) {
-        this.option = option;
-    }
-
     public String getCharacterId() {
         return characterId;
     }
 
-    public void setCharacterId(String characterId) {
-        this.characterId = characterId;
-    }
 }

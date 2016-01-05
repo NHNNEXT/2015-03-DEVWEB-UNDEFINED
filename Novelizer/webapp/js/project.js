@@ -66,16 +66,4 @@ function getSceneData(projectId, callback){
     })
     .done(callback);
 }
-
-function getUserId(userId, callback){
-	$.ajax({
-		url : "http://localhost:8080/login",
-		method : "GET",
-		dataType:"json", //return type
-		data: '{userId":"'+userId+'","password":"'+password+'"}', 	
-	});
-	.done(callback);
-}
-
 	
-}

@@ -1,107 +1,81 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>drog&amp;drop</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Novelizer</title>
+	<link rel='stylesheet'
+	href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css'>
+	<link
+	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
+	rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" type="text/css" href="css/intro.css">
+	<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script type="text/javascript"></script>
 </head>
 <body>
-        <navigation>
-            <ul>
-                <li class="tab-edit"><a href="#none;">편집</a></li>
-                <li class="tab-preset"><a href="#none;">프리셋</a></li>
-                <li class="tab-scenario"><a href="#none;">시나리오</a></li>
-            </ul>
-        </navigation>
-        <main>
-            <div id="edit">
-                <div class="left">
-                    <div id="preview">
-                    <div id="screen" class="dropzones">
-                        <div class="leftChracter dropzones" ></div>
-                        <div class="rightChracter dropzones"></div>
-                        <form name="input method="post>
-                            <textarea class="textfield textsync" placeholder="이곳에 대사를 입력해주세요" maxlength="300"></textarea>
-                        </form>
-                    </div>
-                    <div id="play"></div>
-                    </div>
-              
-                    <div id="toolbox">
-                        <div id="container"> <!--Question - container를 빼는게 더 좋은건지 보통 어떻게 하는건지-->
-                            <ul class="tabs">
-                                <li class="active" rel="tab1">배경</li>
-                                <li rel="tab2">캐릭터</li>
-                                <li rel="tab3">기타</li>
-                            </ul>
-                                <div class="tab_container">
-                                    <div id="tab1" class="tab_content" style="display:block">
-                                        <div class="backgroundSetBox">
-                                            <span id="droppable" class="backgroundSet draggable"><p><h1>하늘</h1></p></span></span>
-                                            <span id="droppable" class="backgroundSet draggable"><p><h1>마을</h1></p></span>
-                                            <span id="droppable" class="backgroundSet draggable"><p><h1>공원</h1></p></span>
-                                            <span id="droppable" class="backgroundSet draggable"><p><h1>학교</h1></p></span>
+	<div class="header">
+		<div id="title">Novelizer</div>
+	</div>
+	<div id="signUp">Sign Up</div>
+	<div id="login">Login</div>
+	
+	<!-- 회원 가입 화면 -->
+	<div id ="sign-up-box" class="animated fadeInUp">
+		<div class="box-header">
+			<h2>SIGN UP</h2>
+		</div>
+		<form class="loginForm" action="form_action.jsp" method="post">
+			<label for="username">Username</label> <br /> 
+			<input type="text" id="username"> <br /> 
+			<label for="password">Password</label><br /> 
+			<input type="password" id="password"> <br />
+			<button type="submit">
+				<a href="form_action.jsp">Sign Up</a>
+			</button>
+		</form>
+	</div>
 
-                                        </div>
-                                    </div>
-                                    <div id="tab2" class="tab_content">
-                                        <div class="backgroundSetBox">
-                                            <span id="droppable" class="backgroundSet draggable character1"><p><h1>영희</h1></p></span>
-                                            <span id="droppable" class="backgroundSet draggable character2"><p><h1>철수</h1></p></span>
-                                           
+	<!-- 로그인 박스화면 -->
+	<div class="login-box animated fadeInUp">
+		<div class="box-header">
+			<h2>LogIn</h2>
+		</div>
+		<form class="loginForm" action="newProject.html" method="post">
+			<label for="username">Username</label> <br /> 
+			<input type="text" id="username"> <br /> 
+			<label for="password">Password</label><br /> 
+			<input type="password" id="password"> <br />
+			<button type="submit">
+				<a href="newproject.html">Sign In</a>
+			</button>
+		</form>
+		<br /> <a href="#"><p class="small">Forgot your password?</p></a>
+	</div>
 
-                                        </div>
+	
 
+	<script type="text/javascript" src="js/intro.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#logo').addClass('animated fadeInDown');
+			$("input:text:visible:first").focus();
+		});
+		$('#username').focus(function() {
+			$('label[for="username"]').addClass('selected');
+		});
+		$('#username').blur(function() {
+			$('label[for="username"]').removeClass('selected');
+		});
+		$('#password').focus(function() {
+			$('label[for="password"]').addClass('selected');
+		});
+		$('#password').blur(function() {
+			$('label[for="password"]').removeClass('selected');
+		});
+	</script>
 
-                                    </div>
-                                    <div id="tab3" class="tab_content">기타</div>  
-                                </div>
-                                <!-- .tab_container -->
-                        </div>
-                            <!-- #container -->
-                    </div>
-                 </div>
-                
-                    <div id="timeline">
-                    <h1>TimeLines</h1>
-                    <div class="sortable">
-                    <ol id="block-list">
-                    </ol>
-                    <ul>
-                        <select class="temp action-option">
-                            <option value="background" class='backGroundAction'>배경</option>
-                            <option value="text" class='textAction'>텍스트</option> 
-                            <option value="character" class='characterAction'>캐릭터</option>
-                            <option value="variable" class='variableAction'>변수</option>
-                        </select>
-                    </ul>
-                    </div>
-                    <button id="button-add-block">블록추가하기</button>
-                    <button id="button-add-action">액션추가하기</button>
-                    <button id="button-remove">삭제하기</button>
-                </div>
-            </div>
-            <div id="preset">프리셋</div>
-              <form action="/file-upload" class="dropzone">
-                      <div class="fallback">
-                        <input name="file" type="file" multiple/>
-                      </div>
-                 </form> 
-            <div id="scenario">시나리오</div>
-
-        </main>
-
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/dataSync.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            Editor.init();
-            EditorDataSync.init();
-        })
-    </script>
 </body>
 </html>

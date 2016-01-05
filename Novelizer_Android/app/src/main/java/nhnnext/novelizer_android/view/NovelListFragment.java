@@ -3,30 +3,34 @@ package nhnnext.novelizer_android.view;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import nhnnext.novelizer_android.Entity.NovelSummaries;
 import nhnnext.novelizer_android.Entity.NovelSummary;
 import nhnnext.novelizer_android.R;
 import nhnnext.novelizer_android.controller.ViewerActivity;
+import nhnnext.novelizer_android.network.Proxy;
 
 public class NovelListFragment extends Fragment {
-    private ArrayList<NovelSummary> novelSummaries;
+    private List<NovelSummary> novelSummaries;
 
-    interface Listener{
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_novel_list, container, false);
-        novelSummaries = new ArrayList<NovelSummary>();
 
-        getNovelSummaryData(novelSummaries);
+        novelSummaries = getNovelSummaryData();
 
         GridView gridView = (GridView) root.findViewById(R.id.novel_list_grid_view);
         NovelListAdapter adapter = new NovelListAdapter(getActivity(), R.layout.novel_item, novelSummaries);
@@ -43,18 +47,19 @@ public class NovelListFragment extends Fragment {
         return root;
     }
 
-    private void getNovelSummaryData(ArrayList<NovelSummary> novelSummaries){
-        /* novel summary data를 받아오는 model부분 후에 추가 구현  */
-        /* Dummy data */
-        NovelSummary dummy1 = new NovelSummary("novel1 name", "novel1 id");
-        NovelSummary dummy2 = new NovelSummary("novel2 name", "novel2 id");
-        NovelSummary dummy3 = new NovelSummary("novel3 name", "novel3 id");
-        NovelSummary dummy4 = new NovelSummary("novel4 name", "novel4 id");
-        NovelSummary dummy5 = new NovelSummary("novel5 name", "novel5 id");
-        novelSummaries.add(dummy1);
-        novelSummaries.add(dummy2);
-        novelSummaries.add(dummy3);
-        novelSummaries.add(dummy4);
-        novelSummaries.add(dummy5);
+    private List<NovelSummary> getNovelSummaryData(){
+        Proxy proxy = new Proxy();
+
+        String projectsJson = proxy.getProjectsByJson(1);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            NovelSummaries novelSummaries = objectMapper.readValue(projectsJson,NovelSummaries.class);
+            return novelSummaries.getNovelSummaries();
+        } catch (Exception e) {
+            Log.e("NovelSummaries Error", "" + e);
+            throw new RuntimeException();
+        }
+
     }
 }

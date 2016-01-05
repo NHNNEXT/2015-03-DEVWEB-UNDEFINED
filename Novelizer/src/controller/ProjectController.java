@@ -17,7 +17,7 @@ import dao.ProjectDao;
 import model.Project;
 import service.ProjectService;
 
-@WebServlet("/project")
+@WebServlet("/newproject")
 public class ProjectController extends HttpServlet {
 	private Logger log = LoggerFactory.getLogger(ProjectController.class);
 
@@ -30,8 +30,8 @@ public class ProjectController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int userId = Integer.parseInt(req.getParameter("userId"));
-		resp.getWriter().write(service.getProjects());
+		String userId = ""+req.getParameter("userId");
+		resp.getWriter().write(service.getProjectsByUserId(Integer.parseInt(userId)));
 
 	}
 
