@@ -78,7 +78,7 @@ var EditorDataSync = {
  					sceneData: JSON.stringify([{
  						sceneId : this.sceneId,
  						blockList : JSON.stringify(this.blockList)
- 					}]))
+ 					}])
  				},
  		})
 		.done(callback[done])
