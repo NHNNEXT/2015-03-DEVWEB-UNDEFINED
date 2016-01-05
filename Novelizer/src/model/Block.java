@@ -41,4 +41,11 @@ public class Block {
 		this.sceneId = sceneId;
 	}
 
+	@Override
+	public String toString() {
+		return "Block [blockId=" + blockId + ", actionList=" + actionList + ", nextBlockId=" + nextBlockId
+				+ ", sceneId=" + sceneId + "]";
+	}
+
+	
 }

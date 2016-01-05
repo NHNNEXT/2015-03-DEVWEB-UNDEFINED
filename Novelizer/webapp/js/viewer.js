@@ -32,7 +32,6 @@ var Viewer = {
             name : "철수"
         },
     ],
-	presetData : ["http://placekitten.com/g/200/500","http://placekitten.com/g/205/500","http://placehold.it/1000x600"],//임시 데이터
 	init : function(){
 		this.getSceneData(this.startScene.bind(this));
 		$(document).on("click","#layer-text",this.onCommand.bind(this));
@@ -52,11 +51,10 @@ var Viewer = {
  			dataType : "json",
  			data : {sceneId : this.sceneId},
  		})
-
- 		request.done(callbackDone);
+ 		.done(callbackDone);
 	},
 	startScene : function(data){
-		this.blockList = data;
+		this.blockList = data.blockList;
 		var block = this.getBlock(1); // 임시 데이터
 		this.playBlock(block);
 	},
@@ -83,7 +81,7 @@ var Viewer = {
 				if($("#character"+action.characterId).length == 0){
 					$("<div id='character"+action.characterId+"' class='character'></div>")
 						.css({
-							backgroundImage:"url('"+this.presetData[action.presetId-1]+"')",
+							backgroundImage:"url('"+this.getCharacter(action.characterId).image+"')",
 							width:"200px",
 							height:"500px",
 							left:action.posX + "%",
@@ -105,7 +103,7 @@ var Viewer = {
 		{
 			layer = $("#layer-bg");
 			layer.css({
-				backgroundImage:"url('"+this.presetData[action.presetId-1]+"')",
+				backgroundImage:"url('"+this.getPreset(action.presetId).image+"')",
 			})
 		}
 	},
@@ -126,6 +124,16 @@ var Viewer = {
 		}
 		
 		return this.getBlock(nextBlockId);
+	},
+	getPreset : function(presetId){
+		return this.presetList.find(function(element, index, array){
+			return (element.presetId == presetId);
+		})
+	},
+	getCharacter : function(characterId){
+		return this.characterList.find(function(element, index, array){
+			return (element.characterId == characterId);
+		})
 	}
 }
 

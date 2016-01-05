@@ -61,9 +61,16 @@ public class ActionDao extends AbstractDao<Action> {
 	private Action convertToAction(List<Object> actionContents) {
 		int actionId = (Integer) actionContents.get(0);
 		String type = (String) actionContents.get(1);
-		int blockId = (Integer) actionContents.get(2);
+		int characterId = (Integer) actionContents.get(2);
+		int presetId = (Integer) actionContents.get(3);
+		int optionId = (Integer) actionContents.get(4);
+		float posX = (Float) actionContents.get(5);
+		float posY = (Float) actionContents.get(6);
+		String animation = (String) actionContents.get(7);
+		String text = (String) actionContents.get(8);
+		int blockId = (Integer) actionContents.get(9);
 
-		return new Action(actionId, type, blockId);
+		return new Action(actionId, type, characterId, presetId, optionId, posX, posY, animation, text, blockId);
 	}
 
 	@Override

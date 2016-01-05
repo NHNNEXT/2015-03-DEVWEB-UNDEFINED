@@ -72,7 +72,10 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 
-			objects = makeObjects(rsmd);
+			while (rs.next()) {
+				rsmd = rs.getMetaData();
+				objects = makeObjects(rsmd);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +99,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		close();
 
 		return allObjects;
 	}
@@ -115,7 +119,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		close();
 		return allObjects;
 	}
 
@@ -125,8 +129,9 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 
 		for (int i = 0; i < rsmd.getColumnCount(); i++) {
 			objects.add(rs.getObject(i + 1));
+			
 		}
-
+		
 		return objects;
 	}
 

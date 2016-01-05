@@ -37,18 +37,18 @@ public class SceneController extends HttpServlet {
 		resp.getWriter().print(result);
 	}
 
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		int sceneId = Integer.parseInt(req.getParameter("sceneId"));
-//		log.info("new Get");
-//		String result;
-//		try {
-//			result = service.getScene(sceneId);
-//		} catch (Exception e) {
-//			result = "error : " + e;
-//			e.printStackTrace();
-//		}
-//		resp.setStatus(200);
-//		resp.getWriter().print(result);
-//	}
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int sceneId = Integer.parseInt(req.getParameter("sceneId"));
+		log.info("new Get");
+		String result;
+		try {
+			result = service.getScene(sceneId);
+		} catch (Exception e) {
+			result = "error : " + e;
+			e.printStackTrace();
+		}
+		resp.setStatus(200);
+		resp.getWriter().print(result);
+	}
 }

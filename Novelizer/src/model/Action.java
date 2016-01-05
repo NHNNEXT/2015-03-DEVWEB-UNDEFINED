@@ -23,12 +23,21 @@ public class Action {
 	}
 
 	public Action(int actionId, String type, int blockId) {
-		this(actionId, type, blockId, null);
+		this(actionId, type, 0, 0, 0, 0.0f, 0.0f, null, null, blockId);
 	}
 
-	public Action(int actionId, String type, int blockId, String optionData) {
+	public Action(int actionId, String actionType, int characterId, int presetId, int optionId, float posX, float posY,
+			String animation, String text, int blockId) {
+		super();
 		this.actionId = actionId;
-		this.actionType = type;
+		this.actionType = actionType;
+		this.characterId = characterId;
+		this.presetId = presetId;
+		this.optionId = optionId;
+		this.posX = posX;
+		this.posY = posY;
+		this.animation = animation;
+		this.text = text;
 		this.blockId = blockId;
 	}
 
@@ -74,6 +83,13 @@ public class Action {
 
 	public void setBlockId(int blockId) {
 		this.blockId = blockId;
+	}
+
+	@Override
+	public String toString() {
+		return "Action [actionId=" + actionId + ", actionType=" + actionType + ", characterId=" + characterId
+				+ ", presetId=" + presetId + ", optionId=" + optionId + ", posX=" + posX + ", posY=" + posY
+				+ ", animation=" + animation + ", text=" + text + ", blockId=" + blockId + "]";
 	}
 
 }

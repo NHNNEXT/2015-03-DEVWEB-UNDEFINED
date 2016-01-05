@@ -2,6 +2,9 @@ package service;
 
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dao.ActionDao;
 import dao.BlockDao;
 import dao.SceneDao;
@@ -10,6 +13,8 @@ import model.Scene;
 import utils.json.JsonHandler;
 
 public class SceneService {
+	private static final Logger log = LoggerFactory.getLogger(SceneService.class);
+
 	private JsonHandler<Scene> jsonHandler;
 	private BlockService blockService;
 	private SceneDao sceneDao;
@@ -19,10 +24,12 @@ public class SceneService {
 	public SceneService() {
 		jsonHandler = new JsonHandler<>();
 		sceneDao = new SceneDao();
+		blockDao = new BlockDao();
+		actionDao = new ActionDao();
 		blockService = new BlockService();
 	}
 
-	public String saveScene(String sceneData) {
+	public String saveScene(String sceneData) throws NullPointerException{
 		Scene scene = jsonHandler.convertToScene(sceneData);
 		scene.setProjectId(1);
 		try {
@@ -38,16 +45,19 @@ public class SceneService {
 		}
 	}
 
-//	public String getScene(int sceneId) throws SQLException {
-//		Scene scene = sceneDao.selectScene(sceneId);
-//		if (scene == null) {
-//			throw new NullPointerException();
-//		}
-//		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));
-//		for (Block block : scene.getBlockList()) {
-//			block.setActionList(actionDao.selectByBlockId((block.getBlockId())));
-//		}
-//		return jsonHandler.convertToJson(scene);
-//	}
+	public String getScene(int sceneId) throws SQLException {
+		Scene scene = sceneDao.selectScene(sceneId);
+		if (scene == null) {
+			throw new NullPointerException();
+		}
+
+		scene.setBlockList(blockDao.selectBySceneId(scene.getSceneId()));
+		for (Block block : scene.getBlockList()) {
+			block.setActionList(actionDao.selectByBlockId((block.getBlockId())));
+		}
+		String json = jsonHandler.convertToJson(scene);
+		log.info(json);
+		return json;
+	}
 
 }
