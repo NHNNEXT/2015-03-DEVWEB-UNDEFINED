@@ -227,14 +227,15 @@ var EditorDataSync = {
  	},
  	getBackgroundActionData : function(blockId){
  		var block = this.getBlock(blockId);
+ 		var action = null;
 
- 		do{
-	 		var action = block.actionList.find(function(element, index, array){
+ 		while(block != null && !action){
+	 		action = block.actionList.find(function(element, index, array){
 	 			return (element.actionType == "background");
 	 		});
 	 		blockId = block.blockId;
 	 		block = this.getPrevBlock(blockId);
- 		}while(block != null && !action);
+ 		}
 
  		if(action){
 	 		var preset = this.getPreset(action.presetId);
@@ -255,7 +256,7 @@ var EditorDataSync = {
  		var closedCharacterId = [];
  		var block = this.getBlock(blockId);
 
- 		do{
+ 		while(block != null){
  			for(var i = 0; i < block.actionList.length; ++i){
  				var action = block.actionList[i];
  				if(action.actionType == "character" &&  closedCharacterId.indexOf(action.characterId) == -1){
@@ -270,19 +271,23 @@ var EditorDataSync = {
 			 		closedCharacterId.push(parseInt(action.characterId));
  				}
  			}
-
  			blockId = block.blockId;
 	 		block = this.getPrevBlock(blockId);
- 		}while(block != null);
+ 		}
 
  		return characterList;
  	},
  	getTextActionData : function(blockId){
  		var block = this.getBlock(blockId);
- 		var action = block.actionList.find(function(element, index, array){
- 			return (element.actionType == "text");
- 		})
 
- 		return {text : action.text, characterId : action.characterId };
+ 		if(block){
+	 		var action = block.actionList.find(function(element, index, array){
+	 			return (element.actionType == "text");
+	 		})
+
+	 		return {text : action.text, characterId : action.characterId };
+ 		}else{
+ 			return {text : "", characterId : 0};
+ 		}
  	},
 }

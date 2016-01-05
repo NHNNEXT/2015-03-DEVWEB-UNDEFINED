@@ -39,6 +39,17 @@ var Editor = {
         Timeline.init();
         Preview.init();
         Toolbox.init();
+        $(".editor-save").on("click",this.save.bind(this));
+    },
+    save : function(){
+        EditorDataSync.postTimelineData({
+            done : function(){
+                
+            },
+            fail : function(){
+
+            }
+        });
     },
     addBlock : function(callback){
         EditorDataSync.addBlock(callback);
@@ -50,6 +61,7 @@ var Editor = {
         Timeline.selectedBlockId = 0;
         Preview.previewBlockId = 0;
         Template.compileTimeline(dataObject);
+        Toolbox.deactivate();
         Preview.updateBlock(this.getBlockPreviewData(0));
         callback();
     },
@@ -57,6 +69,7 @@ var Editor = {
         Timeline.selectedBlockId = blockId;
         Preview.previewBlockId = blockId;
         Preview.updateBlock(this.getBlockPreviewData(blockId));
+        Toolbox.activate();
     },
     compileTimeline : function(){
         var dataObject = EditorDataSync.getDataObject();
@@ -218,6 +231,7 @@ var Timeline = {
         }.bind(this));
     },
     removeBlock : function(e){
+        e.stopPropagation(); // 상위 요소로의 이벤트 전파는 이 메소드로 중지할수 있어요!
         var blockId = $(e.target).closest("li.block").data("blockId");
         Editor.removeBlock(blockId);
     },
@@ -375,9 +389,25 @@ var Toolbox = {
         $(".toolbox-item").draggable({ 
             helper: "clone"
         });
+
+        $(".tab-background").on("click",this.clickTabBtn.bind(this));
+        $(".tab-character").on("click",this.clickTabBtn.bind(this));
+        this.switchTab("background");
+    },
+    activate : function(){
+        $("#toolbox-deactivate").hide();
+    },
+    deactivate : function(){
+        $("#toolbox-deactivate").show();
+    },
+    clickTabBtn : function(e){
+
+        var id = e.target.className.substring(4);
+        this.switchTab(id);
     },
     switchTab : function(id){
-
+        $("#toolbox .toolbox-tab").hide();
+        $("#toolbox-"+id).show();
     }
 }
 
