@@ -1,8 +1,7 @@
-package net.slipp.user;
+package user;
 
 import java.sql.SQLException;
 
-import net.slipp.db.Database;
 
 public class User {
 
