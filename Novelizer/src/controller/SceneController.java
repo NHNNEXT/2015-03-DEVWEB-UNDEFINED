@@ -48,6 +48,7 @@ public class SceneController extends HttpServlet {
 			result = "error : " + e;
 			e.printStackTrace();
 		}
+		log.info(result);
 		resp.setStatus(200);
 		resp.getWriter().print(result);
 	}
