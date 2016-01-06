@@ -89,7 +89,7 @@ $(function() {
     }
     
 	$(document).on("dblclick",".newS", function(){          
-  		location.href='editor.jsp?sceneId'+this.className.substring(13,14);
+  		location.href='editor.jsp?sceneId='+this.className.substring(13,14);
           }); 
     
     // addTab button: just opens the dialog
