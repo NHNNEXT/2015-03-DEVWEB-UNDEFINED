@@ -9,48 +9,79 @@ body,html{
 	overflow: hidden;
 }
 
+body{
+
+	background-color: #FFFEEB;
+}
+
 a{
 	text-decoration: none;
+	color: white;
 }
 
 /* layout */
 navigation{
-	width: 100%;
+	width: 300px;
 }
 	navigation li{
-		float: left;
+		position: relative;
+		display: inline-block;
 		text-align: center;
-
 		width: 150px;
-		padding: 10px 0;
-
-		border: 1px solid #ccc;
+		height: 36px;
 		border-bottom: none;
+		background-color: #665851;
+	    border-radius: 10px 10px 0 0;
+	    color: rgba(255,255,255,0.8);
+	    cursor: pointer;
+	    line-height: 36px;
+	    margin-top: 10px;
+	    margin-left: 10px;
+	    z-index: 500;
+	    box-shadow: 5px -2px 10px rgba(0, 0, 0, 0.4);
+
 	}
-		navigation li a{
-			color: #000;
+
+		/*navigation li:active{
+
+		opacity: 1;
+	    
+	}*/
+		navigation li.editor-save{
+
+			margin-left: -3px;
+					opacity: 0.8;
 		}
+		navigation li a{
+			color: rgba(255,255,255,1);
+			cursor: pointer;
+		}
+
+		navigation li:hover{
+	    color: white;
+	    opacity: 0.9;
+	}
 
 main{
 	clear: both;
-
 	width: 100%;
 	height: 100%;
+	margin-top: -5.5px;
 
-	border: 2px solid #ddd;
+
 }
 
 	#editor{
 		height: 100%;
+		
 	}
 		#editor .layout-left{
 			float: left;
-
 			width: 70%;
 			height: 100%;
 			box-sizing: border-box;
+			position: absolute;
 
-			border-right: 1px solid #ddd;
 		}
 
 		#editor .layout-right{
@@ -65,33 +96,39 @@ main{
 /* preview */
 #preview{
 	position: relative;
-
 	width: 100%;
 	height: 70%;
 	overflow: scroll;
+	background: white;
+	overflow: hidden;
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: #FFFEEB;
 
-	background: #ccc;
 }
+
+	#privew #screen #layer-background #layer-object img{
+		border:none;
+	}
 	#preview #screen{
 		position: absolute;
 		top: 50%;
 		left: 50%;
-
-		width: 640px;
-		height: 480px;
+		width: 880px;
+		height: 460px;
 		margin-top: -240px;
-		margin-left: -320px;
+		margin-left: -442px;
 		box-sizing: border-box;
-
-		background: #fff;
-		border: 1px solid #aaa;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		background: rgba(255,255,255,0.2);
+		overflow: hidden;
 	}
 
 		#preview #screen .layer{
 			position: absolute;
 			top: 0;
 			left: 0;
-
 			width: 100%;
 			height: 100%;
 		}
@@ -107,12 +144,9 @@ main{
 		}
 			#preview #screen #layer-object .character{
 				position: absolute;
-
 				box-sizing: border-box;
 				max-width: 100%;
 				max-height: 100%;
-
-				border: 1px dashed #aaa;
 				cursor: all-scroll;
 			}
 
@@ -120,89 +154,165 @@ main{
 			top: auto;
 			bottom: 0;
 			z-index: 30;
-
 			box-sizing: border-box;
 			width: 100%;
 			height: 30%;
 			padding: 10px;
+
 		}
 			#preview #screen #layer-text .preview-text-box{
-				box-sizing: border-box;
 
+				box-sizing: border-box;
+				border-radius: 5px;
+				border: none;
 				width: 100%;
 				height: 100%;
 				resize: none;
 				padding: 10px;
-
 				font-size: 16px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+				background-color: rgba(255,255,255,0.2);
+
 			}
+
+			#preview #screen #layer-text .preview-text-box:hover, :focus{
+
+					outline: none;
+
+			}
+
 
 			#preview #screen #layer-text .preview-select-character{
 				position: absolute;
 				top: -15px;
+				outline: none;
+				border:none;
+				background-color: rgba(255,255,255,0);
 			}
 
 
 /* toolbox */
 #toolbox{
 	position: relative;
+	width: 98.5%;
+	height: 26.5%;
+	margin-left: 0.5%;
+	margin-top: -15px;
+	border-radius: 5px;
 
-	width: 100%;
-	height: 30%;
 }
 	#toolbox .tab-menu{
 		position: absolute;
-		top: 0;
+		top: 0px;
 		left: 0;
-
-		height:20px;
-		padding:5px;
+		height:30px;
+		line-height:30px;
 	}
 		#toolbox .tab-menu li{
 			float: left;
 			text-align:center;
-
 			width: 80px;
+			height: 30px;
+			background-color: #665851;
+			opacity: 0.8;
+	   		border-radius: 5px 5px 0 0;
+	   		color: rgba(255,255,255,0.8);
+	   		line-height: 30px;
+	   		font-size: 15px;
+	   		box-shadow: 5px -2px 10px rgba(0, 0, 0, 0.4);
+	   		cursor: pointer;
 		}
+
+			#toolbox .tab-menu li:hover, :active, :visited, :focus{
+			opacity: 1;
+		}
+
+			#toolbox .tab-menu li.tab-character{
+			
+			margin-left: 1px;
+		}
+
 
 	#toolbox .container{
 		box-sizing: border-box;
 		width: 100%;
-		height: 100%;
+		height: 93%;
 		padding-top: 30px;
+		margin-top: 0;
+
+	}
+
+
+
+		
+	}
+
+	#toolbox-background {
+
+		height: 100%;
+		width: 100%;
+
+		box-sizing:border-box;
+		
+		border-radius: 5px;
 	}
 
 	#toolbox .toolbox-tab{
 		display: none;
 		width: 100%;
 		height: 100%;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		border-radius: 5px;
+		background-color: rgba(255,255,255,0.2);
 	}
+
+
+	
+
 		#toolbox .background-item{
 			float: left;
 			text-align: center;
-
 			padding: 5px;
 			margin-right: 5px;
+			margin-left: 15px;
+			margin-top: 7px;
+			border-radius: 5px;
+
 		} 
 			#toolbox .background-item img{
 				width: 100px;
 				height: 100px;
-
-				border: 1px solid #ddd;
+/*				border: 3px solid #ddd;*/
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+				border-radius: 5px;
 			} 
+				#toolbox .background-item h4{
+
+					font-size: 14px;
+					color: rgba(0,0,0,0.5);
+				}
+
 
 		#toolbox .character-item{
 			float: left;
 			text-align: center;
-
 			padding: 5px;
 			margin-right: 5px;
 		} 
+
+			#toolbox .character-item h4{
+				font-size: 14px;
+				color: rgba(0,0,0,0.5);
+		} 
+
 			#toolbox .character-item img{
 				width: 100px;
 				height: 100px;
-
-				border: 1px solid #ddd;
+				margin-right: 5px;
+				margin-left: 15px;
+				margin-top: 7px;
+			/*	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);*/
+				border-radius: 5px;
 			}
 
 	#toolbox #toolbox-deactivate{
@@ -210,16 +320,16 @@ main{
 		left: 0;
 		top: 0;
 		z-index: 20;
-
 		width: 100%;
 		height: 100%;
-
-		background: rgba(0,0,0,0.5);
+		background: rgba(0,0,0,0.8);
+		margin-left: 0px;
+		border-radius: 5px;
 	}
 		#toolbox #toolbox-deactivate p{
 			position: relative;
-			top: 50%;
-
+			top: 48%;
+			color: rgba(255,255,255,0.8);
 			margin-top: -20px;
 			text-align: center;
 		}
@@ -228,11 +338,30 @@ main{
 #timeline{
 	width: 100%;
 	height: 100%;
-	overflow: scroll;
+	overflow: hidden;
+	margin-top: -42px;
+	margin-left: -2px;
+	border-radius: 5px 5px 0 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+	color: rgba(0, 0, 0, 0.8);
+	position: relative;
+	font-size: 15px;
+	background-color: rgba(255,255,255,0.2);
+
 }
+
+	#timeline h1{
+
+		background-color: #665851;
+		color: rgba(255, 255, 255, 0.8);
+		text-align: center;
+		height: 37px;
+		line-height: 43px;
+		font-size: 20px;
+
+	}
 	#timeline #block-list .block{
 		position: relative;
-
 		margin-bottom: 5px;
 		padding-left: 20px;
 	}
@@ -240,37 +369,76 @@ main{
 		#timeline #block-list .block .handler{
 			position: absolute;
 			left: 0px;
-
-			width: 20px;
+			width: 10px;
 			height: 100%;
-
 			cursor: all-scroll;
+			border-radius: 5px 0 0 5px;
+			background-color: #665851;
+			margin-left: 10px;
+
 		}
+
+			select{
+
+				outline: none;
+				border:none;
+				background-color: rgba(255,255,255,0);
+
+
+			}
+
+		#timeline ol#block-list li.block .handler{
+
+			border: 0 5px 5px 0;
+			margin-left: 10px;
+		}
+
+		#timeline ol#block-list li.block .container{
+
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			margin-right: 9px;
+			margin-left: 0;
+			box-sizing:border-box;
+			margin-top: 5px;
+			background-color: rgba(255,255,255,0.3);
+		
+		}
+
+				#timeline ol#block-list li.block .container:hover{
+
+					outline: none;
+					border:1px solid gray;
+					transition: 0.8s;
+		
+		}
+
 			#timeline #block-list .block.selected .handler{
 				color: #ffaaaa;
+
 			}
 
 		#timeline #block-list .block .container{
 			position: relative;
-
 			padding: 5px;
 			padding-right: 30px;
 			border-radius: 5px;
-
-			background: #fff;
-			border: 1px solid #ccc;
+			background: #fff;s
 			font-size: 12px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 		}
 			#timeline #block-list .block.selected .container{
-				border-color: #ffaaaa;
+				
 			}
+
+
 
 		#timeline #block-list .block-menu-box{
 			position: absolute;
 			right: 0px;
 			top: 0px;
-
 			width: 25px;
+
 		}
 
 			#timeline #block-list .block-menu-box .action-type-list{
@@ -279,14 +447,81 @@ main{
 				right: 0px;
 				top: 20px;
 				z-index: 100;
-
 				width: 40px;
-
 				border: 1px solid #ccc;
-				background: #fff;
+				background: #FFFEEF;
 				font-size: 11px;
 				text-align: center;
+
 			}
+
+
+				#timeline #block-list .block-menu-box button.button-add-action{
+					
+				/*	border-top-right-radius: 5px;*/
+					border-radius: 15px;
+					background-color: #665851;
+					width: 15px;
+					height: 15px;
+					line-height: 8px;
+					margin-left: 4.5px;
+					outline: none;
+					border:none;
+					color: white;
+					text-align: center;
+					margin-top: 2px;
+					font-size: 12px;
+					padding-left: 5px;
+				}
+
+						#timeline #block-list .block-menu-box button.button-remove-block{
+					
+							background-color: #665851;
+							border-radius: 15px;
+							width: 15px;
+							height: 15px;
+							line-height: 8px;
+							margin-left: 4.5px;
+							outline: none;
+							border:none;
+							color: white;
+							text-align: center;
+							margin-top: 2px;
+							font-size: 4.5px;
+							cursor: pointer;
+						}
+
+				body button.button-add-block{
+
+					margin-top: 45%;
+					margin-left: 23%;
+					position: fixed;
+					border-radius: 100%;
+					width: 50px;
+					height: 50px;
+					background-color: rgba(0,0,0,0.2);
+					border:none;
+					font-size: 15px;
+					border-radius: 100%;
+					width: 50px;
+					height: 50px;
+					z-index: 500;
+					cursor: pointer;
+
+				}
+
+				button.button-add-block:hover{
+					outline: none;
+					background-color: rgba(0,0,0,0.7);
+					color: white;
+				}
+
+
+				#timeline #block-list .block-menu-box .action-type-list{
+					
+					border-radius: 5px;
+				}
+
 
 				#timeline #block-list .block-menu-box .action-type-list li{
 					padding: 3px;
@@ -303,24 +538,76 @@ main{
 
 			#timeline #block-list .block .action-list .action{
 				position: relative;
-
-				padding: 2px;
-				margin: 2px 0px;
+				margin-top: 2px;
+				margin-bottom: 2px;
+				margin-left: 7px;
+				font-size: 12px;
 			}
 
 				#timeline #block-list .block .action-list .action .action-text{
 					vertical-align: middle;
-
 					width: 70%;
 					height: 20px;
 					resize: none;
-
 					border: none;
 					font-size: 12px;
+					margin-top: 5px;
+					background-color: rgba(255,255,255,0);
 				}
+
+		
 
 				#timeline #block-list .block .action-list .action .button-remove-action{
 					cursor: pointer;
-					position: absolute;
-					right: 0px;
+					/*position: absolute;
+					right: 0px;*/
+						
+						border-radius: 15px;
+						line-height: 15px;
+						outline: none;
+						border:none;
+						box-sizing:border-box;
+						padding-left: 2px;
+						padding-top: 1px;
+						color: #665851;
+						text-align: right;
+						margin-top: 2px;
+						font-size: 15px;
+						position: absolute;
+						margin-left: 107px;
+						float: right;
+						opacity: 0.4;
+
+
+
+				}
+
+					#timeline #block-list .block .action-list .background .button-remove-action{
+					cursor: pointer;
+					/*position: absolute;
+					right: 0px;*/
+						
+						border-radius: 15px;
+						line-height: 15px;
+						outline: none;
+						border:none;
+						box-sizing:border-box;
+						padding-left: 2px;
+						padding-top: 1px;
+						color: #665851;
+						text-align: right;
+						margin-top: 2px;
+						font-size: 15px;
+						position: absolute;
+						margin-left: 232px;
+						float: right;
+						opacity: 0.4;
+
+
+
+				}
+
+				.character-pos-x, .character-pos-y{
+					border:none;
+					background-color: rgba(255,255,255,0);
 				}

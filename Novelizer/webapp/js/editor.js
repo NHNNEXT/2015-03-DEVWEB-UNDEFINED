@@ -51,6 +51,7 @@ var Editor = {
             }
         });
     },
+
     addBlock : function(callback){
         EditorDataSync.addBlock(callback);
     },

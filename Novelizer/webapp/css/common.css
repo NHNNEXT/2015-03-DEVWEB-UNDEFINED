@@ -22,10 +22,14 @@ navigation li {
 	padding: 10px 0;
 	text-align: center;
 	border: 1px solid #ccc;
+		background-color: #665851;
+	border-radius: 5px 5px 0 0;
 }
 
 navigation li a {
 	color: #000;
+	background-color: #665851;
+	border-radius: 5px 5px 0 0;
 }
 
 main {
