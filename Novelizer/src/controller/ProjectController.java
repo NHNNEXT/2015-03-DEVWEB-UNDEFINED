@@ -1,20 +1,17 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dao.ProjectDao;
-import model.Project;
 import service.ProjectService;
 
 @WebServlet("/newproject")
@@ -30,18 +27,19 @@ public class ProjectController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String userId = ""+req.getParameter("userId");
-		resp.getWriter().write(service.getProjectsByUserId(Integer.parseInt(userId)));
+		String userId = getUserId(req);
+		resp.getWriter().write(service.getProjectsByUserId(userId));
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String projectData = req.getParameter("projectData");
+		String userId = getUserId(req);
 		String result = "";
 		try {
 			log.info(projectData);
-			result += service.saveProject(projectData);
+			result += service.saveProject(projectData, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,4 +47,8 @@ public class ProjectController extends HttpServlet {
 		resp.getWriter().write(result);
 	}
 
+	private String getUserId(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		return "" + session.getAttribute("userId");
+	}
 }

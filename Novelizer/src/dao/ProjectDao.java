@@ -24,8 +24,8 @@ public class ProjectDao extends AbstractDao<Project> {
 			ArrayList<Object> insertList = new ArrayList<Object>();
 			insertList.add(project.getProjectName());
 			insertList.add(project.getProjectInfo());
-			//TODO User객체가 없어서 임시로 1번으로 user_id설정 추후 수정 
-			insertList.add(1);
+			insertList.add(project.getUserId());
+	
 			return insert(insertList);
 		} catch (Exception e) {
 			log.error("Project Insert Error");
@@ -46,7 +46,7 @@ public class ProjectDao extends AbstractDao<Project> {
 
 	}
 	
-	public List<Project> selectProjectsByUserId(int userId) {
+	public List<Project> selectProjectsByUserId(String userId) {
 		super.selectByParentIdQuery = "SELECT * FROM project WHERE user_id = ?";
 		
 		List<Project> projects = new ArrayList<Project>();
@@ -77,7 +77,8 @@ public class ProjectDao extends AbstractDao<Project> {
 		int projectId = (int) projectContents.get(0);
 		String projectName = (String) projectContents.get(1);
 		String projectInfo = (String) projectContents.get(2);
-		return new Project(projectId, projectName, projectInfo, 1);
+		String userId = (String) projectContents.get(3);
+		return new Project(projectId, projectName, projectInfo, userId);
 	}
 
 	@Override
@@ -89,4 +90,5 @@ public class ProjectDao extends AbstractDao<Project> {
 	public void delete(int key) throws Exception {
 
 	}
+	
 }

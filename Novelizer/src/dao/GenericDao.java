@@ -7,7 +7,7 @@ public interface GenericDao<V> {
 
 	public List<Object> select(int key) throws Exception;
 
-	public List<List<Object>> selectByParentId(int key) throws Exception;
+	public List<List<Object>> selectByParentId(Object key) throws Exception;
 
 	public List<List<Object>> selectAll() throws Exception;
 
