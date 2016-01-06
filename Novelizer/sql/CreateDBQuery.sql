@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_id`  INT NOT NULL DEFAULT 0,
   `project_name` VARCHAR(45) NULL,
   `project_info` TEXT(500) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`project_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3

@@ -105,7 +105,7 @@ public abstract class AbstractDao<V> implements GenericDao<V> {
 		return allObjects;
 	}
 
-	public List<List<Object>> selectByParentId(int key) {
+	public List<List<Object>> selectByParentId(Object key) {
 		init();
 		List<List<Object>> allObjects = new ArrayList<>();
 

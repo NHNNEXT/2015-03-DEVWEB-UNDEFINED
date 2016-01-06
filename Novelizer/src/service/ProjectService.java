@@ -27,13 +27,14 @@ public class ProjectService {
 
 	}
 	
-	public String getProjectsByUserId(int userId) {
+	public String getProjectsByUserId(String userId) {
 		List<Project> projects = projectDao.selectProjectsByUserId(userId);
 		return jsonHandler.convertToJsonArray(projects);
 	}
 
-	public int saveProject(String projectData) {
+	public int saveProject(String projectData, String userId) {
 		Project project = jsonHandler.convertToProject(projectData);
+		project.setUserId(userId);
 		log.info(project.toString());
 		return projectDao.insertProject(project);
 	}
