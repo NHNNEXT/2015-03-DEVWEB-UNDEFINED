@@ -78,7 +78,7 @@ $(function() {
 
         $('.plusButton').on('click', function(){ 
           $("#sortable"+tabCounter).append("<div class='newS newScene"+sceneNum+++"'>"+"scene"+(sceneNum-1)+"<input type='textarea' class='sceneText'></textarea></div>").children(':last').hide().fadeIn(1000);
-          addEditor();
+          
         });  
         
         $('.removeScene').on('click', function(){
@@ -91,12 +91,9 @@ $(function() {
     	// $( "#sortable" ).disableSelection();
     }
     
-    function addEditor() {
-
-    	$(".newS").on("dblclick", function(){          
-      		$('body').load('editor.jsp');
-              }); 
-    }
+	$(document).on("dblclick",".newS", function(){          
+  		location.href='editor.jsp?sceneId'+this.className.substring(13,14);
+          }); 
     
     // addTab button: just opens the dialog
     $( "#add_tab" )
@@ -135,6 +132,16 @@ function getProjectList(callback){
         url : "/newproject",
         method : "GET",
         dataType : "json",
+    })
+    .done(callback);
+}
+
+function getSceneList(projectId, callback){
+    $.ajax({
+        url : "/",
+        method : "GET",
+        dataType : "json",
+        data : {projectId: projectId}
     })
     .done(callback);
 }
