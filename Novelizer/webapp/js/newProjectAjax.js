@@ -1,13 +1,5 @@
 
-function getProjectList(callback){
-    $.ajax({
-        url : "http://localhost:8080/project",
-        method : "GET",
-        dataType : "json",
-    })
-    .done(callback);
-}
-
+/*
 function sendUserId(userId, callback){
 	$.ajax({
 		url : "http://localhost:8080/userId",
@@ -15,4 +7,9 @@ function sendUserId(userId, callback){
 		dataType : "json"
 		data: {userId : 1}
 	})
+<<<<<<< HEAD
 }	
+=======
+}
+*/
+>>>>>>> 4c3b3538adc3d96f862d5c854af49388e9b670c1

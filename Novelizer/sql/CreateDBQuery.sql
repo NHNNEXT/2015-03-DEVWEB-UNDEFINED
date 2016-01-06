@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_id`  INT NOT NULL DEFAULT 0,
   `project_name` VARCHAR(45) NULL,
   `project_info` TEXT(500) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`project_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
@@ -74,6 +74,13 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`scene` (
   `start_block_id` INT NULL,
   `scene_name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`scene_id`,`project_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `novelizer`.`USERS` (
+  `userId` VARCHAR(20) NOT NULL DEFAULT 0,
+  `password` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`userId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

@@ -43,10 +43,10 @@ public class UserDao {
 		pstmt.setString(1, userId);
 
 		ResultSet rs = pstmt.executeQuery();
-		if (rs.next()) {
+		if (!rs.next()) {
 			return null;
 		}
-
+		
 		return new User(rs.getString("userId"), rs.getString("password"));
 
 	}

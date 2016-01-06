@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>drog&amp;drop</title>
+    <title>Novelize Editor</title>
     
     <link rel="stylesheet" type="text/css" href="css/editor.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -13,7 +15,8 @@
         <navigation>
             <ul>
                 <li class="tab-edit"><a href="#none;">편집</a></li>
-                <li class="editor-save">저장하기</a></li>
+                <li class="editor-save">저장하기</li>
+                <li class="editor-save"><a href="/viewer.jsp?sceneId=${param.sceneId}">감상하기</a></li>
             </ul>
             <!-- <button class="editor-save">저장하기</button> -->
         </navigation>
@@ -161,13 +164,7 @@
     <script type="text/javascript" src="js/dataSync.js"></script>
     <script type="text/javascript" src="js/editor.js"></script>
     <script type="text/javascript">
-
-
- $(function () {
- $("editor-save").on("click", function(){
-            alert(작업하신 내용이 저장되었습니다.);
-        });
-});
+	EditorDataSync.sceneId = ${param.sceneId};
         
     </script>
 </body>
