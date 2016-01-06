@@ -68,7 +68,7 @@ div#layer-text {
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 	border-radius: 5px;
 	box-sizing:border-box;
-	color:#fff;
+	color:rgba(0,0,0,0.8);
 }
 	div#layer-text .character-name{
 		position: absolute;
