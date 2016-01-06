@@ -8,17 +8,18 @@ $(function() {
  sceneAreaNum = 1;
  var tabs = $( "#tabs" ).tabs();
 
- getProjectList(function(data){
-    var projectList = data;
 
-    for(var i=0; i<projectList.length; ++i){
-        var data = projectList[i];
+ getProjectList(function(data){
+    projectList = [];
+    for(var i = 0; i < data.length; ++i){
+        var data = data[i];
         var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
         projectList.push(list);
+        
     }
     $("#projectList").append(projectList);
+ })
 
- }.bind(this))
 
     // modal dialog init: custom buttons and a "close" callback resetting the form inside
     var dialog = $( "#dialog" ).dialog({

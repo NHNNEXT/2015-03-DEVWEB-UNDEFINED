@@ -55,7 +55,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `novelizer`.`project`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
-  `project_id`  INT NOT NULL DEFAULT 0,
+  `project_id`  INT NOT NULL AUTO_INCREMENT,
   `project_name` VARCHAR(45) NULL,
   `project_info` TEXT(500) NULL,
   `user_id` VARCHAR(20) NOT NULL,

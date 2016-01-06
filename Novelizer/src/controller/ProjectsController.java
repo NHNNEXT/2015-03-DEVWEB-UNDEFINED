@@ -28,7 +28,9 @@ public class ProjectsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = getUserId(req);
-		//resp.getWriter().write(service.getProjectsByUserId(userId));
+		String responseJson = service.getProjectsByUserId(userId);
+		log.info(responseJson);
+		resp.getWriter().print(responseJson);
 
 	}
 
