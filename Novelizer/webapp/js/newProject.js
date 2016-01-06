@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-getProjectList(function(response){
-	var projectList = [];
-	for(var i=0; i<respons.length; ++i){
-		var data = response[i];
-		var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
-		projectList.push(list);
-	}
-	$("#projectList").append(projectList);	
-})
-
-=======
->>>>>>> 4c3b3538adc3d96f862d5c854af49388e9b670c1
 $(function() {
 	
  var tabTitle = $( "#tab_title" ),
@@ -59,12 +46,15 @@ $(function() {
 
     }); 
 
-
-
     // actual addTab function: adds new tab using the input from the form above
     function addTab() {
         var title = tabTitle.val();
         var content = tabContent.val();
+        newProject(tabCounter, title, content, function(){
+            console.log(tabcounter, title, content);
+            alert("zzz")
+        });
+
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
@@ -132,6 +122,16 @@ function getProjectList(callback){
         url : "/newproject",
         method : "GET",
         dataType : "json",
+    })
+    .done(callback);
+}
+
+function newProject(projectId, title, content, callback){
+    $.ajax({
+        url : "/newproject",
+        method : "POST",
+        dataType : "json",
+        data : JSON.stringify({projectName:title, projectInfo:content, projectId:projectId})
     })
     .done(callback);
 }
