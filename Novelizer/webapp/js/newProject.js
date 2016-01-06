@@ -8,11 +8,18 @@ $(function() {
  sceneAreaNum = 1;
  var tabs = $( "#tabs" ).tabs();
 
+// <<<<<<< HEAD
+//  getProjectList(function(data){
+//     var projectList = data;
+//     for(var i=0; i<projectList.length; ++i){
+//         var data = projectList[i];
+// =======
 
- getProjectList(function(data){
-    projectList = [];
-    for(var i = 0; i < data.length; ++i){
-        var data = data[i];
+//  getProjectList(function(data){
+//     projectList = [];
+//     for(var i = 0; i < data.length; ++i){
+//         var data = data[i];
+// >>>>>>> 6b4a2d5a62d8d2eda37301c399acf9564184f9a8
         var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
         projectList.push(list);
         
@@ -44,7 +51,6 @@ $(function() {
     	addTab();
     	dialog.dialog( "close" );
     	event.preventDefault();
-
     }); 
 
     // actual addTab function: adds new tab using the input from the form above
@@ -61,7 +67,7 @@ $(function() {
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
         tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+content+"</div></div>" + 
         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'><div class='removeScene'></div>"+"scene"+sceneNum+++"<input type='textarea' class='sceneText'></textarea></div><div class='sceneExplain'>If you want to make story just double click! <br /> if you want to sortable scenes, just sort with click</div></div>"; 
-//    	
+    	
     	tabs.find( ".ui-tabs-nav" ).append( li );
         tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p>" );
         $("#sortable"+tabCounter).append("<div class='plusButton'>"+"+"+"</div>");
@@ -92,10 +98,7 @@ $(function() {
     .click(function() {
     	dialog.dialog( "open" );
         tabCounter++;
-
     });
-
-
 
     // close icon: removing the tab on click
     tabs.delegate( "span.ui-icon-close", "click", function() {
@@ -111,12 +114,8 @@ $(function() {
     		tabs.tabs( "refresh" );
     	}
     });
-
-
-
-    
+  
 });
-
 
 function getProjectList(callback){
     $.ajax({
