@@ -28,8 +28,12 @@ public class ProjectsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = getUserId(req);
-		resp.getWriter().write(service.getProjectsByUserId(userId));
-		
+		if (userId == null) {
+			resp.getWriter().write("userId : null");
+		} else {
+			resp.getWriter().write(service.getProjectsByUserId(userId));
+		}
+
 	}
 
 	@Override
