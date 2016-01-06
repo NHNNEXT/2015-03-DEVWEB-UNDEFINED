@@ -131,7 +131,7 @@ function newProject(projectId, title, content, callback){
         url : "/newproject",
         method : "POST",
         dataType : "json",
-        data : JSON.stringify({projectName:title, projectInfo:content, projectId:projectId})
+        data : JSON.stringify({projectData:{projectName:title, projectInfo:content, projectId:projectId}})
     })
     .done(callback);
 }
