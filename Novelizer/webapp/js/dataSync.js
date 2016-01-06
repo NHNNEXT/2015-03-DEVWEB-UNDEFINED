@@ -8,7 +8,7 @@
  */
 
 var EditorDataSync = {
- 	url : "",
+ 	url : "http://127.0.0.1:8080",
  	sceneId : 1,
  	startBlockId : 1,
 	blockList : [],
