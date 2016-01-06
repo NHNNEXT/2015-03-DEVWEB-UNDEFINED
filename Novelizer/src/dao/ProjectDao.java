@@ -18,10 +18,11 @@ public class ProjectDao extends AbstractDao<Project> {
 	}
 
 	public int insertProject(Project project) {
-		super.insertQuery = "INSERT INTO project(project_name, project_info, user_id) values(?, ?, ?);";
+		super.insertQuery = "INSERT INTO project(project_id, project_name, project_info, user_id) values(?, ?, ?, ?);";
 		
 		try {
 			ArrayList<Object> insertList = new ArrayList<Object>();
+			insertList.add(project.getProjectId());
 			insertList.add(project.getProjectName());
 			insertList.add(project.getProjectInfo());
 			insertList.add(project.getUserId());

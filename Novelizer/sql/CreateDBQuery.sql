@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `novelizer`.`project` (
   `project_name` VARCHAR(45) NULL,
   `project_info` TEXT(500) NULL,
   `user_id` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`project_id`))
+  PRIMARY KEY (`project_id`,`user_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;

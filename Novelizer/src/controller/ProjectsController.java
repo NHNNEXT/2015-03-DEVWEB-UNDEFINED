@@ -28,21 +28,18 @@ public class ProjectsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = getUserId(req);
-		if (userId == null) {
-			resp.getWriter().write("userId : null");
-		} else {
-			resp.getWriter().write(service.getProjectsByUserId(userId));
-		}
+		//resp.getWriter().write(service.getProjectsByUserId(userId));
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String projectData = req.getParameter("projectData");
+		log.info(projectData);
 		String userId = getUserId(req);
+		log.info(userId);
 		String result = "";
 		try {
-			log.info(projectData);
 			result += service.saveProject(projectData, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
