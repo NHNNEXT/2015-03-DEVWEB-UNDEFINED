@@ -46,12 +46,15 @@ $(function() {
 
     }); 
 
-
-
     // actual addTab function: adds new tab using the input from the form above
     function addTab() {
         var title = tabTitle.val();
         var content = tabContent.val();
+        newProject(tabCounter, title, content, function(){
+            console.log(tabcounter, title, content);
+            alert("zzz")
+        });
+
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
@@ -65,7 +68,7 @@ $(function() {
 
         $('.plusButton').on('click', function(){ 
           $("#sortable"+tabCounter).append("<div class='newS newScene"+sceneNum+++"'>"+"scene"+(sceneNum-1)+"<input type='textarea' class='sceneText'></textarea></div>").children(':last').hide().fadeIn(1000);
-          addEditor();
+          
         });  
         
         $('.removeScene').on('click', function(){
@@ -78,12 +81,9 @@ $(function() {
     	// $( "#sortable" ).disableSelection();
     }
     
-    function addEditor() {
-
-    	$(".newS").on("dblclick", function(){          
-      		$('body').load('editor.jsp');
-              }); 
-    }
+	$(document).on("dblclick",".newS", function(){          
+  		location.href='editor.jsp?sceneId'+this.className.substring(13,14);
+          }); 
     
     // addTab button: just opens the dialog
     $( "#add_tab" )
@@ -122,6 +122,26 @@ function getProjectList(callback){
         url : "/newproject",
         method : "GET",
         dataType : "json",
+    })
+    .done(callback);
+}
+
+function newProject(projectId, title, content, callback){
+    $.ajax({
+        url : "/newproject",
+        method : "POST",
+        dataType : "json",
+        data : JSON.stringify({projectName:title, projectInfo:content, projectId:projectId})
+    })
+    .done(callback);
+}
+
+function getSceneList(projectId, callback){
+    $.ajax({
+        url : "/",
+        method : "GET",
+        dataType : "json",
+        data : {projectId: projectId}
     })
     .done(callback);
 }
