@@ -46,12 +46,15 @@ $(function() {
 
     }); 
 
-
-
     // actual addTab function: adds new tab using the input from the form above
     function addTab() {
         var title = tabTitle.val();
         var content = tabContent.val();
+        newProject(tabCounter, title, content, function(){
+            console.log(tabcounter, title, content);
+            alert("zzz")
+        });
+
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
@@ -119,6 +122,16 @@ function getProjectList(callback){
         url : "/newproject",
         method : "GET",
         dataType : "json",
+    })
+    .done(callback);
+}
+
+function newProject(projectId, title, content, callback){
+    $.ajax({
+        url : "/newproject",
+        method : "POST",
+        dataType : "json",
+        data : JSON.stringify({projectName:title, projectInfo:content, projectId:projectId})
     })
     .done(callback);
 }
