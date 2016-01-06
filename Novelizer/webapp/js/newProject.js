@@ -1,14 +1,3 @@
-getProjectList(function(response){
-	var projectList = [];
-	for(var i=0; i<respons.length; ++i){
-		var data = response[i];
-		var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
-		projectList.push(list);
-	}
-	$("#projectList").append(projectList);
-	
-})
-
 $(function() {
 	
  var tabTitle = $( "#tab_title" ),
@@ -20,7 +9,14 @@ $(function() {
  var tabs = $( "#tabs" ).tabs();
 
  getProjectList(function(data){
-    var projectList = data.projectList;
+    var projectList = data;
+
+    for(var i=0; i<projectList.length; ++i){
+        var data = projectList[i];
+        var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
+        projectList.push(list);
+    }
+    $("#projectList").append(projectList);
 
  }.bind(this))
 
@@ -53,13 +49,13 @@ $(function() {
 
 
     // actual addTab function: adds new tab using the input from the form above
-    function addTab(title, content) {
-        var title = title || tabTitle.val();
-        var content = content || tabContent.val();
+    function addTab() {
+        var title = tabTitle.val();
+        var content = tabContent.val();
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
-        tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent+"</div></div>" + 
+        tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+content+"</div></div>" + 
         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'><div class='removeScene'></div>"+"scene"+sceneNum+++"<input type='textarea' class='sceneText'></textarea></div><div class='sceneExplain'>If you want to make story just double click! <br /> if you want to sortable scenes, just sort with click</div></div>"; 
 //    	
     	tabs.find( ".ui-tabs-nav" ).append( li );
