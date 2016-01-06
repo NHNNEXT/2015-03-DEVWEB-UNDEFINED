@@ -5,8 +5,7 @@ getProjectList(function(response){
 		var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
 		projectList.push(list);
 	}
-	$("#projectList").append(projectList);
-	
+	$("#projectList").append(projectList);	
 })
 
 $(function() {
