@@ -125,3 +125,13 @@ function getProjectList(callback){
     })
     .done(callback);
 }
+
+function getSceneList(projectId, callback){
+    $.ajax({
+        url : "/",
+        method : "GET",
+        dataType : "json",
+        data : {projectId: projectId}
+    })
+    .done(callback);
+}
