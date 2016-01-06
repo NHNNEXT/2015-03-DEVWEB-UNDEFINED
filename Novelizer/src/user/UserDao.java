@@ -46,7 +46,7 @@ public class UserDao {
 		if (!rs.next()) {
 			return null;
 		}
-
+		
 		return new User(rs.getString("userId"), rs.getString("password"));
 
 	}
