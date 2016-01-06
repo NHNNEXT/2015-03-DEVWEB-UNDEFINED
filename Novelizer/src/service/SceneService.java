@@ -42,18 +42,20 @@ public class SceneService {
 				blockDao.deleteByParentId(sceneId);
 				sceneDao.deleteById(scene.getSceneId());
 				
-				sceneDao.insertScene(scene);
-				blockService.saveBlock(scene);
+				save(scene);
 				return "Scene update";
-			} else {
-				log.info(scene.toString());
-				int insertedSceneId = sceneDao.insertScene(scene);
-				blockService.saveBlock(scene);
-				return "insertedSceneId : " + insertedSceneId;
+			} else {				
+				return "insertedSceneId : " + save(scene);
 			}
 		} catch (Exception e) {
 			return "error : " + e;
 		}
+	}
+	
+	private int save(Scene scene) throws SQLException{
+		int insertedSceneId = sceneDao.insertScene(scene);
+		blockService.saveBlock(scene);
+		return  insertedSceneId;
 	}
 
 	public String getScene(int sceneId) throws SQLException {

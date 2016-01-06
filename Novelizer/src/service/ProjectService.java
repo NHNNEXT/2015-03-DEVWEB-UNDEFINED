@@ -44,6 +44,10 @@ public class ProjectService {
 	public int saveProject(String projectData, String userId) {
 		Project project = jsonHandler.convertToProject(projectData);
 		project.setUserId(userId);
+
+		if(projectDao.select(project.getProjectId()) != null){
+			projectDao.deleteById(project.getProjectId());
+		}		
 		log.info(project.toString());
 		return projectDao.insertProject(project);
 	}
