@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+getProjectList(function(response){
+	var projectList = [];
+	for(var i=0; i<respons.length; ++i){
+		var data = response[i];
+		var list = $("<li class='ui-state-default ui-corner-top' role='tab' aria-selected='true' aria-expanded='true'><a href='#tabs-'"+i+"' class='ui-tabs-anchor' role='presentation'>"+data['projectName']+"</a><span class='ui-icon ui-icon-close' role='presentation'>x</span></li>")
+		projectList.push(list);
+	}
+	$("#projectList").append(projectList);	
+})
+
+=======
+>>>>>>> 4c3b3538adc3d96f862d5c854af49388e9b670c1
 $(function() {
 	
  var tabTitle = $( "#tab_title" ),
