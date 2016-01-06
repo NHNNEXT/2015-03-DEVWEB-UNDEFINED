@@ -19,6 +19,11 @@ $(function() {
  sceneAreaNum = 1;
  var tabs = $( "#tabs" ).tabs();
 
+ getProjectList(function(data){
+    var projectList = data.projectList;
+
+ }.bind(this))
+
     // modal dialog init: custom buttons and a "close" callback resetting the form inside
     var dialog = $( "#dialog" ).dialog({
     	autoOpen: false,
@@ -48,12 +53,13 @@ $(function() {
 
 
     // actual addTab function: adds new tab using the input from the form above
-    function addTab() {
-    	var label = tabTitle.val() || "undefined",
+    function addTab(title, content) {
+        var title = title || tabTitle.val();
+        var content = content || tabContent.val();
     	id = "tabs-" + tabCounter,
         sceneNum = 1,
-        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
-        tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent.val()+"</div></div>" + 
+        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
+        tabContentHtml = "<div class='projectContents'><div class='projectContentsText'>"+tabContent+"</div></div>" + 
         "<div id='sortable"+tabCounter+"' class='sceneArea'><div class='newS newScene"+sceneNum+"'><div class='removeScene'></div>"+"scene"+sceneNum+++"<input type='textarea' class='sceneText'></textarea></div><div class='sceneExplain'>If you want to make story just double click! <br /> if you want to sortable scenes, just sort with click</div></div>"; 
 //    	
     	tabs.find( ".ui-tabs-nav" ).append( li );
@@ -117,10 +123,9 @@ $(function() {
 
 function getProjectList(callback){
     $.ajax({
-        url : "http://localhost:8080/project",
+        url : "/newproject",
         method : "GET",
         dataType : "json",
-        data: "userId : 1"
     })
     .done(callback);
 }
