@@ -1,10 +1,13 @@
 package model;
 
+import java.util.List;
+
 public class Project {
 	private int projectId;
 	private String projectName;
 	private String projectInfo;
 	private String userId;
+	private List<Scene> scenes;
 
 	public Project() {
 
@@ -34,10 +37,18 @@ public class Project {
 		return userId;
 	}
 
-	public void setUserId(String userId) { 
+	public List<Scene> getScenes() {
+		return scenes;
+	}
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
+	public void setScenes(List<Scene> scenes) {
+		this.scenes = scenes;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", projectName=" + projectName + "]";
